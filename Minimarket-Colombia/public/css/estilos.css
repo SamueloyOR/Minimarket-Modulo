@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #27A9F5;
+    padding: 0.5em 1em;
+    color: white;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    margin: 0 1em;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.text p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+.nav__links {
+    display: flex;
+    align-items: center;
+}
+
+.nav__links :hover {
+    color: blue;
+}
