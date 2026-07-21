@@ -1,7 +1,7 @@
-const pool = require('../models/connection');
+import pool from '../models/conection.js';
 
 // 1. OBTENER / LISTAR CLIENTES (Read)
-const obtenerClientes = async (req, res) => {
+export const obtenerClientes = async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT * FROM clientes');
         res.json(rows);
@@ -11,7 +11,7 @@ const obtenerClientes = async (req, res) => {
 };
 
 // 2. CREAR CLIENTE (Create)
-const crearCliente = async (req, res) => {
+export const crearCliente = async (req, res) => {
     try {
         const { documento, nombres, apellidos, correo, telefono } = req.body;
         const query = 'INSERT INTO clientes (documento, nombres, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)';
@@ -24,7 +24,7 @@ const crearCliente = async (req, res) => {
 };
 
 // 3. ACTUALIZAR CLIENTE (Update)
-const actualizarCliente = async (req, res) => {
+export const actualizarCliente = async (req, res) => {
     try {
         const { id } = req.params;
         const { documento, nombres, apellidos, correo, telefono } = req.body;
@@ -38,7 +38,7 @@ const actualizarCliente = async (req, res) => {
 };
 
 // 4. ELIMINAR CLIENTE (Delete)
-const eliminarCliente = async (req, res) => {
+export const eliminarCliente = async (req, res) => {
     try {
         const { id } = req.params;
         await pool.query('DELETE FROM clientes WHERE id = ?', [id]);
@@ -48,9 +48,3 @@ const eliminarCliente = async (req, res) => {
     }
 };
 
-module.exports = {
-    obtenerClientes,
-    crearCliente,
-    actualizarCliente,
-    eliminarCliente
-};

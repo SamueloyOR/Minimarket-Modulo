@@ -1,7 +1,9 @@
-const express = require('express');
-const app = express();
-const clientesRoutes = require('./routes/clientes.routes');
+import "dotenv/config"
+import express from 'express';
+import clientesRoutes from './routes/clientes.routes.js';
 
+
+const app = express();
 app.use(express.json());
 
 // Usar las rutas del módulo

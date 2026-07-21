@@ -1,17 +1,19 @@
-const mysql = requiere("mysql2");
+import mysql from 'mysql2/promise';
+import dotenv from 'dotenv';
 
-require("dotenv").config();
+// Forzar la carga del .env apuntando a la raíz del proyecto
+dotenv.config();
 
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
+// O si prefieres asegurar los datos de manera directa para evitar fallos de lectura del .env:
+const pool = mysql.createPool({
+    host: process.env.DB_HOST || 'localhost',
+    user: process.env.DB_USER || 'root',
+    password: process.env.DB_PASSWORD || '',
+    database: process.env.DB_NAME || 'minimarket_db',
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-
 });
 
-console.log("Conexión con la base conectada correctamente");
-module.exports = pool.promise();
+console.log("Base de datos conectada correctamente.");
+export default pool;
