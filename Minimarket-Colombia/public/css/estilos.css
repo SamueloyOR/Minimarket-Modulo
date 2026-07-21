@@ -1,38 +1,72 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
+    background-color: ghostwhite;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #27A9F5;
-    padding: 0.5em 1em;
-    color: white;
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.navbar a {
-    color: white;
-    text-decoration: none;
-    margin: 0 1em;
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.logo {
-    font-size: 1.5em;
+.form-section{
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.text p {
-    margin: 0;
-    font-size: 1.2em;
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
-.nav__links {
-    display: flex;
-    align-items: center;
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.nav__links :hover {
-    color: blue;
+button:hover {
+    background-color: #45a049;
+}
+
+.table-section{
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
 }
