@@ -1,11 +1,19 @@
-import pool from '../models/conection.js';
+import {
+    ListarClientes,
+    buscarClientesById,
+    crearCLiente,
+    actualizarCliente as actualizarClienteModel,
+    eliminarCliente as eliminarClienteMOdel
+
+} from "../models/conection.js";
 
 // 1. OBTENER / LISTAR CLIENTES (Read)
 export const obtenerClientes = async (req, res) => {
     try {
-        const [rows] = await pool.query('SELECT * FROM clientes');
-        res.json(rows);
+        const clientes = await ListarClientes();
+        res.json(clientes);
     } catch (error) {
+        console.error("ERROR DETALLADO EN GET:", error);
         res.status(500).json({ error: error.message });
     }
 };
@@ -13,12 +21,10 @@ export const obtenerClientes = async (req, res) => {
 // 2. CREAR CLIENTE (Create)
 export const crearCliente = async (req, res) => {
     try {
-        const { documento, nombres, apellidos, correo, telefono } = req.body;
-        const query = 'INSERT INTO clientes (documento, nombres, apellidos, correo, telefono) VALUES (?, ?, ?, ?, ?)';
-        const [result] = await pool.query(query, [documento, nombres, apellidos, correo, telefono]);
-        
-        res.status(201).json({ mensaje: 'Cliente creado con éxito', id: result.insertId });
+        const nuevoCliente = await crearCLiente(req.body);
+        res.status(201).json({ mensaje: 'Cliente creado con éxito', cliente: nuevoCliente });
     } catch (error) {
+        console.error("ERROR DETALLADO EN POST:", error);
         res.status(500).json({ error: error.message });
     }
 };
@@ -27,11 +33,13 @@ export const crearCliente = async (req, res) => {
 export const actualizarCliente = async (req, res) => {
     try {
         const { id } = req.params;
-        const { documento, nombres, apellidos, correo, telefono } = req.body;
-        const query = 'UPDATE clientes SET documento = ?, nombres = ?, apellidos = ?, correo = ?, telefono = ? WHERE id = ?';
+        const clienteActualizado = await actualizarClienteModel(id, req.body);
         
-        await pool.query(query, [documento, nombres, apellidos, correo, telefono, id]);
-        res.json({ mensaje: 'Cliente actualizado correctamente' });
+        if (!clienteActualizado) {
+            return res.status(404).json({ mensaje: 'Cliente no encontrado' });
+        }
+
+        res.json({ mensaje: 'Cliente actualizado correctamente', cliente: clienteActualizado });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -41,10 +49,14 @@ export const actualizarCliente = async (req, res) => {
 export const eliminarCliente = async (req, res) => {
     try {
         const { id } = req.params;
-        await pool.query('DELETE FROM clientes WHERE id = ?', [id]);
-        res.json({ mensaje: 'Cliente eliminado correctamente' });
+        const resultado = await eliminarClienteModel(id);
+        
+        if (!resultado) {
+            return res.status(404).json({ mensaje: 'Cliente no encontrado' });
+        }
+
+        res.json(resultado);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
-

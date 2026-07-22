@@ -1,27 +1,27 @@
-import fs from "node:fs/promise";
+import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 
 const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(fileURLToPath);
+const dirname = path.dirname(filename);
 
 const router = path.join(dirname, "../data/clientes.js");
 
-async function LeerClientes() {
+export async function LeerClientes() {
   try {
-    const data = await fs.readfile(router, "utf-8");
+    const data = await fs.readFile(router, "utf-8");
     return JSON.parse(data);
   } catch (error) {
     if (error.code == "ENOENT") {
-      await guardarCliente([]);
+      await guardarClientes([]);
       return [];
     }
     throw error;
   }
 }
 
-async function guardarClientes(cliente) {
+export async function guardarClientes(cliente) {
   const folder = path.dirname(router);
 
   await fs.mkdir(folder, { recursive: true });
@@ -44,11 +44,12 @@ export async function crearCLiente(data) {
 
   const nuevoCliente = {
     id: randomUUID(),
-    nombre: data.nombre.trim(),
-    documento: data.documento.trim(),
-    telefono: data.telefono.trim(),
-    correo: data.correo.trim(),
-    password: data.password.trim(),
+    nombres: data.nombres ? data.nombres.trim() : "",
+    apellidos: data.apellidos ? data. apellidos.trim() : "",
+    documento: data.documento ? data.documento.trim() : "",
+    telefono: data.telefono ? data.telefono.trim() : "",
+    correo: data.correo ? data.correo.trim() : "",
+    password: data.password ? data.password.trim() : "",
   };
 
   clientes.push(nuevoCliente);
@@ -66,7 +67,7 @@ export async function actualizarCliente(id, data) {
   if (indice === -1) {
     return null;
   }
-}
+
 
 const clienteActual = clientes[indice];
 
@@ -80,9 +81,11 @@ clientes[indice] = {
     correo: data.correo ? data.correo.trim() : clientes[indice].correo,
   };
 
-  await guardarClientes(clientes);
-  return clientes[indice];
 
+  await guardarClientes(clientes);
+
+  return clientes[indice];
+}
 
 export async function eliminarCliente(id) {
   const clientes = await LeerClientes();

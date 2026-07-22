@@ -68,7 +68,7 @@ async function cargarClientes() {
     }
 }
 
-function editarCliente(id, documento, nombres, apellidos, correo, telefono) {
+async function editarCliente(id, documento, nombres, apellidos, correo, telefono) {
     document.getElementById('cliente-id').value = id;
     document.getElementById('documento').value = documento;
     document.getElementById('nombres').value = nombres;

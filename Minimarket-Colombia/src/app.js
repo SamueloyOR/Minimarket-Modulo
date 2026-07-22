@@ -31,13 +31,15 @@ app.get("/api", (req, res) => {
 
 app.use("/api/clientes", clientesRoutes);
 
-
-app.get("/api/*", (req, res) => {
-    res.status(404).json({
-        ok: false,
-        mensaje: "Ruta no encontrada"
-    });
-})
+app.use((req, res, next) => {
+    if (req.originalUrl.startsWith('/api/')) {
+        return res.status(404).json({
+            ok: false,
+            mensaje: "Ruta de la API no encontrada"
+        });
+    }
+    next();
+});
 
 app.listen(PORT, () => {
     console.log("Servidor corriendo en el puerto 3000")

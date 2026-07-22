@@ -8,9 +8,9 @@ import {
 
 const router = Router();
 
-router.get('/clientes', obtenerClientes);
-router.post('/clientes', crearCliente);
-router.put('/clientes/:id', actualizarCliente);
-router.delete('/clientes/:id', eliminarCliente);
+router.get('/', obtenerClientes);
+router.post('/', crearCliente);
+router.put('/:id', actualizarCliente);
+router.delete('/:id', eliminarCliente);
 
 export default router;
