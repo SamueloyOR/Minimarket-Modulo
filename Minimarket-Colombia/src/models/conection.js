@@ -94,4 +94,5 @@ export async function eliminarCliente(id) {
 
   await guardarClientes(nuevosClientes);
   return { mensaje: "Cliente eliminado correctamente" };
+  //hola
 }
