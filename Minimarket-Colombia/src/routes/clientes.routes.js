@@ -13,4 +13,4 @@ router.post('/clientes', crearCliente);
 router.put('/clientes/:id', actualizarCliente);
 router.delete('/clientes/:id', eliminarCliente);
 
-export default router
+export default router;

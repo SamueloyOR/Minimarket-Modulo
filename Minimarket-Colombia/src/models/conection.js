@@ -71,3 +71,27 @@ export async function actualizarCliente(id, data) {
 const clienteActual = clientes[indice];
 
 clientes[indice];
+
+clientes[indice] = {
+    ...clientes[indice],
+    nombre: data.nombre ? data.nombre.trim() : clientes[indice].nombre,
+    documento: data.documento ? data.documento.trim() : clientes[indice].documento,
+    telefono: data.telefono ? data.telefono.trim() : clientes[indice].telefono,
+    correo: data.correo ? data.correo.trim() : clientes[indice].correo,
+  };
+
+  await guardarClientes(clientes);
+  return clientes[indice];
+
+
+export async function eliminarCliente(id) {
+  const clientes = await LeerClientes();
+  const nuevosClientes = clientes.filter((cliente) => cliente.id !== id);
+
+  if (clientes.length === nuevosClientes.length) {
+    return null; // No se encontró el cliente
+  }
+
+  await guardarClientes(nuevosClientes);
+  return { mensaje: "Cliente eliminado correctamente" };
+}

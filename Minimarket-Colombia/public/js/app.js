@@ -1,4 +1,4 @@
-const API_URL = '/api/clientes';
+const API_URL = 'http://localhost:3000/api/clientes';
 
 document.addEventListener('DOMContentLoaded', () => {
     cargarClientes();
