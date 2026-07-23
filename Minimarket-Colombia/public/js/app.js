@@ -1,3 +1,4 @@
+//declaracion de la API
 const API_URL = 'http://localhost:3000/api/clientes';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -38,6 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
         cargarClientes();
     });
 });
+//funciones CRUD
 
 async function cargarClientes() {
     try {
@@ -87,6 +89,7 @@ async function eliminarCliente(id) {
     }
 }
 
+// funtion para ver la contraseña
 
 function ViewPassword() {
     let passwordInput = document.getElementById("password");

@@ -1,13 +1,13 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: ghostwhite;
 }
 
 h1 {
     text-align: center;
     color: #333;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 h2 {
@@ -15,13 +15,40 @@ h2 {
     color: #333;
     margin-bottom: 20px;
 }
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+
+
+.nav__bar{
+    align-items: center;
+    background-color: rgb(47, 128, 189);
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    position: relative;
+    top: 0px;
+    z-index: 1000;
+    border-radius: 30px;
+    color: white;
+
 }
 
-.form-section{
+.nav__bar a{
+    float: left;
+    display: block;
+    color: white;
+    font-weight: 400;
+    transition: 0.2s;
+    text-align: center;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+.nav__bar a:hover{
+    color: yellow;
+    transition: 0.2s;
+}
+
+.form__section{
     max-width: 400px;
     margin: 0 auto;
     padding: 50px 3rem;
@@ -39,13 +66,14 @@ label {
 
 input[type="text"],
 input[type="email"],
-input[type="password"] {
+input[type="password"]{
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
 
 button {
     width: 100%;
@@ -61,7 +89,7 @@ button:hover {
     background-color: #45a049;
 }
 
-.table-section{
+.table__section{
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
@@ -69,4 +97,36 @@ button:hover {
     border: 1px solid #ddd;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
+}
+
+.table__section table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+.footer__container{
+    justify-content: space-between;
+    padding: 1rem 2%;
+    top: 0;
+    margin-top: 50px;
+    align-items: center;
+    color: white;
+    background-color: rgb(47, 128, 189);
+    display: flex;
+    font-weight: bold;
+    position: relative;
+    gap: 20px;
+    text-decoration: none;
+    list-style: none;
+
 }
