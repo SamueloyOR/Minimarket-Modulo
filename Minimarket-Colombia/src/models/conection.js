@@ -3,6 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { randomUUID } from "node:crypto";
 
+
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
@@ -11,11 +12,23 @@ const router = path.join(dirname, "../data/clientes.js");
 export async function LeerClientes() {
   try {
     const data = await fs.readFile(router, "utf-8");
+
+    if (!data || data.trim() === ""){
+      return[];
+    }
+
     return JSON.parse(data);
+
   } catch (error) {
     if (error.code == "ENOENT") {
       await guardarClientes([]);
       return [];
+    }
+    
+    if (error instanceof SyntaxError){
+      await guardarClientes([]);
+      return[];
+
     }
     throw error;
   }
@@ -42,18 +55,26 @@ export async function buscarClientesById(id) {
 export async function crearCLiente(data) {
   const clientes = await LeerClientes();
 
+
+  const documentoLimpio = data.documento ? data.documento.trim() : "";
+
+
+  const existeDocumento = clientes.some(c => c.documento === documentoLimpio);
+  if (existeDocumento) {
+    throw new Error("DOCUMENTO_DUPLICADO");
+  }
+
   const nuevoCliente = {
     id: randomUUID(),
     nombres: data.nombres ? data.nombres.trim() : "",
-    apellidos: data.apellidos ? data. apellidos.trim() : "",
-    documento: data.documento ? data.documento.trim() : "",
+    apellidos: data.apellidos ? data.apellidos.trim() : "",
+    documento: documentoLimpio,
     telefono: data.telefono ? data.telefono.trim() : "",
     correo: data.correo ? data.correo.trim() : "",
     password: data.password ? data.password.trim() : "",
   };
 
   clientes.push(nuevoCliente);
-
   await guardarClientes(clientes);
 
   return nuevoCliente;
@@ -68,12 +89,7 @@ export async function actualizarCliente(id, data) {
     return null;
   }
 
-
-const clienteActual = clientes[indice];
-
-clientes[indice];
-
-clientes[indice] = {
+  clientes[indice] = {
     ...clientes[indice],
     nombre: data.nombre ? data.nombre.trim() : clientes[indice].nombre,
     documento: data.documento ? data.documento.trim() : clientes[indice].documento,
@@ -81,21 +97,15 @@ clientes[indice] = {
     correo: data.correo ? data.correo.trim() : clientes[indice].correo,
   };
 
-
   await guardarClientes(clientes);
 
   return clientes[indice];
 }
 
+
 export async function eliminarCliente(id) {
-  const clientes = await LeerClientes();
-  const nuevosClientes = clientes.filter((cliente) => cliente.id !== id);
 
-  if (clientes.length === nuevosClientes.length) {
-    return null; // No se encontró el cliente
-  }
-
-  await guardarClientes(nuevosClientes);
-  return { mensaje: "Cliente eliminado correctamente" };
-  //hola
+    const clientes = await LeerClientes(); 
+    const clientesFiltrados = clientes.filter(c => String(c.id) !== String(id));
+    await guardarClientes(clientesFiltrados);
 }
