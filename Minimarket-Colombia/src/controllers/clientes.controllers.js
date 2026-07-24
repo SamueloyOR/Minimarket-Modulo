@@ -3,7 +3,7 @@ import {
     buscarClientesById,
     crearCLiente,
     actualizarCliente as actualizarClienteModel,
-    eliminarCliente as eliminarClienteMOdel
+    eliminarCliente as eliminarClienteModel
 
 } from "../models/conection.js";
 
@@ -24,39 +24,47 @@ export const crearCliente = async (req, res) => {
         const nuevoCliente = await crearCLiente(req.body);
         res.status(201).json({ mensaje: 'Cliente creado con éxito', cliente: nuevoCliente });
     } catch (error) {
-        console.error("ERROR DETALLADO EN POST:", error);
-        res.status(500).json({ error: error.message });
+
+        console.error("ERROR DETALLADO", error);
+        
+        if (error.message === "DOCUMENTO_DUPLICADO"){
+            return res.status(400).json({
+                message:"Este numero de documento ya esta registrado"
+            });
+        }
+        return res.status(500).json({ message: error.message });
     }
 };
 
 // 3. ACTUALIZAR CLIENTE (Update)
-export const actualizarCliente = async (req, res) => {
+
+export async function actualizarCliente(req, res) {
     try {
         const { id } = req.params;
         const clienteActualizado = await actualizarClienteModel(id, req.body);
-        
+
         if (!clienteActualizado) {
-            return res.status(404).json({ mensaje: 'Cliente no encontrado' });
+            return res.status(404).json({ message: "Cliente no encontrado" });
         }
 
-        res.json({ mensaje: 'Cliente actualizado correctamente', cliente: clienteActualizado });
+        return res.json(clienteActualizado);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error al actualizar cliente:", error);
+        return res.status(500).json({ message: error.message });
     }
-};
+}
 
 // 4. ELIMINAR CLIENTE (Delete)
-export const eliminarCliente = async (req, res) => {
+
+export async function eliminarCliente(req, res) {
     try {
         const { id } = req.params;
-        const resultado = await eliminarClienteModel(id);
         
-        if (!resultado) {
-            return res.status(404).json({ mensaje: 'Cliente no encontrado' });
-        }
-
-        res.json(resultado);
+        await eliminarClienteModel(id);
+        
+        res.json({ message: "Cliente eliminado correctamente" });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error al eliminar cliente:", error);
+        res.status(500).json({ message: "Error interno del servidor" });
     }
-};
+}
