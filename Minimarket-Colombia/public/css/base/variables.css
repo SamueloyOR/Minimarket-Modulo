@@ -1,0 +1,36 @@
+:root{
+    --primary: rgba(47, 128, 189, 0.95);
+    --primary-dark: rgba(0, 0, 0, 0.1);
+    --primary-hover:#0d5ba8;
+    --primary-light:#09f;
+    --background: #141d26;
+    --text-primary:#ffffff;
+    --text-secondary:#cdd5e1;
+    --text-muted:#94a3b8;
+    --border:rgba(255, 255, 255, 0.1);
+    --card-bg:#1e293b;
+    --shadow:rgba(0,0,0,0.3);
+    --input-bg:#1e293b;
+    --hsla-example:hsla(210, 100%, 56%, 1);
+    --nav-height:72px;
+}
+
+@font-face {
+    font-family: 'Inter variable';
+    src: url('/public/fonts/Inter-VariableFont.ttf') format('truetype');
+    font-style: normal;
+    font-display: swap;
+}
+
+h1{
+    font-size: 2.25rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    text-wrap: balance;
+}
+
+h1 + p{
+    text-wrap: balance;
+    margin-bottom: 2rem;
+}

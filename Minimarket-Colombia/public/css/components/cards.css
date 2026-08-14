@@ -1,0 +1,141 @@
+#main{
+    position: relative;
+    padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background: transparent;
+}
+
+.main__text{
+    border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: var(--background);
+    box-shadow: 0 10px 25px var(--text-primary);
+}
+
+.main__text h1{
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.main__text p{
+    font-size: 16px;
+    color: #cbd5e1;
+}
+
+.users-containers{
+    padding: 2rem;
+    border-radius: 20px;
+    gap: 30px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.users-card{
+   background-color: #ffffff;
+    color: #0f172a;
+    border-radius: 12px;
+    padding: 35px 25px;
+    width: 320px;
+    text-align: center;
+    box-shadow: 0 10px 25px var(--card-bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform 0.3s ease; 
+}
+
+.users-card:hover{
+    transform: translateY(-5px);
+}
+
+.users-card h3{
+    font-size: 22px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+.users-card p{
+    font-size: 14px;
+    color: #475569;
+    margin-bottom: 30px;
+    line-height: 1.5;
+    min-height: 45px;
+}
+
+.btn-container{
+    display: flex;
+    gap: 8px;
+    width: 100%;
+    justify-content: center;
+}
+
+.btn-container-login{
+    flex: 1 1 auto;
+    padding: 12px;
+    background-color: var(--primary-light);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-container-signup{
+    flex: 1 1 auto;
+    padding: 12px;
+    background-color: var(--card-bg);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 12px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease;
+}
+
+.btn-container-login:hover{
+    background-color: var(--primary-hover);
+}
+
+.btn-container-signup:hover{
+    background-color: var(--shadow);
+}
+
+@media ((max-width: 992px)) {
+    .users-containers{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    header {
+        padding: 15px 20px;
+    }
+    
+    nav {
+        display: none;
+    }
+    .footer__section{
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+/* breakpoint: tablet 992px */
