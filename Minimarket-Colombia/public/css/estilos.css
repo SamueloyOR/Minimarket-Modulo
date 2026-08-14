@@ -207,6 +207,22 @@ header a{
     stroke-width: 1.8;
 }
 
+.btn-login{
+    border: 1px color(var(--card-bg));
+    padding: 1rem;
+    border-radius: 10px 10px 10px 10px;
+    color: var(--card-bg);
+    background-color: var();
+    font-size: 0.87rem;
+    cursor: pointer;
+
+}
+.btn-login:hover{
+    background-color: var(--primary-hover);
+    transition: 0.5s;
+}
+
+
 #main{
     position: relative;
     padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
@@ -380,26 +396,30 @@ header a{
     background-color: #0b1120;
     border-top: 1px solid #1e293b;
     font-size: 13px;
-    color: #94a3b8;
     flex-wrap: wrap;
     gap: 15px;
+    font-weight: 700;
+    color: var(--primary);
 }
 
 .footer__section__links{
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
+
+    a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        transition: color 0.5s;
+        font-weight: 500;
+
+        &:hover, &:hover {
+            color: var(--primary);
+            outline: none;
+        }
+    }
 }
 
-.footer__section__links li a{
-    color: #94a3b8;
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.footer__section__links:hover{
-    color: #ffffff;
-}
 
 @media (max-width: 992px) {
     .main__users__containers{
