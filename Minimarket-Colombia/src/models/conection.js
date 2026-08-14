@@ -7,7 +7,7 @@ import { randomUUID } from "node:crypto";
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const router = path.join(dirname, "../data/clientes.js");
+const router = path.join(dirname, "../data/clientes.json");
 
 export async function LeerClientes() {
   try {

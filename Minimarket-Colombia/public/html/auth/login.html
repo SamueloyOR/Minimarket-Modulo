@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Login para accerder al rol deseado">
+    <title>Login</title>
+    <link rel="stylesheet" href="/public/css/base/reset.css">
+    <link rel="stylesheet" href="/public/css/base/variables.css">
+    <link rel="stylesheet" href="/public/css/components/navbar.css">
+    <link rel="stylesheet" href="/public/css/components/footer.css">
+    <link rel="stylesheet" href="/public/css/pages/login.css">
+    
+</head>
+
+
+<body>
+    
+    <header id="hero">
+      <nav class="nav-bar" aria-label="Navegación principal">
+        <div class="nav-bar-logo">
+          <img
+            src="/public/img/minimarket.jpeg"
+            alt="Logo de Minimarket"
+            width="50"
+            height="50"
+          />
+        </div>
+
+        <div class="nav-bar-tittle">
+          <h2>Minimarket</h2>
+        </div>
+
+        <div class="nav-bar-categories">
+          <a class="user-categories" href="/public/html/pages/categories.html"
+            >Categorías</a
+          >
+          <a class="user-offers" href="/public/html/pages/offers.html"
+            >Ofertas</a
+          >
+        </div>
+
+        <section id="search" aria-label="Buscar productos">
+          <form class="search-form" role="search">
+            <button class="search-button" type="submit" aria-label="Buscar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="M16 16L21 21"></path>
+              </svg>
+            </button>
+
+            <input
+              class="search-input"
+              id="Search-In-Inline"
+              type="search"
+              name="q"
+              placeholder="Buscar productos"
+              aria-label="Buscar productos"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+          </form>
+        </section>
+
+        <button class="btn-login" type="submit" aria-label="login">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#ffffff"
+            stroke-width="1"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+            <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+            <path
+              d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
+            />
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+
+    <main id="main">
+        
+
+        <section class="form-section">
+
+            <h1 class="form-title">Iniciar sesion</h1>
+
+            <p>BIenvenido a Minimarket Colombia</p>
+
+            <form action="" id="login-form">
+
+                <label for="user">Correo:</label>
+                <input type="gmail" name="gmail" id="gmail" placeholder="Ej: anonimo@gmail.com">
+
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password" id="password" placeholder="*****">
+
+                <button type="submit" id="btn-submit">
+                    Ingresar
+                </button>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <footer>
+
+    <section class="footer-section">
+        
+        <h3>Minimarket</h3>
+
+        <div class="footer-section-links">
+          <a href="/aboutUS">About us</a>
+          <a href="/contact">Contacto</a>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos y condiciones</a>
+          <a href="/cookies">Cookies</a>
+
+          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+        </div>
+      </section>
+    </footer>
+</body>
+</html>
