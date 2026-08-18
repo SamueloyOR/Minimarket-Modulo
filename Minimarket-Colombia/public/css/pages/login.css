@@ -1,3 +1,4 @@
+
 main{
     position: relative;
     padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
@@ -10,44 +11,106 @@ main{
 
 }
 
-h1{
-    text-align: center;
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    color: #ffffff;
+
+    h1{
+    color: var(--text-prymary);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    letter-spacing: -0.5;
+    }
 
     p{
-    text-align: center;
-    font-size: 16px;
-    color: #cbd5e1;
-    border-bottom: 1px solid var(--border);
+
+    color: var(--text-prymary);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+    }
+
 
     label{
         color: #cbd5e1;
         font-size: 16px;
     }
+    
+.input-form{
 
-}
+    text-align: left;
+    margin-bottom: 20px;
+
+    label {
+        display: block;
+        font-weight: 700;
+        color: var();
+        margin-bottom: 8px;
+        font-size: 0.95rem;
+    }
+
+    input {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid #d1d5db;
+        border-radius: 6px;
+        background-color: #f8fafc;
+        font-size: 1rem;
+        color: var(--boder);
+        outline: none;
+        transition: border-color 0.2s ease;
+    }
+
+    input::placeholder{
+        color: var(--input-bg);
+    }
+
+    input:focus{
+        border-color:var(--input-bg);
+    }
 }
 
-#login-form{
-    margin: 0px 0px 10px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    border-bottom: 1px solid var(--border);
-    background: var(--background);
-    padding: 1rem 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
+#btn-submit{
+    width: 100%;
+    padding: 14px;
+    background-color: var(--hsla-example);
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
 }
+
+#btn-submit:hover{
+    background-color: var(--primary-hover);
+    transition: 0.2s;
+}
+
+.forgot-password{
+    margin-top: 18px;
+
+    a{
+        color: var(--primary-light);
+        text-decoration: underline;
+        font-weight: 600;
+        font-size: 1rem;
+    }
+
+    & a:hover{
+        color: var(--text-muted);
+    }
+}
+
 
 .form-section{
+
     background-color: var(--background);
     padding: 3rem 1rem 10rem 1rem;
     border: var(--boder);
     border-radius: 20px ;
+    padding: 40px 32px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
 }
