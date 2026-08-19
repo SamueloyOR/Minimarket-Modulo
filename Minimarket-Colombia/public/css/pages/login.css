@@ -12,93 +12,109 @@ main {
 
 h1 {
     color: var(--text-primary);
-    font-size: 2.5rem;
-    font-weight: 800;
-    margin-bottom: 8px;
-    letter-spacing: -0.5px;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    letter-spacing: -0.04rem;
 }
 
 p {
-    color: var(--text-primary);
-    font-size: 1.1rem;
-    margin-bottom: 32px;
+    margin: 0 0 28px;
+    color: var(--text-secondary);
+    font-size: 1rem;
 }
 
 label {
-    color: #cbd5e1;
-    font-size: 16px;
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-secondary);
 }
 
 .input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     text-align: left;
-    margin-bottom: 20px;
 }
 
 .input-form label {
     display: block;
     font-weight: 700;
     color: var(--text-secondary);
-    margin-bottom: 8px;
     font-size: 0.95rem;
 }
 
 .input-form input {
+    display: flex;
     width: 100%;
-    padding: 14px 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    background-color: #f8fafc;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--input-bg);
     font-size: 1rem;
-    color: var(--shadow);
-    outline: none;
-    transition: border-color 0.2s ease;
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .input-form input::placeholder {
-    color: var(--input-bg);
+    color: var(--text-muted);
 }
 
 .input-form input:focus {
-    border-color: var(--input-bg);
+    outline: none;
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
+
 }
 
 .password-toggle {
-    display: flex;
+    margin-bottom: 10px;
+    display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 10px;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
 }
 
 .password-toggle input[type="checkbox"] {
     width: auto;
     margin: 0;
     accent-color: var(--primary-light);
+    cursor: pointer;
 }
 
 .password-toggle label {
-    display: inline;
-    margin: 0;
-    font-weight: 500;
-    font-size: 0.9rem;
-    color: #cbd5e1;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none
 }
 
 #btn-submit {
     width: 100%;
-    padding: 14px;
-    background-color: var(--hsla-example);
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-hover));
     color: #ffffff;
     border: none;
-    border-radius: 25px;
+    border-radius: 10px;
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
-    margin-top: 10px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 #btn-submit:hover {
-    background-color: var(--primary-hover);
-    transition: 0.2s;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(9, 153, 255, 0.25);
+    filter: brightness(1.04);
 }
 
 .forgot-password {
@@ -107,13 +123,13 @@ label {
 
 .forgot-password a {
     color: var(--primary-light);
-    text-decoration: underline;
-    font-weight: 600;
-    font-size: 1rem;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 6px;
 }
 
 .forgot-password a:hover {
-    color: var(--text-muted);
+    text-decoration: underline;
 }
 
 .form-section {
