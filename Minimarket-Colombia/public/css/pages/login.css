@@ -1,5 +1,5 @@
 
-main{
+main {
     position: relative;
     padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
     display: flex;
@@ -8,66 +8,82 @@ main{
     justify-content: center;
     flex-grow: 1;
     background: transparent;
-
 }
 
-
-    h1{
-    color: var(--text-prymary);
+h1 {
+    color: var(--text-primary);
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 8px;
-    letter-spacing: -0.5;
-    }
-
-    p{
-
-    color: var(--text-prymary);
-    font-size: 1.1rem;
-    margin-bottom: 32px;
-    }
-
-
-    label{
-        color: #cbd5e1;
-        font-size: 16px;
-    }
-    
-.input-form{
-
-    text-align: left;
-    margin-bottom: 20px;
-
-    label {
-        display: block;
-        font-weight: 700;
-        color: var();
-        margin-bottom: 8px;
-        font-size: 0.95rem;
-    }
-
-    input {
-        width: 100%;
-        padding: 14px 16px;
-        border: 1px solid #d1d5db;
-        border-radius: 6px;
-        background-color: #f8fafc;
-        font-size: 1rem;
-        color: var(--boder);
-        outline: none;
-        transition: border-color 0.2s ease;
-    }
-
-    input::placeholder{
-        color: var(--input-bg);
-    }
-
-    input:focus{
-        border-color:var(--input-bg);
-    }
+    letter-spacing: -0.5px;
 }
 
-#btn-submit{
+p {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+}
+
+label {
+    color: #cbd5e1;
+    font-size: 16px;
+}
+
+.input-form {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.input-form label {
+    display: block;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.input-form input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    background-color: #f8fafc;
+    font-size: 1rem;
+    color: var(--shadow);
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.input-form input::placeholder {
+    color: var(--input-bg);
+}
+
+.input-form input:focus {
+    border-color: var(--input-bg);
+}
+
+.password-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.password-toggle input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--primary-light);
+}
+
+.password-toggle label {
+    display: inline;
+    margin: 0;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #cbd5e1;
+}
+
+#btn-submit {
     width: 100%;
     padding: 14px;
     background-color: var(--hsla-example);
@@ -80,35 +96,31 @@ main{
     margin-top: 10px;
 }
 
-#btn-submit:hover{
+#btn-submit:hover {
     background-color: var(--primary-hover);
     transition: 0.2s;
 }
 
-.forgot-password{
+.forgot-password {
     margin-top: 18px;
-
-    a{
-        color: var(--primary-light);
-        text-decoration: underline;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-
-    & a:hover{
-        color: var(--text-muted);
-    }
 }
 
+.forgot-password a {
+    color: var(--primary-light);
+    text-decoration: underline;
+    font-weight: 600;
+    font-size: 1rem;
+}
 
-.form-section{
+.forgot-password a:hover {
+    color: var(--text-muted);
+}
 
+.form-section {
     background-color: var(--background);
-    padding: 3rem 1rem 10rem 1rem;
-    border: var(--boder);
-    border-radius: 20px ;
+    border: 1px solid var(--border);
+    border-radius: 20px;
     padding: 40px 32px;
-    border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     width: 100%;
     max-width: 420px;
