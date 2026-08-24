@@ -119,22 +119,40 @@ main.register-page {
     box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
 }
 
-.show-password-toggle {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 10px;
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    cursor: pointer;
-    user-select: none;
+.input-container .form-control {
+    padding-right: 46px;
 }
 
-.show-password-toggle input[type="checkbox"] {
-    width: auto;
-    margin: 0;
-    accent-color: var(--primary-light);
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    border-radius: 8px;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+    color: var(--primary-light);
+    background-color: rgba(9, 153, 255, 0.08);
+    outline: none;
+}
+
+.password-toggle i,
+.password-toggle .bx,
+.bx-bx-hide,
+.bx-bx-show {
+    font-size: 1.05rem;
+    line-height: 1;
 }
 
 .btn-register {

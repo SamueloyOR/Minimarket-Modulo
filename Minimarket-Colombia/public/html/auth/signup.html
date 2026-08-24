@@ -30,8 +30,8 @@
             </div>
 
             <div class="nav-bar-categories">
-                <a class="user-categories" href="/public/html/pages/categories.html">Categorías</a>
-                <a class="user-offers" href="/public/html/pages/offers.html">Ofertas</a>
+                <a class="user-categories" href="/Minimarket-Colombia/public/html/pages/categories.html">Categorías</a>
+                <a class="user-offers" href="/Minimarket-Colombia/public/html/pages/offers.html">Ofertas</a>
             </div>
 
             <section id="search" aria-label="Buscar productos">
@@ -71,8 +71,7 @@
         </nav>
     </header>
 
-    <body>
-        <main class="register-page">
+    <main class="register-page">
             <section class="register-card">
                 <h1>Crear cuenta</h1>
                 <p>Únete a Minimarket y empieza a comprar.</p>
@@ -106,12 +105,19 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" id="password" class="form-control" required placeholder="••••••••">
-                        <label class="show-password-toggle">
-                            <input type="checkbox" onclick="ViewPassword()">
-                            Mostrar contraseña
-                        </label>
+
+                        <div class="password-toggle">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" id="password" class="form-control" required placeholder="••••••••" value="">
+                            <i class="bx-bx-hide">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
+                                    fill="none" stroke="#cdd5e1" stroke-width="1" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+                                <path
+                                    d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+                            </svg></i>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -128,14 +134,14 @@
 
                     <div class="form-group">
                         <label for="telefono">Teléfono:</label>
-                        <input type="text" id="telefono" class="form-control" placeholder="Ejem: 21231244">
+                        <input type="text" id="telefono" class="form-control" placeholder="Ejem: +57 31120283423">
                     </div>
 
                     <button type="submit" id="btn-submit" class="btn-register">
                         Registrar
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                            fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
-                            stroke-linejoin="round" aria-hidden="true">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                            aria-hidden="true">
                             <path d="M5 12l14 0" />
                             <path d="M13 18l6 -6" />
                             <path d="M13 6l6 6" />
@@ -165,8 +171,23 @@
                 </div>
             </section>
         </footer>
-
-        <script src="/public/js/app.js"></script>
+    <script>
+        // Password toggle: show/hide password when clicking the eye icon
+        (function(){
+            const toggleContainer = document.querySelector('.password-toggle');
+            if(!toggleContainer) return;
+            const input = toggleContainer.querySelector('input[type="password"], input[type="text"]');
+            const btn = toggleContainer.querySelector('i');
+            btn && btn.addEventListener('click', function(){
+                if(!input) return;
+                const isPwd = input.type === 'password';
+                input.type = isPwd ? 'text' : 'password';
+                // toggle a class to allow CSS changes if needed
+                btn.classList.toggle('visible', isPwd);
+                btn.setAttribute('aria-pressed', String(isPwd));
+            });
+        })();
+    </script>
     </body>
 
 </html>
