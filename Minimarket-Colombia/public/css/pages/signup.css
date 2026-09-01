@@ -119,40 +119,29 @@ main.register-page {
     box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
 }
 
-.input-container .form-control {
-    padding-right: 46px;
+.password-toggle {
+    position: relative;
+    width: 100%;
 }
 
-.password-toggle {
+.password-toggle i {
     position: absolute;
     right: 12px;
     top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    color: var(--text-muted);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6px;
-    border-radius: 8px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    color: var(--text-muted);
+    z-index: 2;
 }
 
-.password-toggle:hover,
-.password-toggle:focus-visible {
-    color: var(--primary-light);
-    background-color: rgba(9, 153, 255, 0.08);
-    outline: none;
-}
+.btn-toggle-show{
+    background-color: #0f172a;
 
-.password-toggle i,
-.password-toggle .bx,
-.bx-bx-hide,
-.bx-bx-show {
-    font-size: 1.05rem;
-    line-height: 1;
+    &.is-applied{
+        background-color: var(--primary-hover);
+    }
 }
 
 .btn-register {
