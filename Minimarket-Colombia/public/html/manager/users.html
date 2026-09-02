@@ -53,14 +53,28 @@
                 </form>
             </section>
 
-            <button class="btn-login" type="submit" aria-label="login">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                    stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-                    <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-                    <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
-                </svg>
-            </button>
+            <div class="profile-dropdown">
+                <button class="profile-toggle" type="button" aria-label="Seleccionar tipo de perfil" aria-expanded="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+                        <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                        <path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" />
+                    </svg>
+                </button>
+
+                <div class="profile-menu" id="profileMenu" role="menu" aria-label="Tipos de perfil">
+                    <button type="button" class="profile-option selected" data-profile="user" role="menuitem">Usuario</button>
+                    <button type="button" class="profile-option" data-profile="admin" role="menuitem">Administrador</button>
+                    <button type="button" class="profile-option" data-profile="worker" role="menuitem">Trabajador</button>
+                </div>
+
+                <select name="profile" id="profile" class="sr-only" aria-hidden="true">
+                    <option value="user" selected>Usuario</option>
+                    <option value="admin">Administrador</option>
+                    <option value="worker">Trabajador</option>
+                </select>
+            </div>
 
             <button class="btn-shopping" id="shopping" type="submit" aria-label="shopping">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
@@ -126,6 +140,7 @@
                         <th>Teléfono</th>
                         <th>Acciones</th>
                     </tr>
+                </thead>
                 <tbody id="tabla-clientes">
 
                 </tbody>
@@ -154,7 +169,7 @@
     </main>
 
     <!-- Script de conexión con la API -->
-    <script src="./js/app.js" defer></script>
+    <script src="/Minimarket-Colombia/public/js/app.js" defer></script>
 
 
 </body>
