@@ -63,18 +63,3 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
-//funcion para cambiar el estilo del icono
-
-const showPsw = document.querySelector(".btn-toggle-show");
-
-if (showPsw) {
-  showPsw.addEventListener('click', function(event){
-    const element = event.currentTarget;
-
-    if (element.classList.contains('btn-toggle-show')){
-      element.classList.toggle('is-applied');
-      element.disabled = false;
-    }
-  });
-}

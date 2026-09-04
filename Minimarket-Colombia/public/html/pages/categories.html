@@ -1,11 +1,135 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Categorías de productos de Minimarket Colombia"
+    />
+    <title>Categorías | Minimarket Colombia</title>
+    <link rel="stylesheet" href="/Minimarket-Colombia/public/css/base/reset.css" />
+    <link rel="stylesheet" href="/Minimarket-Colombia/public/css/base/variables.css" />
+    <link rel="stylesheet" href="/Minimarket-Colombia/public/css/components/footer.css" />
+    <link rel="stylesheet" href="/Minimarket-Colombia/public/css/components/navbar.css" />
+    <link rel="stylesheet" href="/Minimarket-Colombia/public/css/pages/categories.css" />
+  </head>
+
+  <body>
+    <header id="hero" role="banner">
+      <nav class="nav-bar" aria-label="Navegación principal">
+        <div class="nav-bar-logo">
+          <img src="/Minimarket-Colombia/public/img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+        </div>
+
+        <div class="nav-bar-tittle">
+          <h2>Minimarket</h2>
+        </div>
+
+        <div class="nav-bar-categories">
+          <a class="user-categories" href="/Minimarket-Colombia/public/html/pages/categories.html#categorias">Categorías</a>
+          <a class="user-offers" href="/Minimarket-Colombia/public/html/pages/offers.html#ofertas">Ofertas</a>
+        </div>
+
+        <section id="search" aria-label="Buscar productos">
+          <form class="search-form" role="search">
+            <button class="search-button" type="submit" aria-label="Buscar">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="M16 16L21 21"></path>
+              </svg>
+            </button>
+
+            <input class="search-input" id="Search-In-Inline" type="search" name="q" placeholder="Buscar productos" aria-label="Buscar productos" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+          </form>
+        </section>
+
+        <button class="btn-shopping" id="shopping" type="submit" aria-label="shopping">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>
+        </button>
+      </nav>
+    </header>
+
+    <main id="categorias" role="main">
+      <div id="principal-content">
+        <aside class="categories-sidebar">
+          <h2>Categorías</h2>
+          <span>Explora por necesidades del hogar.</span>
+
+          <div class="categories-container">
+            <button class="category-card" type="button">
+              <svg ...></svg>
+              <div>
+                <h3>Frutas y verduras</h3>
+                <p>Productos frescos del día.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button">
+              <svg ...></svg>
+              <div>
+                <h3>Lácteos</h3>
+                <p>Leches, yogures y quesos.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button">
+              <svg ...></svg>
+              <div>
+                <h3>Aseo y hogar</h3>
+                <p>Todo para tu limpieza y orden.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button">
+              <svg ...></svg>
+              <div>
+                <h3>Snacks</h3>
+                <p>Refrigerios y aperitivos.</p>
+              </div>
+            </button>
+          </div>
+        </aside>
+
+        <section class="categories-main" aria-label="Productos destacados">
+          <h1 class="categories-title">Encuentra lo que necesitas</h1>
+          <span>Selecciona una categoría y descubre lo mejor del mercado.</span>
+
+          <div class="products-carts">
+            <article class="category-card">
+              <h3>Canasta básica</h3>
+              <p>Arroz, panela, aceite y productos esenciales para tu hogar.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+            <article class="category-card">
+              <h3>Desayunos</h3>
+              <p>Pan, huevos, café y alimentos para empezar bien el día.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+            <article class="category-card">
+              <h3>Perfumería</h3>
+              <p>Productos de higiene y cuidado personal con buena calidad.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer id="form-section">
+      <section class="footer-section">
+        <h3>Minimarket</h3>
+        <div class="footer-section-links">
+          <a href="/aboutUS">About us</a>
+          <a href="/contact">Contacto</a>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos y condiciones</a>
+          <a href="/cookies">Cookies</a>
+          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+        </div>
+      </section>
+    </footer>
+  </body>
 </html>
