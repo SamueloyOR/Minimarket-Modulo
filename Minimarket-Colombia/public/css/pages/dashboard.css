@@ -143,6 +143,10 @@ main {
     width: min(100%, 1400px);
 }
 
+.dashboard {
+    align-items: flex-start;
+}
+
 .dashboard-sidebar {
     background: var(--input-bg);
     border: 1px solid var(--border);
@@ -179,8 +183,8 @@ main {
 
 .btn-dashboard:hover,
 .btn-dashboard:focus-visible {
-    background: rgba(9, 153, 255, 0.08);
-    border-color: rgba(9, 153, 255, 0.15);
+    background: var(--primary-dark);
+    border-color: var(--border);
     color: var(--text-primary);
 }
 
@@ -206,8 +210,10 @@ main {
     background: var(--input-bg);
     border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 1.25rem 1.3rem;
+    padding: 1rem;
     box-shadow: 0 12px 24px var(--shadow);
+    margin-top: 0;
+    align-self: start;
 }
 
 .tittle {
@@ -229,6 +235,7 @@ main {
 .tittle > span {
     color: var(--text-secondary);
     font-size: 0.95rem;
+    align-items: center;
 }
 
 .calendar,
