@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard-Client</title>
+    <link rel="stylesheet" href="../../css/base/reset.css">
+    <link rel="stylesheet" href="../../css/base/variables.css">
+    <link rel="stylesheet" href="../../css/components/cards.css">
+    <link rel="stylesheet" href="../../css/components/footer.css">
+    <link rel="stylesheet" href="../../css/components/modal.css">
+    <link rel="stylesheet" href="../../css/components/navbar.css">
+    <link rel="stylesheet" href="../../css/pages/dashboard.css">
+</head>
+<body>
+
+    <header id="hero">
+      <nav class="nav-bar" aria-label="Navegación principal">
+        <div class="nav-bar-logo" aria-label="Logo-minimarket">
+          <img
+            src="/Minimarket-Colombia/public/img/minimarket.jpeg"
+            alt="Logo de Minimarket"
+            width="50"
+            height="50"
+          />
+        </div>
+
+        <div class="nav-bar-tittle">
+          <h2>Minimarket</h2>
+        </div>
+
+        <section id="search" aria-label="Buscar productos">
+          <form class="search-form" role="search">
+            <button class="search-button" type="submit" aria-label="Buscar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="M16 16L21 21"></path>
+              </svg>
+            </button>
+
+            <input
+              class="search-input"
+              id="Search-In-Inline"
+              type="search"
+              name="q"
+              placeholder="Buscar orders, productos, o clientes"
+              aria-label="Buscar productos"
+              autocorrect="off"
+              autocomplete="off"
+              autocapitalize="off"
+              spellcheck="false"
+            />
+          </form>
+        </section>
+
+        <form>
+                <section class="notifications" aria-label="Notificaciones">
+                  <button class="bell-button" type="button" aria-label="Notificaciones">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                            stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 8a6 6 0 0 0 -12 0c0 7 -3 9 -3 9h18s-3 -2 -3 -9" />
+                            <path d="M13.73 21a2 2 0 0 1 -3.46 0" />
+                        </svg>
+                    </button>
+            </section>
+        </form>
+
+        <div class="profile-dropdown">
+          <button
+            class="profile-toggle"
+            type="button"
+            aria-label="Seleccionar tipo de perfil"
+            aria-expanded="false"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="32"
+              height="32"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#ffffff"
+              stroke-width="1"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
+              <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+              <path
+                d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
+              />
+            </svg>
+          </button>
+
+          <div class="profile-menu" id="profileMenu" role="menu" aria-label="Tipos de perfil">
+            <button type="button" class="profile-option selected" data-profile="user" role="menuitem">Usuario</button>
+            <button type="button" class="profile-option" data-profile="admin" role="menuitem">Administrador</button>
+            <button type="button" class="profile-option" data-profile="worker" role="menuitem">Trabajador</button>
+          </div>
+
+          <select name="profile" id="profile" class="sr-only" aria-hidden="true">
+            <option value="user" selected>Usuario</option>
+            <option value="admin">Administrador</option>
+            <option value="worker">Trabajador</option>
+          </select>
+        </div>
+
+      </nav>
+    
+    </header>
+
+      <main>
+
+        <section class="dashboard">
+        <section class="dashboard-sidebar">
+            <span>OVERVIEW</span>
+
+            <button class="btn-dashboard" id="btn-dashboard">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                        stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M17.8 20l-12 -1.5c-1 -.1 -1.8 -.9 -1.8 -1.9v-9.2c0 -1 .8 -1.8 1.8 -1.9l12 -1.5c1.2 -.1 2.2 .8 2.2 1.9v12.1c0 1.2 -1.1 2.1 -2.2 1.9z" />
+                        <path d="M12 5l0 14" />
+                        <path d="M4 12l16 0" />
+                    </svg>
+                </i>
+                <span>Resumen</span>
+            </button>
+
+            <button class="btn-dashboard" id="btn-dashboard">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clipboard-list"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" /><path d="M9 5a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2" /><path d="M9 12l.01 0" /><path d="M13 12l2 0" /><path d="M9 16l.01 0" /><path d="M13 16l2 0" /></svg>
+                </i>
+                <span>Mis pedidos
+                </span>
+            </button>
+
+            <span>MANAGEMENT</span>
+
+            <button class="btn-dashboard" id="btn-Products">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-map-pin-2"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 18.5l-3 -1.5l-6 3v-13l6 -3l6 3l6 -3v7" /><path d="M9 4v13" /><path d="M15 7v5" /><path d="M21.121 20.121a3 3 0 1 0 -4.242 0c.418 .419 1.125 1.045 2.121 1.879c1.051 -.89 1.759 -1.516 2.121 -1.879" /><path d="M19 18v.01" /></svg>
+                </i>
+                <span>Direcciones</span>
+            </button>
+
+            <button class="btn-dashboard" id="btn-Orders">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8" /><path d="M3 10l18 0" /><path d="M7 15l.01 0" /><path d="M11 15l2 0" /></svg>
+                </i>
+                <span>Metodos de pago</span>
+            </button>
+
+            <button class="btn-dashboard" id="btn-Customers">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-star"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245" /></svg>
+                </i>
+                <span>Favoritos</span>
+            </button>
+
+            <button class="btn-dashboard" id="btn-Stores">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-settings-2"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M19.875 6.27a2.225 2.225 0 0 1 1.125 1.948v7.284c0 .809 -.443 1.555 -1.158 1.948l-6.75 4.27a2.269 2.269 0 0 1 -2.184 0l-6.75 -4.27a2.225 2.225 0 0 1 -1.158 -1.948v-7.285c0 -.809 .443 -1.554 1.158 -1.947l6.75 -3.98a2.33 2.33 0 0 1 2.25 0l6.75 3.98h-.033" /><path d="M9 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" /></svg>
+                </i>
+                <span>Config</span>
+            </button>
+
+            <button class="btn-sign-out" id="btn-sign-out">
+                <i>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-logout"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 -2v-2"/><path d="M7 12h14l-3 -3m0 6l3 -3"/></svg>
+                </i>
+                <span>Cerrar sesión</span>
+            </button>
+
+        </section>
+        <section class="main-content">
+            <div class="tittle">
+                <h1>!Hola Samuel</h1>
+                <span>Aqui esta el resumen de tu cuenta y actividad reciente.</span>
+            </div>
+
+            <form class="carts-containers">
+                <div class="cart-profile">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-receipt"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M5 21v-16a2 2 0 0 1 2 -2h10a2 2 0 0 1 2 2v16l-3 -2l-2 2l-2 -2l-2 2l-2 -2l-3 2m4 -14h6m-6 4h6m-2 4h2" /></svg>
+                    </i>
+                    <h4>Mis pedidos</h4>
+                    
+                    <span>Revisa el historial de tus compras y descarga recibos</span>
+
+                    <a href="/orders">Ver todos</a>
+                </div>
+                <div class="cart-directions">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-send"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M10 14l11 -11" /><path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" /></svg>
+                    </i>
+                    <h4>Direcciones Guardadas</h4>
+                    <span>Administra tus ligares de entrega para un checkout mas rapido</span>
+
+                    <a href="/">Gestionar</a>
+                </div>
+                <div class="cart-methods">
+                    <i>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-credit-card"><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M3 8a3 3 0 0 1 3 -3h12a3 3 0 0 1 3 3v8a3 3 0 0 1 -3 3h-12a3 3 0 0 1 -3 -3l0 -8" /><path d="M3 10l18 0" /><path d="M7 15l.01 0" /><path d="M11 15l2 0" /></svg>
+                    </i>
+                    <h4>Formas de Pago</h4>
+                    <span>Actualiza tus tarjetas y opciones de pago preferidas</span>
+                    <a href="/payment-methods">metodos de pago</a>
+                </div>
+            </form>
+            </section>
+      </main>
+
+      <footer>
+
+    <section class="footer-section">
+        
+        <h3>Minimarket</h3>
+
+        <div class="footer-section-links">
+          <a href="/aboutUS">About us</a>
+          <a href="/contact">Contacto</a>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos y condiciones</a>
+          <a href="/cookies">Cookies</a>
+
+          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+        </div>
+      </section>
+    </footer>
+    
+</body>
+
+
+</html>
