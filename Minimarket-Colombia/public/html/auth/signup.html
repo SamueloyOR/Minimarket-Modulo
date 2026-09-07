@@ -37,7 +37,7 @@
       href="/Minimarket-Colombia/public/css/pages/signup.css"
     />
 
-    <script type="module" src="/Minimarket-Colombia/public/js/auth.js"></script>
+    <script type="module" src="/Minimarket-Colombia/public/js/pages/auth.js"></script>
   </head>
 
   <body>
@@ -59,12 +59,12 @@
         <div class="nav-bar-categories">
           <a
             class="user-categories"
-            href="/Minimarket-Colombia/public/html/pages/categories.html"
+            href="/Minimarket-Colombia/public/html/pages/categories.html#categorias"
             >Categorías</a
           >
           <a
             class="user-offers"
-            href="/Minimarket-Colombia/public/html/pages/offers.html"
+            href="/Minimarket-Colombia/public/html/pages/offers.html#ofertas"
             >Ofertas</a
           >
         </div>
@@ -128,13 +128,44 @@
             </svg>
           </button>
 
-          <div class="profile-menu" id="profileMenu" role="menu" aria-label="Tipos de perfil">
-            <button type="button" class="profile-option selected" data-profile="user" role="menuitem">Usuario</button>
-            <button type="button" class="profile-option" data-profile="admin" role="menuitem">Administrador</button>
-            <button type="button" class="profile-option" data-profile="worker" role="menuitem">Trabajador</button>
+          <div
+            class="profile-menu"
+            id="profileMenu"
+            role="menu"
+            aria-label="Tipos de perfil"
+          >
+            <button
+              type="button"
+              class="profile-option selected"
+              data-profile="user"
+              role="menuitem"
+            >
+              Usuario
+            </button>
+            <button
+              type="button"
+              class="profile-option"
+              data-profile="admin"
+              role="menuitem"
+            >
+              Administrador
+            </button>
+            <button
+              type="button"
+              class="profile-option"
+              data-profile="worker"
+              role="menuitem"
+            >
+              Trabajador
+            </button>
           </div>
 
-          <select name="profile" id="profile" class="sr-only" aria-hidden="true">
+          <select
+            name="profile"
+            id="profile"
+            class="sr-only"
+            aria-hidden="true"
+          >
             <option value="user" selected>Usuario</option>
             <option value="admin">Administrador</option>
             <option value="worker">Trabajador</option>
