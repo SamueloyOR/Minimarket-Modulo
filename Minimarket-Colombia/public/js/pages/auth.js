@@ -1,15 +1,3 @@
-//toggle para mostrar y ocultar contraseña
-function togglePasswordVisibility(input, icon) {
-  if (!input) return;
-
-  const isPassword = input.type === "password";
-  input.type = isPassword ? "text" : "password";
-
-  if (icon) {
-    icon.classList.toggle("visible", isPassword);
-    icon.setAttribute("aria-pressed", String(isPassword));
-  }
-}
 
 document.addEventListener("DOMContentLoaded", () => {
   const toggleContainer = document.querySelector(".password-toggle");
