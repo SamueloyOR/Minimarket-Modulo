@@ -37,7 +37,10 @@
       href="/Minimarket-Colombia/public/css/pages/signup.css"
     />
 
-    <script type="module" src="/Minimarket-Colombia/public/js/pages/auth.js"></script>
+    <script defer src="/Minimarket-Colombia/public/js/components/navegation.js"></script>
+    <script defer src="/Minimarket-Colombia/public/js/components/password-toggle.js"></script>
+    <script defer src="/Minimarket-Colombia/public/js/components/profile-menu.js"></script>
+    <script defer src="/Minimarket-Colombia/public/js/pages/auth.js"></script>
   </head>
 
   <body>
@@ -212,9 +215,9 @@
               role="tablist"
               aria-label="Tipo de perfil"
             >
-              <button class="tab active" type="button">Cliente</button>
-              <button class="tab" type="button">Trabajador</button>
-              <button class="tab" type="button">Admin</button>
+              <button class="tab active" type="button" id="tab">Cliente</button>
+              <button class="tab" type="button" id="tab">Trabajador</button>
+              <button class="tab" type="button" id="tab">Admin</button>
             </div>
           </div>
 
@@ -242,7 +245,7 @@
           </div>
 
           <div class="form-group">
-            <div class="password-toggle">
+            <div class="password">
               <label for="password">Contraseña:</label>
               <input
                 type="password"
@@ -251,7 +254,7 @@
                 required
                 placeholder="••••••••"
               />
-              <i id="btn" class="btn-toggle-show">
+              <i id="showPassword" class="btn-toggle-show" aria-label="Mostrar contraseña" tabindex="0">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
@@ -285,13 +288,14 @@
           </div>
 
           <div class="form-group">
-            <label for="correo">Correo Electrónico:</label>
+            <label for="gmail">Correo:</label>
             <input
               type="email"
-              id="correo"
+              id="gmail"
               class="form-control"
               placeholder="Ejem: anonimo@gmail.com"
             />
+            <div id="mensaje-de-estado" class="mensaje"></div>
           </div>
 
           <div class="form-group">

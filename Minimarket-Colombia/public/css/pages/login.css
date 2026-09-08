@@ -117,6 +117,30 @@ label {
     filter: brightness(1.04);
 }
 
+.mensaje {
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: bold;
+    }
+
+.mensaje.exito {
+    color: #2e7d32;
+    }
+
+.mensaje.error {
+    color: #c62828;
+    }
+
+.input-form input.valido {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.input-form input.invalido {
+    border-color: #c62828;
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+}
+
 .forgot-password {
     margin-top: 18px;
 }

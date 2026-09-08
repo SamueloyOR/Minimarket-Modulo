@@ -51,3 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+
+//Seleccionar rol
+document.addEventListener("DOMContentLoaded", () =>{
+  const table = document.querySelectorAll("tab")
+  const rolInput = document.addEventListener("click", function () {
+    console.log("")
+  })
+})

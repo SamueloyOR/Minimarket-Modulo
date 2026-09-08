@@ -119,12 +119,36 @@ main.register-page {
     box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
 }
 
-.password-toggle {
+.mensaje {
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: bold;
+    }
+
+.mensaje.exito {
+    color: #2e7d32;
+    }
+
+.mensaje.error {
+    color: #c62828;
+    }
+
+.form-control.valido {
+    border-color: #2e7d32;
+    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+}
+
+.form-control.invalido {
+    border-color: #c62828;
+    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+}
+
+.password {
     position: relative;
     width: 100%;
 }
 
-.password-toggle i {
+.password i {
     position: absolute;
     right: 12px;
     top: 50%;
@@ -134,14 +158,20 @@ main.register-page {
     justify-content: center;
     color: var(--text-muted);
     z-index: 2;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-.btn-toggle-show{
-    background-color: #0f172a;
+.btn-toggle-show {
+    color: var(--text-muted);
+}
 
-    &.is-applied{
-        background-color: var(--primary-hover);
-    }
+.btn-toggle-show.is-applied {
+    color: var(--hsla-example);
+}
+
+.btn-toggle-show svg {
+    stroke: currentColor;
+    transition: stroke 0.2s ease;
 }
 
 .btn-register {
