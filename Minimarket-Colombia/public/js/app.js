@@ -1,6 +1,6 @@
 
 //declaracion de la API
-const API_URL = 'http://localhost:3000/api/clientes';
+const API_URL = 'http://localhost:3000/api/';
 
 let response;
 
