@@ -218,7 +218,6 @@ main{
 
 .btn-sign-out{
     background: var(--input-bg);
-<<<<<<< HEAD
     border-radius: 10px;
     color: red;
     border: 2px solid red;
@@ -244,14 +243,13 @@ main{
     svg {
         stroke: lightcoral;
     }
-=======
+
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 1rem;
     box-shadow: 0 12px 24px var(--shadow);
     margin-top: 0;
     align-self: start;
->>>>>>> dev
 }
 
 .tittle {
@@ -272,16 +270,12 @@ main{
         font-size: 0.95rem;
     }
 }
-<<<<<<< HEAD
-=======
-
 .tittle > span {
     color: var(--text-secondary);
     font-size: 0.95rem;
     align-items: center;
 }
 
->>>>>>> dev
 .calendar,
 .btn-form {
     display: flex;

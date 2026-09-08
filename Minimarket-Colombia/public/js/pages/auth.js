@@ -54,9 +54,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 //Seleccionar rol
-document.addEventListener("DOMContentLoaded", () =>{
-  const table = document.querySelectorAll("tab")
-  const rolInput = document.addEventListener("click", function () {
-    console.log("")
-  })
-})
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll(".tab");
+  const roleInput = document.getElementById("role");
+
+  const applyRoleStyle = (selectedTab) => {
+    const roleColors = {
+      Cliente: { backgroundColor: "green", color: "white" },
+      Trabajador: { backgroundColor: "blue", color: "white" },
+      Admin: { backgroundColor: "red", color: "white" },
+    };
+
+    tabs.forEach((tab) => {
+      const isActive = tab === selectedTab;
+      tab.classList.toggle("active", isActive);
+
+      const role = tab.dataset.role || tab.textContent.trim();
+      const colorConfig = roleColors[role];
+
+      if (colorConfig && isActive) {
+        tab.style.backgroundColor = colorConfig.backgroundColor;
+        tab.style.color = colorConfig.color;
+      } else {
+        tab.style.backgroundColor = "";
+        tab.style.color = "";
+      }
+    });
+  };
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const role = tab.dataset.role || tab.textContent.trim();
+
+      if (roleInput) {
+        roleInput.value = role;
+      }
+
+      applyRoleStyle(tab);
+    });
+  });
+
+  const initialRole = roleInput ? roleInput.value.trim() : "";
+  const activeTab = [...tabs].find(
+    (tab) => (tab.dataset.role || tab.textContent.trim()) === initialRole,
+  );
+
+  if (activeTab) {
+    applyRoleStyle(activeTab);
+  } else if (tabs.length) {
+    applyRoleStyle(tabs[0]);
+  }
+});
