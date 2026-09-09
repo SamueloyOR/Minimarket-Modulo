@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 4000;
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
-const MONGO_URI = process.env.MONGO_URI || "mongodb+srv://samuelosro23:rosemeri123@minimarket101.hshogla.mongodb.net/";
+const MONGO_URI = process.env.MONGO_URI;
 
 //Midlewares
 app.use(cors());
@@ -24,7 +24,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 //archivos 
-app.use(express.static("../public"));
+app.use(express.static(path.join(dirname, "../public")));
 
 //rutas de paginhas
 
@@ -41,8 +41,21 @@ app.get("/signup", (req, res) => {
 });
 
 app.get("/dashboard", (req, res) => {
-    res.sendFile(path.join(dirname, "../public/html/dashboard.html"));
+    res.sendFile(path.join(dirname, "../public/html/dashboard/client.html"));
 });
+
+app.get("/dashboard/client", (req, res) => {
+    res.sendFile(path.join(dirname, "../public/html/dashboard/client.html"));
+});
+
+app.get("/dashboard/admin", (req, res) => {
+    res.sendFile(path.join(dirname, "../public/html/dashboard/admin.html"));
+});
+
+app.get("/dashboard/worker", (req, res) => {
+    res.sendFile(path.join(dirname, "../public/html/dashboard/worker.html"));
+});
+
 app.get("/api", (req, res) => {
     res.json({
         ok: true,
@@ -64,10 +77,14 @@ app.use((req, res, next) => {
 });
 
 //conexion con mongo
-console.log("Conectando a la base de datos..."), process.env.MONGO_URI;
-mongoose.connect("mongodb+srv://samuelosro23:rosemeri123@minimarket101.hshogla.mongodb.net/")
-    .then(() => console.log("Conectado a la base de datos"))
-    .catch((err) => console.error("Error al conectar a la base de datos:", err));
+if (!MONGO_URI) {
+    console.error("Error con uel de mongo");
+} else {
+    console.log("Conectando a la base de datos...");
+    mongoose.connect(MONGO_URI)
+        .then(() => console.log("Conectado a la base de datos"))
+        .catch((err) => console.error("Error al conectar a la base de datos:", err));
+}
 
 
 app.listen(PORT, () => {

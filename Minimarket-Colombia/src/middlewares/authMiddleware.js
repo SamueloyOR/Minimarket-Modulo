@@ -1,20 +1,22 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
+
+const JWT_SECRET = process.env.JWT_SECRET || "minimarket-secret-2026";
 
 const verifyToken = (req, res, next) => {
-    const auth = req.headers["autorizacion"];
-    const token = auth && auth.split(" ")[1];
+    const auth = req.headers["authorization"] || req.headers["autorizacion"];
+    const token = auth && auth.startsWith("Bearer ") ? auth.split(" ")[1] : auth;
 
     if (!token) {
         return res.status(401).json({ message: "Acceso denegado. Token no proporcionado." });
     }
-    
+
     try {
-        const verified = jwt.verify(token, process.env.JWT_SECRET);
+        const verified = jwt.verify(token, JWT_SECRET);
         req.user = verified;
         next();
     } catch (error) {
-        res.status(403).json({ message: "Token inválido." });
+        return res.status(403).json({ message: "Token inválido." });
     }
 };
 
-module.exports = verifyToken;
+export default verifyToken;
