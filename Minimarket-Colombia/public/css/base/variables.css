@@ -15,13 +15,6 @@
     --nav-height:72px;
 }
 
-@font-face {
-    font-family: 'Inter variable';
-    src: url('../img/minimarket.jpeg') format('truetype');
-    font-style: normal;
-    font-display: swap;
-}
-
 h1{
     font-size: 2.25rem;
     font-weight: 900;

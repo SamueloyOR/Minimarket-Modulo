@@ -4,7 +4,7 @@
     align-items: center;
     width: 100%;
     padding: 1.5rem clamp(1rem, 4vw, 3rem);
-    background: var(--card-bg);
+    background: var(--background);
     border-top: 1px solid var(--border);
     font-size: 0.85rem;
     flex-wrap: wrap;
