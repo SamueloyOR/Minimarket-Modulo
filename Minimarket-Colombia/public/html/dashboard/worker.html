@@ -10,7 +10,9 @@
     <link rel="stylesheet" href="../../css/components/footer.css">
     <link rel="stylesheet" href="../../css/components/modal.css">
     <link rel="stylesheet" href="../../css/components/navbar.css">
+    <link rel="stylesheet" href="../../css/components/cart.css">
     <link rel="stylesheet" href="../../css/pages/dashboard.css">
+    <script src="../../js/pages/cart.js" defer></script>
 
 </head>
 <body>
@@ -115,6 +117,28 @@
         </div>
 
       </nav>
+
+      <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Abrir carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 17h-11v-14h-2" />
+          <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+        <span id="count">0</span>
+      </button>
+
+      <div id="cart-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+          <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">&times;</button>
+          <h2 id="cart-title">Tu carrito</h2>
+          <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+          <div class="cart-footer">
+            <p>Total: $<span id="cart-total">0</span></p>
+            <button id="checkout-btn" type="button">Finalizar Compra</button>
+          </div>
+        </div>
+      </div>
     
     </header>
 

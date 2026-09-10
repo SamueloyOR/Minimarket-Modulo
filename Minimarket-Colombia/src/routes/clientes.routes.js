@@ -6,11 +6,11 @@ import {
     eliminarCliente 
 } from "../controllers/clientes.controllers.js";
 
-const router = Router();
+const clientesRouter = Router();
 
-router.get('/', obtenerClientes);
-router.post('/', crearCliente);
-router.put('/:id', actualizarCliente);
-router.delete('/:id', eliminarCliente);
+clientesRouter.get('/', obtenerClientes);
+clientesRouter.post('/', crearCliente);
+clientesRouter.put('/:id', actualizarCliente);
+clientesRouter.delete('/:id', eliminarCliente);
 
-export default router;
+export default clientesRouter;
