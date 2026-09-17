@@ -1,4 +1,4 @@
-// Función para ver la contraseña
+                // Función para ver la contraseña
 function viewPassword() {
     const passwordInput = document.getElementById("password");
     if (!passwordInput) return;
@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (passwordInput && toggle) {
         const togglePassword = () => {
             const isVisible = passwordInput.type === 'text';
-            passwordInput.type = isVisible ? 'password' : 'text';
-
+                passwordInput.type = isVisible ? 'password' : 'text';
+    
             if (toggle.tagName === 'INPUT') {
                 toggle.checked = !isVisible;
             }

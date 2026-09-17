@@ -2,7 +2,7 @@ import User from "../models/users.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "minimarket-secret-2026";
+const JWT_SECRET = process.env.JWT_SECRET || "minimarket2026";
 
 export const register = async (req, res) => {
     try {
