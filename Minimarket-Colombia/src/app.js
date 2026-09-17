@@ -17,6 +17,12 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const MONGO_URI = process.env.MONGO_URL;
 
+// constantes del productos
+
+import Products from './models/products.js';
+import initialProducts from './data/products.json' with  {type: 'json'};
+
+
 app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
@@ -103,3 +109,23 @@ async function startServer() {
 }
 
 startServer();
+
+// funcion ppara conectar los productos a mongo
+
+async function seedProductsDatabaseonStart(){
+    try{
+        const count = await Products.countDocuments();
+
+        if (count === 0) {
+            await Products.insertMany(initialProducts);
+            console.log("!Productos iniciales cargados en el arranque")
+        }else {
+            console.log("La base de datos ya tienen productos")
+        }
+
+    }catch (error){
+        console.error("Error al cargar los prudctos", error)
+    }
+}
+
+seedProductsDatabaseonStart()

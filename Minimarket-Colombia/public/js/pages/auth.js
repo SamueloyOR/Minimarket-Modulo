@@ -1,60 +1,20 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   const toggleContainer = document.querySelector(".password-toggle");
   if (toggleContainer) {
     const input = toggleContainer.querySelector(
       'input[type="password"], input[type="text"]',
     );
-    const btn = toggleContainer.querySelector("i");
 
-    if (input && btn) {
-      btn.addEventListener("click", () => {
-        togglePasswordVisibility(input, btn);
-      });
+    if (input) {
+      const checkbox = toggleContainer.querySelector('input[type="checkbox"]');
+      if (checkbox) {
+        checkbox.addEventListener("change", () => {
+          input.type = checkbox.checked ? "text" : "password";
+        });
+      }
     }
   }
 
-  const profileDropdown = document.querySelector(".profile-dropdown");
-  const profileToggle = document.querySelector(".profile-toggle");
-  const profileMenu = document.getElementById("profileMenu");
-  const profileSelect = document.getElementById("profile");
-
-  if (profileDropdown && profileToggle && profileMenu && profileSelect) {
-    const setProfile = (value) => {
-      profileSelect.value = value;
-
-      profileMenu.querySelectorAll(".profile-option").forEach((button) => {
-        const isSelected = button.dataset.profile === value;
-        button.classList.toggle("selected", isSelected);
-        button.setAttribute("aria-checked", String(isSelected));
-      });
-    };
-
-    profileToggle.addEventListener("click", () => {
-      const isOpen = profileDropdown.classList.toggle("open");
-      profileToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    profileMenu.querySelectorAll(".profile-option").forEach((button) => {
-      button.addEventListener("click", () => {
-        setProfile(button.dataset.profile);
-        profileDropdown.classList.remove("open");
-        profileToggle.setAttribute("aria-expanded", "false");
-      });
-    });
-
-    document.addEventListener("click", (event) => {
-      if (!profileDropdown.contains(event.target)) {
-        profileDropdown.classList.remove("open");
-        profileToggle.setAttribute("aria-expanded", "false");
-      }
-    });
-  }
-});
-
-
-//Seleccionar rol
-document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
   const roleInput = document.getElementById("role-value");
 
