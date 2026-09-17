@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 4000;
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-const MONGO_URI = process.env.MONGO_URI;
+const MONGO_URI = process.env.MONGO_URL;
 
 app.use(cors());
 app.use(express.json());
@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 
 async function startServer() {
     if (!MONGO_URI) {
-        console.error("Error con uel de mongo");
+        console.error("Error con url de mongo");
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en el puerto ${PORT}`);
         });
