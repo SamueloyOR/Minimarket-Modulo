@@ -9,22 +9,12 @@
 	gap: 1.5rem;
 }
 
-.categories-sidebar,
-.categories-main {
-	min-width: 0;
-	padding: 0;
-}
-
-.categories-sidebar {
-	background: var(--input-bg);
+.categories-sidebar, .categories-main{
+	background: var(--background);
 	border: 1px solid var(--border);
 	border-radius: 10px;
 	padding: 1rem 0.75rem;
 	box-shadow: 0 12px 24px var(--shadow);
-}
-
-.categories-main {
-	padding-top: 0.25rem;
 }
 
 .categories-sidebar h2 {
@@ -63,20 +53,19 @@
 	display: flex;
 	align-items: center;
 	gap: 0.75rem;
+	margin-top: 0.5rem;
 	padding: 0.8rem 0.7rem;
 	background: transparent;
 	color: var(--text-primary);
-	border: 1px solid transparent;
+	border: 1px solid var(--border);
     border-radius: 10px;
 	transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 }
-
 .category-card:hover {
 	color: var(--text-primary);
 	background: rgba(9, 153, 255, 0.08);
 	border-color: rgba(9, 153, 255, 0.15);
     cursor: pointer;
-
 }
 
 .categories-container .category-card:hover svg {
@@ -101,7 +90,7 @@
 	min-height: 150px;
 	align-items: flex-start;
 	flex-direction: column;
-	background: var(--card-bg);
+	background: var(--background);
 	border-color: var(--border);
 	box-shadow: 0 10px 25px var(--shadow);
 }
@@ -137,6 +126,7 @@
     transition: all 0.3s ease-in-out;
 }
 
+
 @media (max-width: 600px) {
 	#principal-content {
 		display: block;
@@ -156,9 +146,6 @@
 		grid-template-columns: 1fr;
 	}
 
-	.categories-main {
-		padding-top: 0;
-	}
 }
 
 @media (max-width: 480px) {
