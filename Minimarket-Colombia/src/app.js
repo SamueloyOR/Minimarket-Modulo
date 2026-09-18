@@ -29,6 +29,7 @@ app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static(path.join(dirname, "../public")));
 
+
 app.get("/", (req, res) => {
     res.sendFile(path.join(dirname, "../public/html/index.html"));
 });
@@ -84,39 +85,51 @@ async function startServer() {
         throw new Error("MONGO_URL no está configurado");
     }
 
-    await mongoose.connect(MONGO_URI);
-    console.log("Conectado a MongoDB");
+    try {
+        console.log("Conectando a MongoDB...");
 
-    await seedProductsDatabaseOnStart();
+        await mongoose.connect(MONGO_URI, {
+            serverSelectionTimeoutMS: 10000
+        });
 
-    app.listen(PORT, () => {
-        console.log(`Servidor corriendo en el puerto ${PORT}`);
-    });
+        console.log("MongoDB conectado");
+
+        await seedProductsDatabaseonStart();
+
+        app.listen(PORT, () => {
+            console.log(`Servidor corriendo en el puerto ${PORT}`);
+        });
+    } catch (error) {
+        console.error("No se pudo iniciar el servidor:", error.message);
+        process.exit(1);
+    }
 }
 
-startServer().catch((error) => {
-    console.error("No se pudo iniciar el servidor:", error);
-    process.exit(1);
+app.get("/api/health", (req, res) => {
+    const states = {
+        0: "disconnected",
+        1: "connected",
+        2: "connecting",
+        3: "disconnecting"
+    };
+
+    res.json({
+        ok: true,
+        mongoState: mongoose.connection.readyState,
+        mongoStateName: states[mongoose.connection.readyState]
+    });
 });
 
 startServer();
 
 // funcion ppara conectar los productos a mongo
+async function seedProductsDatabaseonStart() {
+    const count = await Products.countDocuments();
 
-async function seedProductsDatabaseonStart(){
-    try{
-        const count = await Products.countDocuments();
-
-        if (count === 0) {
-            await Products.insertMany(initialProducts);
-            console.log("!Productos iniciales cargados en el arranque")
-        }else {
-            console.log("La base de datos ya tienen productos")
-        }
-
-    }catch (error){
-        console.error("Error al cargar los prudctos", error)
+    if (count === 0) {
+        await Products.insertMany(initialProducts);
+        console.log("Productos iniciales cargados en el arranque");
+    } else {
+        console.log("La base de datos ya tiene productos");
     }
 }
-
-seedProductsDatabaseonStart()

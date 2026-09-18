@@ -120,45 +120,45 @@ export const clearCart = (req, res) => {
     });
 };
 
-const session = await mongoose.startSession();
 
 export const checkoutCart = async (req, res) => {
     const { items } = req.body;
     const cart = Array.isArray(items) && items.length ? items : getCartByUser(req);
 
-    try{
-        await session.withTransaction(async () => {
-
-            if (!cart || cart.length === 0) {
+    if (!cart || cart.length === 0) {
         return res.status(400).json({ message: 'El carrito está vacío o formato inválido.' });
-        }
+    }
+    const session = await mongoose.startSession();
 
+    try {
         let calculatedTotal = 0;
 
-        for (const item of cart) {
-            const product = catalogoProductos.find((p) => p.id === item.id);
-        if (!product) {
-            return res.status(404).json({ message: `El producto con ID ${item.id} no existe.` });
-        }
+        await session.withTransaction(async () => {
+            for (const item of cart) {
+                const product = catalogoProductos.find((p) => p.id === item.id);
+                if (!product) {
+                    throw new Error(`El producto con ID ${item.id} no existe.`);
+                }
 
-        if (product.stock < item.quantity) {
-            return res.status(400).json({ message: `Stock insuficiente para ${product.name}.` });
-        }
+                if (product.stock < item.quantity) {
+                    throw new Error(`Stock insuficiente para ${product.name}.`);
+                }
 
-            calculatedTotal += product.price * item.quantity;
-        }
+                calculatedTotal += product.price * item.quantity;
+            }
 
             carts.set(getCartKey(req), []);
+        });
 
-            return res.status(200).json({
-                message: 'Compra procesada correctamente',
-                totalMonto: calculatedTotal,
-                items: cart
-            });
-        })
+        return res.status(200).json({
+            message: 'Compra procesada correctamente',
+            totalMonto: calculatedTotal,
+            items: cart
+        });
 
-    }finally{
+    } catch (error) {
+        return res.status(400).json({ message: error.message || 'Error al procesar la compra.' });
+    } finally {
         await session.endSession();
     }
 };
-
