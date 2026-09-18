@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 const catalogoProductos = [
     { id: '1', name: 'Arroz', price: 4000, stock: 20 },
     { id: '2', name: 'Aceite 1L', price: 9000, stock: 10 },
@@ -8,7 +10,7 @@ const catalogoProductos = [
 const carts = new Map();
 
 const getCartKey = (req) => {
-    const userId = req.user?.id || req.headers['x-user-id'] || 'anonymous';
+    const userId = req.user.id;
     return `cart:${userId}`;
 };
 
@@ -118,18 +120,23 @@ export const clearCart = (req, res) => {
     });
 };
 
-export const checkoutCart = (req, res) => {
+const session = await mongoose.startSession();
+
+export const checkoutCart = async (req, res) => {
     const { items } = req.body;
     const cart = Array.isArray(items) && items.length ? items : getCartByUser(req);
 
-    if (!cart || cart.length === 0) {
+    try{
+        await session.withTransaction(async () => {
+
+            if (!cart || cart.length === 0) {
         return res.status(400).json({ message: 'El carrito está vacío o formato inválido.' });
-    }
+        }
 
-    let calculatedTotal = 0;
+        let calculatedTotal = 0;
 
-    for (const item of cart) {
-        const product = catalogoProductos.find((p) => p.id === item.id);
+        for (const item of cart) {
+            const product = catalogoProductos.find((p) => p.id === item.id);
         if (!product) {
             return res.status(404).json({ message: `El producto con ID ${item.id} no existe.` });
         }
@@ -138,15 +145,20 @@ export const checkoutCart = (req, res) => {
             return res.status(400).json({ message: `Stock insuficiente para ${product.name}.` });
         }
 
-        calculatedTotal += product.price * item.quantity;
+            calculatedTotal += product.price * item.quantity;
+        }
+
+            carts.set(getCartKey(req), []);
+
+            return res.status(200).json({
+                message: 'Compra procesada correctamente',
+                totalMonto: calculatedTotal,
+                items: cart
+            });
+        })
+
+    }finally{
+        await session.endSession();
     }
-
-    carts.set(getCartKey(req), []);
-
-    return res.status(200).json({
-        message: 'Compra procesada correctamente',
-        totalMonto: calculatedTotal,
-        items: cart
-    });
 };
 

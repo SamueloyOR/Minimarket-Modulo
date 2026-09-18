@@ -1,12 +1,17 @@
-import { Schema, model } from 'mongoose';
+const soloAdmin = (req, res, next) => {
+    if(!req.user){
+        return res.status(401).json({
+            message: "Atenticacion requerida"
+        })
+    }
 
-const userSchema = new Schema({
-    nombre: { type: String, required: true, trim: true },
-    correo: { type: String, required: true, unique: true, lowercase: true, trim: true },
-    password: { type: String, required: true },
-    rol: { type: String, enum: ['cliente', 'trabajador', 'admin'], default: 'cliente' }
-}, {
-    timestamps: true
-});
+    if (req.user.rol !== "admin"){
+        return res.status(403).json({
+            message: "No tiene permisos de admin"
+        })
+    }
 
-export default model('User', userSchema);
+    next();
+}
+
+export default soloAdmin;

@@ -1,6 +1,5 @@
 import {
     ListarClientes,
-    buscarClientesById,
     crearCLiente,
     actualizarCliente as actualizarClienteModel,
     eliminarCliente as eliminarClienteModel

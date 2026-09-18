@@ -7,8 +7,12 @@ import {
     clearCart,
     checkoutCart
 } from '../controllers/cartControllers.js';
+import verifyToken from '../middlewares/authMiddleware.js';
+
 
 const cartRouter = Router();
+
+cartRouter.use(verifyToken);
 
 cartRouter.get('/', getCart);
 cartRouter.post('/', addItem);

@@ -9,6 +9,7 @@ import mongoose from "mongoose";
 import clientesRoutes from "./routes/clientes.routes.js";
 import authRoutes from "./routes/auth.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
+import productsRouter from './routes/products.routes.js';
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -66,14 +67,7 @@ app.get("/api", (req, res) => {
 app.use("/api/clientes", clientesRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/cart", cartRoutes);
-
-app.get('/api/products', (req, res) => {
-    const products = [
-        { id: '1', name: 'Arroz 1kg', price: 4.50 },
-        { id: '2', name: 'Aceite 1L', price: 8.00 }
-    ];
-    res.json(products);
-});
+app.use("/api/products", productsRouter);
 
 app.use((req, res, next) => {
     if (req.originalUrl.startsWith('/api/')) {
@@ -87,26 +81,23 @@ app.use((req, res, next) => {
 
 async function startServer() {
     if (!MONGO_URI) {
-        console.error("Error con url de mongo");
-        app.listen(PORT, () => {
-            console.log(`Servidor corriendo en el puerto ${PORT}`);
-        });
-        return;
+        throw new Error("MONGO_URL no está configurado");
     }
 
-    try {
-        console.log("Conectando a la base de datos...");
-        await mongoose.connect(MONGO_URI);
-        console.log("Conectado a la base de datos");
+    await mongoose.connect(MONGO_URI);
+    console.log("Conectado a MongoDB");
 
-        app.listen(PORT, () => {
-            console.log(`Servidor corriendo en el puerto ${PORT}`);
-        });
-    } catch (error) {
-        console.error("Error al conectar a la base de datos:", error);
-        process.exit(1);
-    }
+    await seedProductsDatabaseOnStart();
+
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en el puerto ${PORT}`);
+    });
 }
+
+startServer().catch((error) => {
+    console.error("No se pudo iniciar el servidor:", error);
+    process.exit(1);
+});
 
 startServer();
 
