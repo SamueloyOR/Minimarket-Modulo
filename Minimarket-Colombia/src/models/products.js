@@ -1,19 +1,24 @@
-import { Schema, model } from 'mongoose';
+import mongoose, { Schema, model } from 'mongoose';
 
-const categories = ['Frutas y verduras', 'Lácteos', 'Aseo y hogar', 'Snacks'];
-
-const productSchema = new Schema({
-    nombre: { type: String, required: true, trim: true },
-    descripcion: { type: String, trim: true },
-    precio: { type: Number, required: true, min: 0 },
-    stock: { type: Number, default: 0, min: 0 },
-    categoria: { type: String, required: true, enum: categories },
-    imagen: { type: String, trim: true },
+//esquema de los productos
+const productSchema = new mongoose.Schema({
+    nombre: { type: String, required: true },
+    descripcion: { type: String },
+    categoria: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Category",
+    required: true,
+    },
+    precioRegular: { type: Number, required: true },
+    precioOferta: { type: Number, default: null }, // Si es null, no está en oferta
     enOferta: { type: Boolean, default: false },
-    precioOferta: { type: Number, min: 0 }
-}, {
-    timestamps: true
+    stock: { type: Number, required: true, default: 0 },
+    imagenUrl: { type: String },
+    activo: { type: Boolean, default: true },
+    },
+{
+    timestamps: true,
 });
 
-export const CATEGORIAS_VALIDAS = categories;
-export default model('Product', productSchema);
+export const Product = mongoose.model("Product", productSchema)
+

@@ -12,6 +12,25 @@ export const register = async (req, res) => {
             return res.status(400).json({ message: "Nombre, correo y contraseña son obligatorios" });
         }
 
+        //validar que la el registro sea tipo string
+        if(
+            typeof nombre !== "string" ||
+            typeof correo !== "string" ||
+            typeof password !== "string"
+        ){
+            return res.status(400).json({
+                message:"Datos de refistro validos"
+            })
+        }
+
+        //validar la longitud de la contraseña
+
+        if(password.length < 8){
+            return res.stauts(404).json({
+                message: "contraseña debe contener al menos 8 caracteres"
+            })
+        }
+
         const existingUser = await User.findOne({ correo: correo.trim().toLowerCase() });
         if (existingUser) {
             return res.status(400).json({ message: "El correo ya está registrado" });
@@ -26,25 +45,6 @@ export const register = async (req, res) => {
             password: hashedPassword,
             rol: "cliente"
         });
-
-        //validar que la el registro sea tipo string
-        if(
-            typeof nombre !== "string" ||
-            typeof correo !== "string" ||
-            typeof password !== "string"
-        ){
-            return res.status(400).json({
-                message:"Datos de refistro validos"
-            })
-        }
-
-        //validar la longitud de la contraseña
-
-        if(password.length === 8){
-            return res.stauts(404).json({
-                message: "contraseña admitida contiene 8 caracteres"
-            })
-        }
 
         await newUser.save();
         res.status(201).json({ message: "Usuario registrado con éxito" });

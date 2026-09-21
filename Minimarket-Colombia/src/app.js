@@ -122,7 +122,7 @@ app.get("/api/health", (req, res) => {
 
 startServer();
 
-// funcion ppara conectar los productos a mongo
+// funcion para conectar los productos a mongo
 async function seedProductsDatabaseonStart() {
     const count = await Products.countDocuments();
 

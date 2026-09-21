@@ -57,142 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    const fetchCart = async () => {
-        try {
-            const response = await fetch('http://localhost:4000/api/cart', {
-                headers: {
-                    'x-user-id': getUserId()
-                }
-            });
 
-            if (!response.ok) {
-                throw new Error('No se pudo cargar el carrito');
-            }
+    const requireLogin = () => {
+        if (sessionStorage.isloggedin()) return true;
 
-            const data = await response.json();
-            renderCart(data);
-        } catch (error) {
-            console.error('Error cargando carrito:', error);
-            renderCart({ items: [], total: 0, count: 0 });
+        if(confirm("Debes iniciar sesion para accerder al carrito Deseas regrear al login?")){
+            window.location.href = "/login";
         }
-    };
 
-    const addToCart = async (product) => {
-        try {
-            const response = await fetch('http://localhost:4000/api/cart', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-user-id': getUserId()
-                },
-                body: JSON.stringify(product)
-            });
-
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.message || 'No se pudo agregar el producto');
-            }
-
-            renderCart(data);
-            openCart();
-        } catch (error) {
-            alert(error.message || 'No fue posible agregar al carrito.');
-        }
-    };
-
-    const removeFromCart = async (itemId) => {
-        try {
-            const response = await fetch(`http://localhost:4000/api/cart/${itemId}`, {
-                method: 'DELETE',
-                headers: {
-                    'x-user-id': getUserId()
-                }
-            });
-
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.message || 'No se pudo eliminar el producto');
-            }
-
-            renderCart(data);
-        } catch (error) {
-            alert(error.message || 'No fue posible eliminar el producto.');
-        }
-    };
-
-    const checkoutCart = async () => {
-        try {
-            const response = await fetch('http://localhost:4000/api/cart/checkout', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'x-user-id': getUserId()
-                }
-            });
-
-            const data = await response.json();
-            if (!response.ok) {
-                throw new Error(data.message || 'No se pudo finalizar la compra');
-            }
-
-            alert(`Compra finalizada con éxito. Total: $${Number(data.totalMonto || 0).toLocaleString('es-CO')}`);
-            renderCart({ items: [], total: 0, count: 0 });
-        } catch (error) {
-            alert(error.message || 'No fue posible finalizar la compra.');
-        }
-    };
-
-    const openCart = () => {
-        modal.classList.add('active');
-        modal.setAttribute('aria-hidden', 'false');
-    };
-
-    const closeCart = () => {
-        modal.classList.remove('active');
-        modal.setAttribute('aria-hidden', 'true');
-    };
-
-    if (openBtn) {
-        openBtn.addEventListener('click', openCart);
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeCart);
-    }
-
-    if (modal) {
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                closeCart();
-            }
-        });
-    }
-
-    if (cartItemsList) {
-        cartItemsList.addEventListener('click', async (event) => {
-            const button = event.target.closest('.remove-item');
-            if (!button) return;
-            await removeFromCart(button.dataset.id);
-        });
-    }
-
-    if (checkoutBtn) {
-        checkoutBtn.addEventListener('click', checkoutCart);
-    }
-
-    document.body.addEventListener('click', async (event) => {
-        const button = event.target.closest('[data-add-to-cart]');
-        if (!button) return;
-
-        const product = {
-            id: button.dataset.productId || 'demo-product',
-            name: button.dataset.productName || 'Producto',
-            price: Number(button.dataset.productPrice || 0),
-            quantity: Number(button.dataset.productQty || 1)
-        };
-
-        await addToCart(product);
-    });
-
-    fetchCart();
-});
+        return false;
+        
+    }});

@@ -1,18 +1,10 @@
 import mongoose from "mongoose";
-
-const catalogoProductos = [
-    { id: '1', name: 'Arroz', price: 4000, stock: 20 },
-    { id: '2', name: 'Aceite 1L', price: 9000, stock: 10 },
-    { id: '3', name: 'Leche', price: 3500, stock: 25 },
-    { id: '4', name: 'Pan integral', price: 2800, stock: 15 }
-];
+import Product from "../models/products.js"
+import { CATEGORIAS_VALIDAS } from "../models/products.js";
 
 const carts = new Map();
 
-const getCartKey = (req) => {
-    const userId = req.user.id;
-    return `cart:${userId}`;
-};
+const getCartKey = (req) => `cart:${req.user.id}`;
 
 const getCartByUser = (req) => {
     const key = getCartKey(req);
@@ -22,44 +14,63 @@ const getCartByUser = (req) => {
     return carts.get(key);
 };
 
+const calcularResumen = (items) => ({
+    items,
+
+    total: items.reduce((sum, item) => sum + item.price * item.quantity, 0),
+    count: items.reduce((sum, item) => sum + item.quantity, 0)
+});
+
+const esIdMongoValido = (id) => /^[a-f\d]{24}$/i.test(String(id || ""));
+
 export const getCart = (req, res) => {
     const items = getCartByUser(req);
-    const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    return res.json({
-        items,
-        total,
-        count: items.reduce((sum, item) => sum + item.quantity, 0)
-    });
+    return res.json(calcularResumen(items));
 };
 
-export const addItem = (req, res) => {
+export const addItem = async (req, res) => {
     try {
-        const { id, name, price, quantity = 1 } = req.body;
+        const {productId, quantity = 1} = req.body;
+        const cantidad = NUmber(quantity)
 
-        if (!id || !name || !price || Number(quantity) <= 0) {
+        if (!productId  || !esIdMongoValido(productId) || !Number.isFinite(cantidad) || cantidad <= 0) {
             return res.status(400).json({ message: 'Datos del producto inválidos.' });
         }
 
-        const cart = getCartByUser(req);
-        const productIndex = cart.findIndex((item) => item.id === id);
+        const producto = await Product.findById(productId);
+        if (!producto){
+            return res.status(404).json({message: 'El producto no existe'});
+        };
 
-        if (productIndex >= 0) {
-            cart[productIndex].quantity += Number(quantity);
-        } else {
-            cart.push({ id, name, price: Number(price), quantity: Number(quantity) });
+        const cart = getCartByUser(req);
+        const existente = cart.find((item) => item.id === String(producto._id));
+        const cantidadDeseada = (existente?.quantity || 0) + cantidad;
+
+        if (producto.stock < cantidadDeseada) {
+            return res.status(400).json({ message: `Stock insuficiente para ${producto.nombre}. Disponible: ${producto.stock}`})
+        };
+
+        const precioUnitario = producto.endOferta && producto.precioOferta ? producto.precioOferta : producto.precio;
+
+        if(existente){
+            existente.quantity = cantidadDeseada;
+        }else{
+            cart.push({
+                id: String(producto._id),
+                name: producto.nombre,
+                price: precioUnitario,
+                image: producto.imagen || "",
+                quantity: cantidad
+            })
         }
 
-        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
         return res.status(201).json({
-            message: 'Producto agregado al carrito.',
-            items: cart,
-            total,
-            count: cart.reduce((sum, item) => sum + item.quantity, 0)
+            message: "producto agregado al carrito",
+            ...calcularResumen(cart)
         });
     } catch (error) {
-        return res.status(500).json({ message: 'Error al agregar producto al carrito.' });
+        console.error("Erroe al agregar al carrito:", error)
+        return res.status(500).json({message: "Error al agregar producto al carrito"})
     }
 };
 
@@ -78,14 +89,8 @@ export const updateItem = (req, res) => {
     }
 
     item.quantity = Number(quantity);
-    const total = cart.reduce((sum, product) => sum + product.price * product.quantity, 0);
+    return res.json({message:"Cantidad actualziada.", ...calcularResumen(cart)});
 
-    return res.json({
-        message: 'Cantidad actualizada.',
-        items: cart,
-        total,
-        count: cart.reduce((sum, product) => sum + product.quantity, 0)
-    });
 };
 
 export const removeItem = (req, res) => {
@@ -94,40 +99,28 @@ export const removeItem = (req, res) => {
     const filtered = cart.filter((item) => item.id !== itemId);
 
     if (filtered.length === cart.length) {
-        return res.status(404).json({ message: 'Producto no encontrado en el carrito.' });
+        return res.status(404).json({ message: "Producto no encontrado en el carrito." });
     }
 
     carts.set(getCartKey(req), filtered);
-    const total = filtered.reduce((sum, item) => sum + item.price * item.quantity, 0);
-
-    return res.json({
-        message: 'Producto eliminado del carrito.',
-        items: filtered,
-        total,
-        count: filtered.reduce((sum, item) => sum + item.quantity, 0)
-    });
+    return res.json({ message: "Producto eliminado del carrito.", ...calcularResumen(filtered) });
 };
 
-export const clearCart = (req, res) => {
-    const key = getCartKey(req);
-    carts.set(key, []);
 
-    return res.json({
-        message: 'Carrito vaciado.',
-        items: [],
-        total: 0,
-        count: 0
-    });
+export const clearCart = (req, res) => {
+    carts.set(getCartKey(req), []);
+    return res.json({message: "Carrito vaciado.", items: [], total: 0, count: 0});
 };
 
 
 export const checkoutCart = async (req, res) => {
-    const { items } = req.body;
-    const cart = Array.isArray(items) && items.length ? items : getCartByUser(req);
+
+    const cart = getCartByUser(req);
 
     if (!cart || cart.length === 0) {
         return res.status(400).json({ message: 'El carrito está vacío o formato inválido.' });
     }
+
     const session = await mongoose.startSession();
 
     try {
@@ -135,16 +128,21 @@ export const checkoutCart = async (req, res) => {
 
         await session.withTransaction(async () => {
             for (const item of cart) {
-                const product = catalogoProductos.find((p) => p.id === item.id);
-                if (!product) {
-                    throw new Error(`El producto con ID ${item.id} no existe.`);
+                const producto = catalogoProductos.find((item.id).session(session));
+
+                if (!producto) {
+                    throw new Error(`El producto ${item.name} no esta disponible.`);
                 }
 
-                if (product.stock < item.quantity) {
-                    throw new Error(`Stock insuficiente para ${product.name}.`);
+                if (producto.stock < item.quantity) {
+                    throw new Error(`Stock insuficiente para ${producto.nombre}. Disponible: ${producto.stock}`);
                 }
 
-                calculatedTotal += product.price * item.quantity;
+                const precioUnitario = precio.endOferta && producto.precioOferta ? producto.precioOferta : producto.precio;
+                totalMonto += precioUnitario * item.quantity;
+
+                product.stock -= item.quantity;
+                await producto.save({ session})
             }
 
             carts.set(getCartKey(req), []);
@@ -162,3 +160,4 @@ export const checkoutCart = async (req, res) => {
         await session.endSession();
     }
 };
+
