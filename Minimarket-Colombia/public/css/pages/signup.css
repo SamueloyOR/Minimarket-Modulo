@@ -80,7 +80,10 @@ main.register-page {
 .tab.active {
     background-color: #ffffff;
     color: #0f172a;
+    box-shadow: 0 10px 8px var(--background);
+    filter: brightness(1.04);
 }
+
 
 .form-group {
     text-align: left;

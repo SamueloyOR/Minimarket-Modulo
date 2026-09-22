@@ -14,8 +14,8 @@ const router = Router();
 
 router.post('/', verifyToken, obtenerOrdenes);
 router.get('/user', verifyToken, obtenerOrdenesUsuario);
-router.get('/', verifyToken, soloAdmin, puedeGestionarCLientes, obtenerTodasOrdenes);
-router.put('/:id', verifyToken, soloAdmin, puedeGestionarCLientes, actualizarEstadoOrden);
+router.get('/', verifyToken, puedeGestionarCLientes, obtenerTodasOrdenes);
+router.put('/:id', verifyToken, puedeGestionarCLientes, actualizarEstadoOrden);
 router.delete('/:id', verifyToken, soloAdmin, eliminarOrden);
 
 export default router;

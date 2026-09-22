@@ -1,6 +1,6 @@
-
 // Declaración de la API
-const API_URL = '/api/clientes';
+const API_URL = "/api/clientes";
+const authHeaders = () => ({ "Content-Type": "application/json", Authorization: "Bearer " + (localStorage.getItem("token") || "") });
 
 let response;
 
@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (id) {
                     response = await fetch(`${API_URL}/${id}`, {
                         method: 'PUT',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: authHeaders(),
                         body: JSON.stringify(clienteData)
                     });
                 } else {
                     response = await fetch(API_URL, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
+                        headers: authHeaders(),
                         body: JSON.stringify(clienteData)
                     });
                 }
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
 // Funciones CRUD
 async function cargarClientes() {
     try {
-        const response = await fetch(API_URL);
+        const response = await fetch(API_URL, { headers: authHeaders() });
         if (!response.ok) {
             throw new Error('Error al cargar clientes');
         }
@@ -89,15 +89,15 @@ async function cargarClientes() {
         clientes.forEach((cliente) => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <td>${cliente.id}</td>
+                <td>${cliente._id}</td>
                 <td>${cliente.documento}</td>
                 <td>${cliente.nombres}</td>
                 <td>${cliente.apellidos}</td>
                 <td>${cliente.correo || ''}</td>
                 <td>${cliente.telefono || ''}</td>
                 <td>
-                    <button onclick="editarCliente('${cliente.id}', '${cliente.documento}', '${cliente.nombres}', '${cliente.apellidos}', '${cliente.correo || ''}', '${cliente.telefono || ''}')">Editar</button>
-                    <button onclick="eliminarCliente('${cliente.id}')">Eliminar</button>
+                    <button onclick="editarCliente('${cliente._id}', '${cliente.documento}', '${cliente.nombres}', '${cliente.apellidos}', '${cliente.correo || ''}', '${cliente.telefono || ''}')">Editar</button>
+                    <button onclick="eliminarCliente('${cliente._id}')">Eliminar</button>
                 </td>
             `;
             tbody.appendChild(tr);
@@ -138,7 +138,7 @@ async function editarCliente(id, documento, nombres, apellidos, correo, telefono
 async function eliminarCliente(id) {
     if (confirm('¿Estás seguro de eliminar este cliente?')) {
         try {
-            const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE' });
+            const response = await fetch(`${API_URL}/${id}`, { method: 'DELETE', headers: authHeaders() });
 
             if (response.ok) {
                 cargarClientes();

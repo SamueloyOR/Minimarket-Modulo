@@ -153,3 +153,50 @@
 		grid-template-columns: 1fr;
 	}
 }
+
+.product-card {
+    display: flex;
+    min-height: 320px;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--background);
+    box-shadow: 0 10px 25px var(--shadow);
+}
+
+.product-card img {
+    width: 100%;
+    height: 145px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: #eef2f4;
+}
+
+.product-card h3 {
+    margin: 0;
+}
+
+.product-card p {
+    min-height: 2.6em;
+    color: var(--text-secondary);
+}
+
+.product-card strong {
+    color: var(--primary-hover);
+    font-size: 1.1rem;
+}
+
+.product-card .btn-view-Weekly-Deals {
+    margin-top: auto;
+}
+
+.catalog-message {
+    grid-column: 1 / -1;
+    color: var(--text-secondary);
+}
+
+.catalog-message-error {
+    color: #b91c1c;
+}
