@@ -1,14 +1,18 @@
-import {Router} from "express";
-import {obtenerCategorias, crearCategoria, actualizarCategoria, eliminarCategoria} from "../controllers/categoryControllers.js";
-import {authenticateToken, authorizeAdmin} from "../middlewares/authMiddleware.js";
+import { Router } from 'express';
+import {
+    obtenerCategorias,
+    crearCategoria,
+    actualizarCategoria,
+    eliminarCategoria
+} from '../controllers/categoryControllers.js';
+import verifyToken from '../middlewares/authMiddleware.js';
+import soloAdmin from '../middlewares/adminMiddleware.js';
 
 const router = Router();
 
-//Rutas para categorías
-
-router.get("/", obtenerCategorias);
-router.post("/", authenticateToken, authorizeAdmin, crearCategoria);
-router.put("/:id", authenticateToken, authorizeAdmin, actualizarCategoria);
-router.delete("/:id", authenticateToken, authorizeAdmin, eliminarCategoria);
+router.get('/', obtenerCategorias);
+router.post('/', verifyToken, soloAdmin, crearCategoria);
+router.put('/:id', verifyToken, soloAdmin, actualizarCategoria);
+router.delete('/:id', verifyToken, soloAdmin, eliminarCategoria);
 
 export default router;

@@ -1,26 +1,21 @@
-import {Router} from "express";
+import { Router } from 'express';
 import {
     obtenerOrdenes,
     obtenerOrdenesUsuario,
     obtenerTodasOrdenes,
     actualizarEstadoOrden,
-    eliminarOrden} from "../controllers/orderControllers.js";
-
-const authMiddleware = require("../middlewares/authMiddleware.js");
-const adminMiddleware = require("../middlewares/adminMiddleware.js");
-const workerMiddleware = require("../middlewares/workerMiddleware.js");
+    eliminarOrden
+} from '../controllers/orderControllers.js';
+import verifyToken from '../middlewares/authMiddleware.js';
+import soloAdmin from '../middlewares/adminMiddleware.js';
+import puedeGestionarCLientes from '../middlewares/workersMIddleware.js';
 
 const router = Router();
 
-// Rutas para clientes
-
-router.post("/", authMiddleware, obtenerOrdenes);
-router.get("/user", authMiddleware, obtenerOrdenesUsuario);
-
-// Rutas para administradores y trabajadores
-
-router.get("/", authMiddleware, adminMiddleware, workerMiddleware, obtenerTodasOrdenes);
-router.put("/:id", authMiddleware, adminMiddleware, workerMiddleware, actualizarEstadoOrden);
-router.delete("/:id", authMiddleware, adminMiddleware, workerMiddleware, eliminarOrden);
+router.post('/', verifyToken, obtenerOrdenes);
+router.get('/user', verifyToken, obtenerOrdenesUsuario);
+router.get('/', verifyToken, soloAdmin, puedeGestionarCLientes, obtenerTodasOrdenes);
+router.put('/:id', verifyToken, soloAdmin, puedeGestionarCLientes, actualizarEstadoOrden);
+router.delete('/:id', verifyToken, soloAdmin, eliminarOrden);
 
 export default router;

@@ -6,29 +6,26 @@ const JWT_SECRET = process.env.JWT_SECRET || "minimarket2026";
 
 export const register = async (req, res) => {
     try {
-        const { nombre, correo, password} = req.body;
+        const { nombre, correo, password } = req.body;
 
         if (!nombre || !correo || !password) {
             return res.status(400).json({ message: "Nombre, correo y contraseña son obligatorios" });
         }
 
-        //validar que la el registro sea tipo string
-        if(
+        if (
             typeof nombre !== "string" ||
             typeof correo !== "string" ||
             typeof password !== "string"
-        ){
+        ) {
             return res.status(400).json({
-                message:"Datos de refistro validos"
-            })
+                message: "Datos de registro inválidos"
+            });
         }
 
-        //validar la longitud de la contraseña
-
-        if(password.length < 8){
-            return res.stauts(404).json({
-                message: "contraseña debe contener al menos 8 caracteres"
-            })
+        if (password.length < 8) {
+            return res.status(400).json({
+                message: "La contraseña debe contener al menos 8 caracteres"
+            });
         }
 
         const existingUser = await User.findOne({ correo: correo.trim().toLowerCase() });
@@ -79,5 +76,4 @@ export const login = async (req, res) => {
         res.status(500).json({ message: "Error interno del servidor" });
     }
 };
-
 

@@ -1,24 +1,35 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-//esquema de los productos
-const productSchema = new mongoose.Schema({
-    nombre: { type: String, required: true },
-    descripcion: { type: String },
+export const CATEGORIAS_VALIDAS = [
+    'Frutas y verduras',
+    'Lácteos',
+    'Aseo y hogar',
+    'Snacks'
+];
+
+const productSchema = new Schema({
+    nombre: { type: String, required: true, trim: true },
+    descripcion: { type: String, default: '' },
     categoria: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-    required: true,
+        type: String,
+        enum: CATEGORIAS_VALIDAS,
+        required: true,
+        trim: true
     },
-    precioRegular: { type: Number, required: true },
-    precioOferta: { type: Number, default: null }, // Si es null, no está en oferta
+    precio: { type: Number, required: true, min: 0 },
+    precioRegular: { type: Number, default: 0, min: 0 },
+    precioOferta: { type: Number, default: null, min: 0 },
     enOferta: { type: Boolean, default: false },
-    stock: { type: Number, required: true, default: 0 },
-    imagenUrl: { type: String },
-    activo: { type: Boolean, default: true },
-    },
-{
-    timestamps: true,
+    stock: { type: Number, required: true, default: 0, min: 0 },
+    imagen: { type: String, default: '' },
+    imagenUrl: { type: String, default: '' },
+    activo: { type: Boolean, default: true }
+}, {
+    timestamps: true
 });
 
-export const Product = mongoose.model("Product", productSchema)
+const Product = model('Product', productSchema);
+
+export { Product };
+export default Product;
 
