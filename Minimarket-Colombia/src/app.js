@@ -3,7 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import mongoose from 'mongoose';
 
 import clientesRoutes from './routes/clientes.routes.js';
@@ -11,8 +11,10 @@ import authRoutes from './routes/auth.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 import productsRouter from './routes/products.routes.js';
 import categoryRoutes from './routes/category.routes.js';
+import orderRoutes from './routes/order.routes.js';
+import usersRoutes from './routes/users.routes.js';
 
-const app = express();
+export const app = express();
 const PORT = process.env.PORT || 4000;
 
 const filename = fileURLToPath(import.meta.url);
@@ -81,6 +83,8 @@ app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/orders', orderRoutes);
+app.use('/api/users', usersRoutes);
 
 app.use((req, res, next) => {
     if (req.originalUrl.startsWith('/api/')) {
@@ -92,7 +96,7 @@ app.use((req, res, next) => {
     next();
 });
 
-async function startServer() {
+export async function startServer() {
     if (!MONGO_URI) {
         throw new Error('MONGO_URI no está configurado');
     }
@@ -107,7 +111,7 @@ async function startServer() {
         console.log('MongoDB conectado');
         await seedProductsDatabaseonStart();
 
-        app.listen(PORT, () => {
+        return app.listen(PORT, () => {
             console.log(`Servidor corriendo en el puerto ${PORT}`);
         });
     } catch (error) {
@@ -116,7 +120,12 @@ async function startServer() {
     }
 }
 
-startServer();
+if (process.argv[1]) {
+    const isDirectRun = import.meta.url === pathToFileURL(process.argv[1]).href;
+    if (isDirectRun) {
+        startServer();
+    }
+}
 
 async function seedProductsDatabaseonStart() {
     const count = await Product.countDocuments();
