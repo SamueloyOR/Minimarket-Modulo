@@ -11,6 +11,7 @@ import authRoutes from './routes/auth.routes.js';
 import cartRoutes from './routes/cart.routes.js';
 import productsRouter from './routes/products.routes.js';
 import categoryRoutes from './routes/category.routes.js';
+import orderRoutes from './routes/order.routes.js'
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -82,6 +83,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/products', productsRouter);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/orders', orderRoutes);;l3
 
 app.use((req, res, next) => {
     if (req.originalUrl.startsWith('/api/')) {
