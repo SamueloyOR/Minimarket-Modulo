@@ -18,6 +18,19 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
 
+  const rolesPorRuta = {
+    "/dashboard/admin": "admin",
+    "/dashboard/worker": "trabajador",
+    "/dashboard/client": "cliente",
+  };
+  const rolEsperado = rolesPorRuta[window.location.pathname];
+
+  if (rolEsperado && usuario.rol !== rolEsperado) {
+    const rutaSegura = usuario.rol === "admin" ? "admin" : usuario.rol === "trabajador" ? "worker" : "client";
+    window.location.href = `/dashboard/${rutaSegura}`;
+    return;
+  }
+
   const nombreEl = document.querySelector("[data-user-name]");
   if (nombreEl) {
     nombreEl.textContent = usuario.nombre || "";

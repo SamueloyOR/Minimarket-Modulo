@@ -1,482 +1,507 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Acá encontraras lo indispensable para tu hogar desde la comondidad de tu hogar"
-    />
-    <title>Dashboard - Administrador</title>
 
-    <link
-      rel="stylesheet"
-      href="../../css/base/reset.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/base/variables.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/components/cards.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/components/footer.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/components/modal.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/components/navbar.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/components/cart.css"
-    />
-    <link
-      rel="stylesheet"
-      href="../../css/pages/dashboard.css"
-    />
-    <script src="../../js/pages/cart.js" defer></script>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Acá encontraras lo indispensable para tu hogar desde la comondidad de tu hogar" />
+  <title>Dashboard | Administrador</title>
 
-  <body>
-    <header id="hero">
-      <nav class="nav-bar" aria-label="Navegación principal">
-        <div class="nav-bar-logo" aria-label="Logo-minimarket">
-          <img
-            src="/img/minimarket.jpeg"
-            alt="Logo de Minimarket"
-            width="50"
-            height="50"
-          />
-        </div>
+  <link rel="stylesheet" href="../../css/base/reset.css" />
+  <link rel="stylesheet" href="../../css/base/variables.css" />
+  <link rel="stylesheet" href="../../css/components/cards.css" />
+  <link rel="stylesheet" href="../../css/components/footer.css" />
+  <link rel="stylesheet" href="../../css/components/modal.css" />
+  <link rel="stylesheet" href="../../css/components/navbar.css" />
+  <link rel="stylesheet" href="../../css/components/cart.css" />
+  <link rel="stylesheet" href="../../css/pages/dashboard.css" />
+  <script src="../../js/pages/cart.js" defer></script>
+  <script defer src="/js/components/profile-menu.js"></script>
+</head>
 
-        <div class="nav-bar-tittle">
-          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
-        </div>
+<body>
+  <header id="hero">
+    <nav class="nav-bar" aria-label="Navegación principal">
+      <div class="nav-bar-logo" aria-label="Logo-minimarket">
+        <img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+      </div>
 
-        <section id="search" aria-label="Buscar productos">
-          <form class="search-form" role="search">
-            <button class="search-button" type="submit" aria-label="Buscar">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="6"></circle>
-                <path d="M16 16L21 21"></path>
-              </svg>
-            </button>
+      <div class="nav-bar-tittle">
+        <h2><a href="" class="nav-brand">Minimarket</a></h2>
+      </div>
 
-            <input
-              class="search-input"
-              id="Search-In-Inline"
-              type="search"
-              name="q"
-              placeholder="Buscar orders, productos, o clientes"
-              aria-label="Buscar productos"
-              autocorrect="off"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck="false"
-            />
-          </form>
-        </section>
-
-        <form>
-          <section class="notifications" aria-label="Notificaciones">
-            <button
-              class="bell-button"
-              type="submit"
-              aria-label="Notificaciones"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ffffff"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M18 8a6 6 0 0 0 -12 0c0 7 -3 9 -3 9h18s-3 -2 -3 -9" />
-                <path d="M13.73 21a2 2 0 0 1 -3.46 0" />
-              </svg>
-            </button>
-          </section>
-        </form>
-
-        <div class="profile-dropdown">
-          <button
-            class="profile-toggle"
-            type="button"
-            aria-label="Seleccionar tipo de perfil"
-            aria-expanded="false"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-              <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-              <path
-                d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
-              />
+      <section id="search" aria-label="Buscar productos">
+        <form class="search-form" role="search">
+          <button class="search-button" type="submit" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="6"></circle>
+              <path d="M16 16L21 21"></path>
             </svg>
           </button>
 
-          <div
-            class="profile-menu"
-            id="profileMenu"
-            role="menu"
-            aria-label="Tipos de perfil"
-          >
-            <button
-              type="button"
-              class="profile-option selected"
-              data-profile="user"
-              role="menuitem"
-            >
-              Usuario
-            </button>
-            <button
-              type="button"
-              class="profile-option"
-              data-profile="admin"
-              role="menuitem"
-            >
-              Administrador
-            </button>
-            <button
-              type="button"
-              class="profile-option"
-              data-profile="worker"
-              role="menuitem"
-            >
-              Trabajador
-            </button>
-          </div>
-
-          <select
-            name="profile"
-            id="profile"
-            class="sr-only"
-            aria-hidden="true"
-          >
-            <option value="user" selected>Usuario</option>
-            <option value="admin">Administrador</option>
-            <option value="worker">Trabajador</option>
-          </select>
-        </div>
-
-        <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Abrir carrito">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-            <path d="M17 17h-11v-14h-2" />
-            <path d="M6 5l14 1l-1 7h-13" />
-          </svg>
-          <span id="count">0</span>
-        </button>
-
-        <div id="cart-modal" class="modal-overlay" aria-hidden="true">
-          <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-            <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">&times;</button>
-            <h2 id="cart-title">Tu carrito</h2>
-            <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
-            <div class="cart-footer">
-              <p>Total: $<span id="cart-total">0</span></p>
-              <button id="checkout-btn" type="button">Finalizar Compra</button>
-            </div>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <section class="dashboard">
-        <section class="dashboard-sidebar">
-          <span>OVERVIEW</span>
-
-          <button class="btn-dashboard" id="btn-dashboard">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M17.8 20l-12 -1.5c-1 -.1 -1.8 -.9 -1.8 -1.9v-9.2c0 -1 .8 -1.8 1.8 -1.9l12 -1.5c1.2 -.1 2.2 .8 2.2 1.9v12.1c0 1.2 -1.1 2.1 -2.2 1.9z"
-                />
-                <path d="M12 5l0 14" />
-                <path d="M4 12l16 0" />
-              </svg>
-            </i>
-            <span>dashboard</span>
-          </button>
-
-          <button class="btn-dashboard" id="btn-dashboard">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path
-                  d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              </svg>
-            </i>
-            <span>Data</span>
-          </button>
-
-          <span>MANAGEMENT</span>
-
-          <button class="btn-dashboard" id="btn-Products">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M3 19v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z"
-                />
-                <path d="M11 17h2" />
-                <path d="M9 12h6" />
-                <path d="M10 7h4" />
-              </svg>
-            </i>
-            <span>Products</span>
-          </button>
-
-          <button class="btn-dashboard" id="btn-Orders">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path
-                  d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              </svg>
-            </i>
-            <span>Orders</span>
-          </button>
-
-          <button class="btn-dashboard" id="btn-Customers">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path
-                  d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              </svg>
-            </i>
-            <span>Customers</span>
-          </button>
-
-          <button class="btn-dashboard" id="btn-Stores">
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path
-                  d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z"
-                />
-                <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              </svg>
-            </i>
-            <span>Stores</span>
-          </button>
-        </section>
+          <input class="search-input" id="Search-In-Inline" type="search" name="q"
+            placeholder="Buscar orders, productos, o clientes" aria-label="Buscar productos" autocorrect="off"
+            autocomplete="off" autocapitalize="off" spellcheck="false" />
+        </form>
       </section>
 
-      <section class="main">
-        <div class="tittle">
-          <h1>Dashboard Admin</h1>
-          <span>Aqui ves lo que ocurre con tus tiendas hoy.</span>
+      <form>
+        <section class="notifications" aria-label="Notificaciones">
+          <button class="bell-button" type="submit" aria-label="Notificaciones">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+              stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8a6 6 0 0 0 -12 0c0 7 -3 9 -3 9h18s-3 -2 -3 -9" />
+              <path d="M13.73 21a2 2 0 0 1 -3.46 0" />
+            </svg>
+          </button>
+        </section>
+      </form>
 
-          <form class="calendar">
-            <label for="calendar">last 30 Days</label>
-            <input type="date" id="calendar" name="calendar" />
-          </form>
+      <!--Dropdown Manu-->
 
-          <form class="btn-form">
-            <button class="btn">
-              <span
-                ><i>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#607d8b"
-                    stroke-width="1"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
-                    <path d="M7 11l5 5l5 -5" />
-                    <path d="M12 4l0 12" />
-                  </svg> </i
-                >Export</span
-              >
-            </button>
-          </form>
-        </div>
+      <div class="profile-dropdown">
+        <button type="button" id="dropdown-toggle" aria-haspopup="true" aria-expanded="false"
+          aria-controls="dropdown-menu" class="dropdown-menu">
+          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
+            stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+            <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
+            <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
+          </svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+            stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 5l0 14" />
+            <path d="M18 13l-6 6" />
+            <path d="M6 13l6 6" />
+          </svg>
+        </button>
+        <ul id="dropdown-menu" aria-labelledby="dropdown-toggle">
+          <li>
+            <a href="../../html/dashboard/admin.html">
 
-        <form class="carts-containers">
-          <div class="cart-total">
-            <h4>Total Revenue</h4>
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M9.5 3h5a1.5 1.5 0 0 1 1.5 1.5a3.5 3.5 0 0 1 -3.5 3.5h-1a3.5 3.5 0 0 1 -3.5 -3.5a1.5 1.5 0 0 1 1.5 -1.5z"
-                />
-                <path
-                  d="M4 17v-1a8 8 0 1 1 16 0v1a4 4 0 0 1 -4 4h-8a4 4 0 0 1 -4 -4z"
-                />
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
+                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+                <path d="M10 12h4v4h-4z" />
               </svg>
-            </i>
-          </div>
-          <div class="cart-orders">
-            <h4>Total orders</h4>
-            <i> </i>
-          </div>
-          <div class="cart-customers">
-            <h4>Active Customers</h4>
-            <i>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="32"
-                height="32"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#607d8b"
-                stroke-width="1"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              Dashboard
+            </a>
+            <a href="../../html/manager/users.html">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
                 <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                 <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                 <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
               </svg>
-            </i>
-          </div>
+              Customers
+            </a>
 
-          <div class="cart-Alerts">
-            <h4>Pending Alerts</h4>
+            <a href="/">
+
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                <path d="M12 4v7l2 -2l2 2v-7" />
+              </svg>
+              Orders
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div id="cart-modal" class="modal-overlay" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+          <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">
+            &times;
+          </button>
+          <h2 id="cart-title">Tu carrito</h2>
+          <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+          <div class="cart-footer">
+            <p>Total: $<span id="cart-total">0</span></p>
+            <button id="checkout-btn" type="button">Finalizar Compra</button>
           </div>
-        </form>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="dashboard">
+      <section class="dashboard-sidebar">
+        <span>OVERVIEW</span>
+
+        <button class="btn-dashboard" id="btn-dashboard">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M17.8 20l-12 -1.5c-1 -.1 -1.8 -.9 -1.8 -1.9v-9.2c0 -1 .8 -1.8 1.8 -1.9l12 -1.5c1.2 -.1 2.2 .8 2.2 1.9v12.1c0 1.2 -1.1 2.1 -2.2 1.9z" />
+              <path d="M12 5l0 14" />
+              <path d="M4 12l16 0" />
+            </svg>
+          </i>
+          <span>dashboard</span>
+        </button>
+
+        <button class="btn-dashboard" id="btn-dashboard">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path
+                d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            </svg>
+          </i>
+          <span>Data</span>
+        </button>
+
+        <span>MANAGEMENT</span>
+
+        <button class="btn-dashboard" id="btn-Products">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 19v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
+              <path d="M11 17h2" />
+              <path d="M9 12h6" />
+              <path d="M10 7h4" />
+            </svg>
+          </i>
+          <span>Products</span>
+        </button>
+
+        <button class="btn-dashboard" id="btn-Orders">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path
+                d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            </svg>
+          </i>
+          <span>Orders</span>
+        </button>
+
+        <button class="btn-dashboard" id="btn-Customers">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path
+                d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            </svg>
+          </i>
+          <span>Customers</span>
+        </button>
+
+        <button class="btn-dashboard" id="btn-Stores">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
+              stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M10 9m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v9.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path
+                d="M17 3m0 1.105a1.105 1.105 0 0 1 1.105 -1.105h1.79a1.105 1.105 0 0 1 1.105 1.105v15.79a1.105 1.105 0 0 1 -1.105 1.105h-1.79a1.105 1.105 0 0 1 -1.105 -1.105z" />
+              <path d="M5 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            </svg>
+          </i>
+          <span>Stores</span>
+        </button>
+
+        <button class="btn-sign-out" id="btn-sign-out">
+          <i>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+              class="icon icon-tabler icons-tabler-logout">
+              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+              <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 -2v-2"></path>
+              <path d="M7 12h14l-3 -3m0 6l3 -3"></path>
+            </svg>
+          </i>
+          <span>
+            Cerrar Sesión
+          </span>
+        </button>
       </section>
 
-    </main>
+      <section class="admin-panel">
+        <div class="admin-panel-shell">
+          <div class="admin-header">
+            <div class="tittle">
+              <h1>Dashboard Overview</h1>
+              <span>.</span>
+            </div>
 
-    <footer>
-        <section class="footer-section">
-          <h3>Minimarket</h3>
+            <div class="toolbar">
+              <form class="calendar">
+                <label for="calendar">Last 30 Days</label>
+                <input type="date" id="calendar" name="calendar" />
+              </form>
 
-          <div class="footer-section-links">
-            <a href="/aboutUS">About us</a>
-            <a href="/contact">Contacto</a>
-            <a href="/privacidad">Privacidad</a>
-            <a href="/terminos">Términos y condiciones</a>
-            <a href="/cookies">Cookies</a>
-
-            <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+              <form class="btn-form">
+                <button class="btn" type="button">
+                  <span>
+                    <i>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+                        <path d="M7 11l5 5l5 -5" />
+                        <path d="M12 4l0 12" />
+                      </svg>
+                    </i>
+                    Export
+                  </span>
+                </button>
+              </form>
+            </div>
           </div>
-        </section>
-      </footer>
-      
-      <script defer src="/js/pages/dashboard.js"></script>
-  </body>
+
+          <div class="stats-grid carts-containers">
+            <div class="cart-total">
+              <div class="card-head">
+                <h4>Total Revenue</h4>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 19h16" />
+                  <path d="M7 16V9" />
+                  <path d="M12 16V5" />
+                  <path d="M17 16v-4" />
+                </svg>
+              </div>
+              <div class="metric-value">$12,500.00</div>
+              <div class="metric-meta"><span class="up">↑ 12.5%</span> vs last month</div>
+            </div>
+
+            <div class="cart-orders">
+              <div class="card-head">
+                <h4>Total Orders</h4>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M9 5h6" />
+                  <path d="M8 3h8a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2H8a2 2 0 0 1 -2 -2V5a2 2 0 0 1 2 -2z" />
+                  <path d="M9 9h6" />
+                  <path d="M9 13h6" />
+                </svg>
+              </div>
+              <div class="metric-value">1,248</div>
+              <div class="metric-meta"><span class="up">↑ 8.2%</span> vs last month</div>
+            </div>
+
+            <div class="cart-customers">
+              <div class="card-head">
+                <h4>Active Customers</h4>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M16 19v-1a4 4 0 0 0 -4 -4H8a4 4 0 0 0 -4 4v1" />
+                  <circle cx="10" cy="7" r="4" />
+                  <path d="M22 19v-1a4 4 0 0 0 -3 -3.87" />
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
+              </div>
+              <div class="metric-value">8,432</div>
+              <div class="metric-meta"><span class="up">↑ 5.1%</span> vs last month</div>
+            </div>
+
+            <div class="cart-Alerts">
+              <div class="card-head">
+                <h4>Pending Alerts</h4>
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 3a6 6 0 0 1 6 6v5l2 3H4l2 -3V9a6 6 0 0 1 6 -6z" />
+                  <path d="M10 21a2 2 0 0 0 4 0" />
+                </svg>
+              </div>
+              <div class="metric-value">23</div>
+              <div class="metric-meta"><span class="warn">Low stock</span> requires action</div>
+            </div>
+          </div>
+
+          <div class="content-grid">
+            <div class="panel-card chart-panel">
+              <div class="section-header">
+                <h3>Revenue Overview</h3>
+                <button type="button" class="mini-select">Oct 2023</button>
+              </div>
+
+              <div class="chart" aria-label="Gráfico de ingresos">
+                <div class="y-axis">
+                  <span>$25k</span>
+                  <span>$20k</span>
+                  <span>$15k</span>
+                  <span>$10k</span>
+                  <span>$5k</span>
+                  <span>$0k</span>
+                </div>
+
+                <div class="bars-wrap">
+                  <div class="chart-bars">
+                    <span class="bar" style="height: 54%"></span>
+                    <span class="bar" style="height: 68%"></span>
+                    <span class="bar" style="height: 48%"></span>
+                    <span class="bar" style="height: 74%"></span>
+                    <span class="bar" style="height: 62%"></span>
+                    <span class="bar" style="height: 80%"></span>
+                    <span class="bar" style="height: 56%"></span>
+                  </div>
+                  <div class="x-axis">
+                    <span>1 Oct</span>
+                    <span>5 Oct</span>
+                    <span>10 Oct</span>
+                    <span>15 Oct</span>
+                    <span>20 Oct</span>
+                    <span>25 Oct</span>
+                    <span>30 Oct</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card side-panel">
+              <div class="section-header">
+                <h3>Top Products</h3>
+                <a href="#" class="view-all">View All</a>
+              </div>
+
+              <div class="product-list">
+                <div class="product-row">
+                  <span class="badge org">ORG</span>
+                  <div>
+                    <strong>Organic Avocados</strong>
+                    <small>Produce • 420 sales</small>
+                  </div>
+                  <span class="price">$2,450</span>
+                </div>
+
+                <div class="product-row">
+                  <span class="badge frh">FRH</span>
+                  <div>
+                    <strong>Fresh Sourdough</strong>
+                    <small>Bakery • 315 sales</small>
+                  </div>
+                  <span class="price">$1,890</span>
+                </div>
+
+                <div class="product-row">
+                  <span class="badge alm">ALM</span>
+                  <div>
+                    <strong>Almond Milk 1L</strong>
+                    <small>Dairy • 280 sales</small>
+                  </div>
+                  <span class="price">$1,120</span>
+                </div>
+
+                <div class="product-row">
+                  <span class="badge cfb">CFB</span>
+                  <div>
+                    <strong>Artisan Coffee Beans</strong>
+                    <small>Pantry • 150 sales</small>
+                  </div>
+                  <span class="price">$2,100</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="manager-panel panel-card">
+            <div class="section-header table-header">
+              <div>
+                <h3>Store Managers</h3>
+                <p>Manage your team’s access and roles.</p>
+              </div>
+              <button type="button" class="add-manager">+ Add Manager</button>
+            </div>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>User</th>
+                  <th>Role / Store</th>
+                  <th>Status</th>
+                  <th>Last Active</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="user-cell">
+                    <span class="avatar avatar-one">M</span>
+                    <div>
+                      <strong>Maria Rodriguez</strong>
+                      <small>maria@minimarket.com</small>
+                    </div>
+                  </td>
+                  <td>Store Manager<br /><small>Downtown Branch</small></td>
+                  <td><span class="status active">Active</span></td>
+                  <td>Today, 08:30 AM</td>
+                  <td><button type="button" class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td class="user-cell">
+                    <span class="avatar avatar-two">C</span>
+                    <div>
+                      <strong>Carlos Gomez</strong>
+                      <small>carlos@gminimarket.com</small>
+                    </div>
+                  </td>
+                  <td>Regional Director<br /><small>All Stores</small></td>
+                  <td><span class="status active">Active</span></td>
+                  <td>Yesterday, 14:15 PM</td>
+                  <td><button type="button" class="action-btn">Edit</button></td>
+                </tr>
+                <tr>
+                  <td class="user-cell">
+                    <span class="avatar avatar-three">A</span>
+                    <div>
+                      <strong>Ana Silva</strong>
+                      <small>ana@minimarket.com</small>
+                    </div>
+                  </td>
+                  <td>Inventory Analyst<br /><small>Westside Branch</small></td>
+                  <td><span class="status suspended">Suspended</span></td>
+                  <td>Oct 24, 09:00 AM</td>
+                  <td><button type="button" class="action-btn">Edit</button></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="table-footer">
+              <span>Showing 1 to 3 of 12 managers</span>
+              <div class="pager">
+                <button type="button">Previous</button>
+                <span class="page active">1</span>
+                <span class="page">2</span>
+                <span class="page">Next</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer>
+    <section class="footer-section">
+      <h3>Minimarket</h3>
+
+      <div class="footer-section-links">
+        <a href="/aboutUS">About us</a>
+        <a href="/contact">Contacto</a>
+        <a href="/privacidad">Privacidad</a>
+        <a href="/terminos">Términos y condiciones</a>
+        <a href="/cookies">Cookies</a>
+
+        <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+      </div>
+    </section>
+  </footer>
+
+  <script defer src="/js/pages/dashboard.js"></script>
+</body>
+
 </html>

@@ -82,43 +82,52 @@
 }
 
 .btn-container-login{
-    flex: 1 1 auto;
-    padding: 12px;
-    background-color: var(--primary-light);
+    width: 100%;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-hover));
     color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 12px;
-    text-align: center;
     text-decoration: none;
-    transition: background-color 0.2s ease;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
 }
 
 .btn-container-signup{
-    flex: 1 1 auto;
-    padding: 12px;
-    background-color: var(--card-bg);
+    width: 100%;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--background), var(--text-secondary));
     color: #ffffff;
-    border: none;
-    border-radius: 6px;
-    font-size: 15px;
-    font-weight: 600;
-    cursor: pointer;
-    margin-bottom: 12px;
-    text-align: center;
     text-decoration: none;
-    transition: background-color 0.2s ease;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+
 }
 
 .btn-container-login:hover{
-    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(9, 153, 255, 0.25);
+    filter: brightness(1.04);
 }
 
 .btn-container-signup:hover{
-    background-color: var(--shadow);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px var(--primary-dark);
+    filter: brightness(1.04);
 }
 
 @media ((max-width: 992px)) {
@@ -140,5 +149,3 @@
         padding: 20px;
     }
 }
-
-/* breakpoint: tablet 992px */

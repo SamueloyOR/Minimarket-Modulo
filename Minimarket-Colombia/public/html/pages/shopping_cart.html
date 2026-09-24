@@ -1,11 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Carrito de compras de Minimarket Colombia">
+  <title>Carrito | Minimarket Colombia</title>
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/cart.css">
+  <link rel="stylesheet" href="../../css/pages/shopping.css">
+  <script src="../../js/pages/cart.js" defer></script>
 </head>
 <body>
-    
+  <header class="shopping-header">
+    <nav class="nav-bar" aria-label="Navegación principal">
+      <div class="nav-bar-logo"><img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50"></div>
+      <div class="nav-bar-tittle"><h2><a href="/" class="nav-brand">Minimarket</a></h2></div>
+      <div class="nav-bar-categories">
+        <a class="user-categories" href="/html/pages/categories.html">Categorías</a>
+        <a class="user-offers" href="/html/pages/offers.html">Ofertas</a>
+      </div>
+      <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Actualizar carrito">
+        <span id="count">0</span>
+      </button>
+    </nav>
+  </header>
+
+  <main class="shopping-page">
+    <section class="shopping-intro">
+      <p class="shopping-kicker">Tu compra</p>
+      <h1>Carrito de compras</h1>
+      <p>Revisa tus productos y finaliza el pedido cuando estés listo.</p>
+    </section>
+
+    <section id="cart-modal" class="shopping-cart-panel active" aria-hidden="false">
+      <div class="shopping-cart-content" role="region" aria-labelledby="cart-title">
+        <h2 id="cart-title">Productos seleccionados</h2>
+        <p id="cart-message" class="cart-message" role="status" aria-live="polite"></p>
+        <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+        <div class="cart-footer">
+          <p>Total: <span id="cart-total">$0</span></p>
+          <button id="checkout-btn" type="button">Finalizar compra</button>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

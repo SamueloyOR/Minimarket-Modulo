@@ -18,12 +18,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".tab");
   const roleInput = document.getElementById("role-value");
 
+  tabs.forEach((tab) => {
+    if (tab.dataset.role !== "Cliente") tab.hidden = true;
+  });
+
   const applyRoleStyle = (selectedTab) => {
     const roleColors = {
-      Cliente: { backgroundColor: "green", color: "white" },
+      Cliente: { backgroundColor: "green", color: "white", },
       Trabajador: { backgroundColor: "blue", color: "white" },
       Admin: { backgroundColor: "red", color: "white" },
     };
+
 
     tabs.forEach((tab) => {
       const isActive = tab === selectedTab;
@@ -113,6 +118,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+
+
       localStorage.setItem("token", resultado.token);
       localStorage.setItem("usuario", JSON.stringify(resultado.user));
 
@@ -131,7 +138,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const registerForm = document.querySelector(".register-form");
   if (!registerForm) return;
 
-  const ROL_MAP = { Cliente: "cliente", Trabajador: "trabajador", Admin: "admin" };
 
   registerForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -143,7 +149,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const correo = document.getElementById("gmail").value.trim();
     const password = document.getElementById("password").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
-    const roleInput = document.getElementById("role-value");
 
     if (!nombres || !apellidos || !documento || !correo || !password) {
       mostrarMensaje("Todos los campos son obligatorios (excepto teléfono).");
@@ -155,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const rol = ROL_MAP[roleInput ? roleInput.value : "Cliente"] || "cliente";
 
     const btn = document.getElementById("btn-submit");
     if (btn) btn.disabled = true;
@@ -170,7 +174,6 @@ document.addEventListener("DOMContentLoaded", () => {
           telefono,
           correo,
           password,
-          rol,
         }),
       });
 

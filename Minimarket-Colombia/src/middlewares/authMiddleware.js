@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-const JWT_SECRET = process.env.JWT_SECRET || "minimarket2026";
+const JWT_SECRET = process.env.JWT_SECRET || "minimarket-secret-2026";
 
 const verifyToken = (req, res, next) => {
     const auth = req.headers["authorization"] || req.headers["autorizacion"];
