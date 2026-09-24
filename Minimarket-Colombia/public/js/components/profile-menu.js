@@ -1,6 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+//document.addEventListener("DOMContentLoaded", function () {
     var toggle = document.querySelector(".profile-toggle");
-    var dropdown = document.querySelector(".profile-dropdown");
     var menu = document.querySelector(".profile-menu");
     if (!toggle || !dropdown || !menu) return;
     toggle.addEventListener("click", function () {
@@ -23,4 +22,11 @@ document.addEventListener("DOMContentLoaded", function () {
             toggle.setAttribute("aria-expanded", "false");
         }
     });
-});
+//});
+
+//Funcion para agregar interaccion al dropdown menu
+
+document.addEventListener("DOMcontentloaded", function (){
+    var toggle
+    var menu
+})

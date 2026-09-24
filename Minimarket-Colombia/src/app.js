@@ -55,7 +55,6 @@ app.get('/dashboard/admin', (req, res) => {
 app.get('/dashboard/worker', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/dashboard/worker.html'));
 });
-
 app.get('/api', (req, res) => {
     res.json({
         ok: true,
