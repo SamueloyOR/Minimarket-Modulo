@@ -48,7 +48,7 @@ href="../../css/base/reset.css"
       <nav class="nav-bar" aria-label="Navegación principal">
         <div class="nav-bar-logo">
           <img
-            src="/Minimarket-Colombia/public/img/minimarket.jpeg"
+            src="../../img/minimarket.jpeg"
             alt="Logo de Minimarket"
             width="50"
             height="50"
@@ -56,18 +56,18 @@ href="../../css/base/reset.css"
         </div>
 
         <div class="nav-bar-tittle">
-          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
+          <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
         </div>
 
         <div class="nav-bar-categories">
           <a
             class="user-categories"
-            href="../pages/categories.html"
+            href="../pages/categories.html#categorias"
             >Categorías</a
           >
           <a
             class="user-offers"
-            href="../pages/offers.html"
+            href="../pages/offers.html#ofertas"
             >Ofertas</a
           >
         </div>
@@ -175,11 +175,10 @@ href="../../css/base/reset.css"
           </select>
         </div>
 
-        <button
+        <a
           class="btn-shopping"
-          id="shopping"
-          type="submit"
-          aria-label="shopping"
+          href="../pages/shopping_cart.html"
+          aria-label="Abrir carrito"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +196,8 @@ href="../../css/base/reset.css"
             <path d="M17 17h-11v-14h-2" />
             <path d="M6 5l14 1l-1 7h-13" />
           </svg>
-        </button>
+          <span id="count">0</span>
+        </a>
       </nav>
     </header>
 

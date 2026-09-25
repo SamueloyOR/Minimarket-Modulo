@@ -26,12 +26,12 @@
         </div>
 
         <div class="nav-bar-tittle">
-          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
+          <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
         </div>
 
         <div class="nav-bar-categories">
-          <a class="user-categories" href="../../html/pages/categories.html#categorias">Categorías</a>
-          <a class="user-offers" href="../../html/pages/offers.html#ofertas">Ofertas</a>
+          <a class="user-categories" href="categories.html#categorias">Categorías</a>
+          <a class="user-offers" href="offers.html#ofertas">Ofertas</a>
         </div>
 
         <section id="search" aria-label="Buscar productos">
@@ -78,7 +78,7 @@
           <span>Explora por necesidades del hogar.</span>
 
           <div class="categories-container">
-            <button class="category-card" type="button">
+            <button class="category-card" type="button" data-category="Frutas y verduras">
               <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="32"
@@ -93,7 +93,7 @@
                 <p>Productos frescos del día.</p>
               </div>
             </button>
-            <button class="category-card" type="button">
+            <button class="category-card" type="button" data-category="Lácteos">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
@@ -108,7 +108,7 @@
                 <p>Leches, yogures y quesos.</p>
               </div>
             </button>
-            <button class="category-card" type="button">
+            <button class="category-card" type="button" data-category="Aseo y hogar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="32"
@@ -132,7 +132,7 @@
                 <p>Todo para tu limpieza y orden.</p>
               </div>
             </button>
-            <button class="category-card" type="button">
+            <button class="category-card" type="button" data-category="Snacks">
 
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -176,6 +176,51 @@
         </section>
       </div>
     </main>
+
+    <section class="category-admin" id="category-admin" hidden aria-labelledby="category-admin-title">
+      <div class="category-admin-heading">
+        <p class="admin-kicker">Administración</p>
+        <h2 id="category-admin-title">Gestiona tu catálogo</h2>
+        <p>Crea categorías y productos que quedarán guardados en MongoDB.</p>
+      </div>
+
+      <div class="category-admin-grid">
+        <form class="admin-form" id="category-form">
+          <h3>Nueva categoría</h3>
+          <label for="category-name">Nombre</label>
+          <input id="category-name" name="nombre" type="text" required placeholder="Ej. Bebidas" />
+          <label for="category-description">Descripción</label>
+          <textarea id="category-description" name="descripcion" rows="3" placeholder="Qué encontrarás aquí"></textarea>
+          <button type="submit">Guardar categoría</button>
+        </form>
+
+        <form class="admin-form" id="product-form">
+          <h3>Nuevo producto</h3>
+          <label for="product-name">Nombre</label>
+          <input id="product-name" name="nombre" type="text" required placeholder="Ej. Jugo de mango" />
+          <label for="product-description">Descripción</label>
+          <textarea id="product-description" name="descripcion" rows="2" placeholder="Descripción breve"></textarea>
+          <div class="admin-form-row">
+            <div>
+              <label for="product-price">Precio</label>
+              <input id="product-price" name="precio" type="number" min="0" step="1" required />
+            </div>
+            <div>
+              <label for="product-stock">Stock</label>
+              <input id="product-stock" name="stock" type="number" min="0" step="1" value="0" required />
+            </div>
+          </div>
+          <label for="product-category">Categoría</label>
+          <select id="product-category" name="categoria" required>
+            <option value="">Selecciona una categoría</option>
+          </select>
+          <label for="product-image">URL de imagen</label>
+          <input id="product-image" name="imagen" type="url" placeholder="https://..." />
+          <button type="submit">Guardar producto</button>
+        </form>
+      </div>
+      <p id="admin-catalog-message" class="admin-catalog-message" role="status" aria-live="polite"></p>
+    </section>
 
     <footer id="form-section">
       <section class="footer-section">

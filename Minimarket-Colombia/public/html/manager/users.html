@@ -18,24 +18,24 @@
     <link rel="stylesheet" href="../../css/pages/dashboard.css">
     <link rel="stylesheet" href="../../css/pages/login.css">
 
-    <script defer src="/js/components/profile-menu.js"></script>
+    <script defer src="../../js/components/profile-menu.js"></script>
 </head>
 
 <body>
     <header id="hero" role="banner">
         <nav class="nav-bar" aria-label="Navegación principal">
             <div class="nav-bar-logo">
-                <img src="/img/minimarket.jpeg" alt="Logo de Minimarket" width="50"
+                <img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50"
                     height="50" />
             </div>
 
             <div class="nav-bar-tittle">
-            <h2><a href="/" class="nav-brand">Minimarket</a></h2>
+            <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
             </div>
 
             <div class="nav-bar-categories">
-                <a class="user-categories" href="/html/pages/categories.html#categorias">Categorías</a>
-                <a class="user-offers" href="/html/pages/offers.html#ofertas">Ofertas</a>
+                <a class="user-categories" href="../pages/categories.html#categorias">Categorías</a>
+                <a class="user-offers" href="../pages/offers.html#ofertas">Ofertas</a>
             </div>
 
             <section id="search" aria-label="Buscar productos">
@@ -77,7 +77,7 @@
                 </select>
             </div>
 
-            <button class="btn-shopping" id="shopping" type="submit" aria-label="shopping">
+            <a class="btn-shopping" id="shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                     stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
@@ -85,7 +85,7 @@
                     <path d="M17 17h-11v-14h-2" />
                     <path d="M6 5l14 1l-1 7h-13" />
                 </svg>
-            </button>
+            </a>
         </nav>
     </header>
 
@@ -170,7 +170,7 @@
     </main>
 
     <!-- Script de conexión con la API -->
-    <script src="/js/app.js" defer></script>
+    <script src="../../js/app.js" defer></script>
 
 
 </body>

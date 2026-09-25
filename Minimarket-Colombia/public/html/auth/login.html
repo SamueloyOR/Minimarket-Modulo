@@ -1,201 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Login para accerder al rol deseado">
-    <title>Login</title>
-    <link rel="stylesheet" href="../../css/base/reset.css">
-    <link rel="stylesheet" href="../../css/base/variables.css">
-    <link rel="stylesheet" href="../../css/components/navbar.css">
-    <link rel="stylesheet" href="../../css/components/modal.css">
-    <link rel="stylesheet" href="../../css/components/footer.css">
-    <link rel="stylesheet" href="../../css/pages/login.css">
-    
 
-    <script defer src="/js/components/password-toggle.js"></script>
-    <script defer src="/js/components/profile-menu.js"></script>
-    <script defer src="/js/components/navegation.js"></script>
-    <script defer src="/js/pages/auth.js"></script>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login para accerder al rol deseado">
+  <title>Login</title>
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/components/modal.css">
+  <link rel="stylesheet" href="../../css/components/footer.css">
+  <link rel="stylesheet" href="../../css/pages/login.css">
+
+
+  <script defer src="../../js/components/navegation.js"></script>
+  <script defer src="../../js/components/password-toggle.js"></script>
+  <script defer src="../../js/components/profile-menu.js"></script>
+  <script defer src="../../js/pages/auth.js"></script>
+  <script defer src="../../js/pages/cart.js"></script>
 </head>
 
 
 <body>
-    <header id="hero">
-      <nav class="nav-bar" aria-label="Navegación principal">
-        <div class="nav-bar-logo" aria-label="Logo-minimarket">
-          <img
-            src="/Minimarket-Colombia/public/img/minimarket.jpeg"
-            alt="Logo de Minimarket"
-            width="50"
-            height="50"
-          />
-        </div>
+  <header id="hero">
+    <nav class="nav-bar" aria-label="Navegación principal">
+      <div class="nav-bar-logo" aria-label="Logo-minimarket">
+        <img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+      </div>
 
-        <div class="nav-bar-tittle">
-          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
-        </div>
+      <div class="nav-bar-tittle">
+        <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
+      </div>
 
-        <div class="nav-bar-categories">
-          <a class="user-categories" href="/html/pages/categories.html#categorias"
-            >Categorías</a
-          >
-          <a class="user-offers" href="/html/pages/offers.html#ofertas"
-            >Ofertas</a
-          >
-        </div>
+      <div class="nav-bar-categories">
+        <a class="user-categories" href="../pages/categories.html#categorias">Categorías</a>
+        <a class="user-offers" href="../pages/offers.html#ofertas">Ofertas</a>
+      </div>
 
-        <section id="search" aria-label="Buscar productos">
-          <form class="search-form" role="search">
-            <button class="search-button" type="submit" aria-label="Buscar">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                aria-hidden="true"
-              >
-                <circle cx="11" cy="11" r="6"></circle>
-                <path d="M16 16L21 21"></path>
-              </svg>
-            </button>
-
-            <input
-              class="search-input"
-              id="Search-In-Inline"
-              type="search"
-              name="q"
-              placeholder="Buscar productos"
-              aria-label="Buscar productos"
-              autocorrect="off"
-              autocomplete="off"
-              autocapitalize="off"
-              spellcheck="false"
-            />
-          </form>
-        </section>
-
-        <div class="profile-dropdown">
-          <button
-            class="profile-toggle"
-            type="button"
-            aria-label="Seleccionar tipo de perfil"
-            aria-expanded="false"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
-              <path d="M12 10m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
-              <path
-                d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855"
-              />
+      <section id="search" aria-label="Buscar productos">
+        <form class="search-form" role="search">
+          <button class="search-button" type="submit" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="6"></circle>
+              <path d="M16 16L21 21"></path>
             </svg>
           </button>
 
-          <div class="profile-menu" id="profileMenu" role="menu" aria-label="Tipos de perfil">
-            <button type="button" class="profile-option selected" data-profile="user" role="menuitem">Usuario</button>
-            <button type="button" class="profile-option" data-profile="admin" role="menuitem">Administrador</button>
-            <button type="button" class="profile-option" data-profile="worker" role="menuitem">Trabajador</button>
+          <input class="search-input" id="Search-In-Inline" type="search" name="q" placeholder="Buscar productos"
+            aria-label="Buscar productos" autocorrect="off" autocomplete="off" autocapitalize="off"
+            spellcheck="false" />
+        </form>
+      </section>
+
+      <section>
+        <div class="profile-dropdown">
+          <a id="profile-dropdown-menu" href="#" role="button">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a id="btn-dashboard" class="dropdown-item" href="#">Dashboard</a>
+            <a id="btn-my-profile" class="dropdown-item" href="#">My Profile</a>
+            <a id="btn-Accont-settings" class="dropdown-item" href="#">Accont Setting</a>
+            <a id="btn-payments" class="dropdown-item" href="#">Billing & payments</a>
+            <a id="btn-sign-out" class="dropdown-item" href="#">sign out</a>
+          </div>
+        </div>
+
+      </section>
+
+      <a class="btn-shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 17h-11v-14h-2" />
+          <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+      </a>
+    </nav>
+  </header>
+
+
+  <main id="main">
+
+
+    <section class="form-section">
+
+      <h1 class="form-title">Iniciar sesión</h1>
+
+      <p>Bienvenido a Minimarket Colombia.</p>
+
+      <form class="login-form">
+
+        <div class="input-form">
+          <label for="gmail">Correo:</label>
+          <input type="email" name="gmail" id="gmail" placeholder="Ingresa tu correo" required>
+          <div id="mensaje-de-estado" class="mensaje"></div>
+
+          <label for="password">Contraseña:</label>
+          <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
+
+          <div class="password-toggle">
+            <input type="checkbox" id="showPassword">
+            <label for="showPassword">Mostrar Contraseña</label>
           </div>
 
-          <select name="profile" id="profile" class="sr-only" aria-hidden="true">
-            <option value="user" selected>Usuario</option>
-            <option value="admin">Administrador</option>
-            <option value="worker">Trabajador</option>
-          </select>
         </div>
-        
-        <button class="btn-shopping" id="shopping" type="submit" aria-label="shopping">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="32"
-              height="32"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#ffffff"
-              stroke-width="1"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-              <path d="M17 17h-11v-14h-2" />
-              <path d="M6 5l14 1l-1 7h-13" />
-            </svg>
-          </button>
-      </nav>
-    </header>
+        <button type="submit" id="btn-submit">
+          Ingresar
+        </button>
 
-
-    <main id="main">
-        
-
-        <section class="form-section">
-
-            <h1 class="form-title">Iniciar sesión</h1>
-
-            <p>Bienvenido a Minimarket Colombia.</p>
-
-            <form class="login-form">
-
-              <div class="input-form">
-                <label for="gmail">Correo:</label>
-                <input type="email" name="gmail" id="gmail" placeholder="Ingresa tu correo" required>
-                <div id="mensaje-de-estado" class="mensaje"></div>
-
-                <label for="password">Contraseña:</label>
-                <input type="password" name="password" id="password" placeholder="Ingresa tu contraseña" required>
-
-                <div class="password-toggle">
-                  <input type="checkbox" id="showPassword">
-                  <label for="showPassword">Mostrar Contraseña</label>
-                </div>
-
-              </div>
-                <button type="submit" id="btn-submit">
-                    Ingresar
-                </button>
-
-                <div class="forgot-password">
-                  <a href="#">¿Olvido la contraseña?</a>
-                </div>
+        <div class="forgot-password">
+          <a href="#">¿Olvido la contraseña?</a>
+        </div>
 
 
 
-            </form>
+      </form>
 
-        </section>
+    </section>
 
-    </main>
+  </main>
 
-    <footer>
+  <footer>
 
     <section class="footer-section">
-        
-        <h3>Minimarket</h3>
 
-        <div class="footer-section-links">
-          <a href="/aboutUS">About us</a>
-          <a href="/contact">Contacto</a>
-          <a href="/privacidad">Privacidad</a>
-          <a href="/terminos">Términos y condiciones</a>
-          <a href="/cookies">Cookies</a>
+      <h3>Minimarket</h3>
 
-          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
-        </div>
-      </section>
-    </footer>
+      <div class="footer-section-links">
+        <a href="/aboutUS">About us</a>
+        <a href="/contact">Contacto</a>
+        <a href="/privacidad">Privacidad</a>
+        <a href="/terminos">Términos y condiciones</a>
+        <a href="/cookies">Cookies</a>
+
+        <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+      </div>
+    </section>
+  </footer>
 </body>
+
 </html>

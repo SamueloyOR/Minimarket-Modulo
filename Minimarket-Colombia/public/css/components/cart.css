@@ -128,19 +128,21 @@
     align-items: center;
     gap: 6px;
     font-size: 1rem;
+}
 
-    span{
-        padding: 0.7px 0.7rem 0.7px 0.7rem;
-        border-radius: 20px;
-        background-color: red;
-        border: 1px solid red;
+#open-cart-btn span {
+    min-width: 1.7rem;
+    padding: 0.1rem 0.45rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 999px;
+    background: #e5484d;
+    text-align: center;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
 
-    }
-
-    span:hover{
-        background: lightcoral;
-        transition: 0.5s;
-    }
+#open-cart-btn:hover span {
+    background: #f87171;
+    transform: translateY(-1px);
 }
 .cart-message {
     margin: 0 0 10px;

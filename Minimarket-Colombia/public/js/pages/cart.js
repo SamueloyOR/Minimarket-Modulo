@@ -5,11 +5,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartItemsList = document.getElementById("cart-items");
     const totalElement = document.getElementById("cart-total");
     const cartCount = document.getElementById("count");
+    const pageCartCount = document.getElementById("cart-page-count");
     const checkoutBtn = document.getElementById("checkout-btn");
 
     if (!modal || !cartItemsList) return;
 
+    const isCartModal = modal.classList.contains("modal-overlay");
+
     const token = () => localStorage.getItem("token");
+    const getCartPageUrl = () => {
+        if (!window.location.pathname.includes("/html/")) {
+            return "/html/pages/shopping_cart.html";
+        }
+
+        return window.location.pathname.includes("/html/dashboard/")
+            ? "../pages/shopping_cart.html"
+            : "shopping_cart.html";
+    };
     const apiRequest = async (url, options = {}) => {
         const response = await fetch(`/api/cart${url}`, {
             ...options,
@@ -76,6 +88,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (totalElement) totalElement.textContent = formatCurrency(data.total);
         if (cartCount) cartCount.textContent = String(data.count || 0);
+        if (pageCartCount) pageCartCount.textContent = String(data.count || 0);
     };
 
     const loadCart = async () => {
@@ -88,17 +101,25 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     const setModal = (open) => {
+        if (!isCartModal) {
+            loadCart();
+            return;
+        }
         modal.classList.toggle("active", open);
         modal.setAttribute("aria-hidden", String(!open));
         if (open) loadCart();
     };
 
     openBtn?.addEventListener("click", () => {
+        if (!isCartModal) {
+            loadCart();
+            return;
+        }
         if (!token()) {
             window.location.href = "/login";
             return;
         }
-        setModal(true);
+        window.location.href = getCartPageUrl();
     });
     closeBtn?.addEventListener("click", () => setModal(false));
     modal.addEventListener("click", (event) => {

@@ -1,5 +1,6 @@
 import Product from "../models/products.js";
 import { CATEGORIAS_VALIDAS } from "../models/products.js";
+import Category from "../models/category.js";
 
 const CAMPOS_PRODUCTO = [
     "nombre",
@@ -24,6 +25,11 @@ function esIdMongooseValido(id) {
 
 function escaparRegex(valor) {
     return valor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+async function categoriaDisponible(nombre) {
+    if (CATEGORIAS_VALIDAS.includes(nombre)) return true;
+    return Boolean(await Category.exists({ nombre }));
 }
 
 // Get obtener productos
@@ -80,7 +86,7 @@ export const createProduct = async (req, res) => {
             precioNumero < 0 ||
             !Number.isInteger(stockNumero) ||
             stockNumero < 0 ||
-            !CATEGORIAS_VALIDAS.includes(categoria)
+            !(await categoriaDisponible(categoria))
         ) {
             return res.status(400).json({ message: "Datos de producto inválidos" });
         }
@@ -121,7 +127,7 @@ export const updateProduct = async (req, res) => {
         if (
             (cambios.precio !== undefined && (!Number.isFinite(cambios.precio) || cambios.precio < 0)) ||
             (cambios.stock !== undefined && (!Number.isInteger(cambios.stock) || cambios.stock < 0)) ||
-            (cambios.categoria !== undefined && !CATEGORIAS_VALIDAS.includes(cambios.categoria))
+            (cambios.categoria !== undefined && !(await categoriaDisponible(cambios.categoria)))
         ) {
             return res.status(400).json({ message: "Datos de producto inválidos" });
         }

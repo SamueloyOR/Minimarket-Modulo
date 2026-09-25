@@ -1,5 +1,4 @@
 // barra de navegacion, productos, clientes o ordenes
-
 const searchInput = document.getElementById("Search-In-Inline") || document.getElementById("search");
 let resultsList = document.getElementById("results");
 

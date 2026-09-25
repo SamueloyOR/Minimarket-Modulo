@@ -12,7 +12,6 @@ const productSchema = new Schema({
     descripcion: { type: String, default: '' },
     categoria: {
         type: String,
-        enum: CATEGORIAS_VALIDAS,
         required: true,
         trim: true
     },

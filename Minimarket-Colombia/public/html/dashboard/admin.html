@@ -15,8 +15,8 @@
   <link rel="stylesheet" href="../../css/components/navbar.css" />
   <link rel="stylesheet" href="../../css/components/cart.css" />
   <link rel="stylesheet" href="../../css/pages/dashboard.css" />
-  <script src="../../js/pages/cart.js" defer></script>
-  <script defer src="/js/components/profile-menu.js"></script>
+
+  <script src="../../js/components/profile-menu.js"></script>
 </head>
 
 <body>
@@ -27,7 +27,12 @@
       </div>
 
       <div class="nav-bar-tittle">
-        <h2><a href="" class="nav-brand">Minimarket</a></h2>
+        <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
+      </div>
+
+      <div class="nav-bar-categories">
+        <a class="user-categories" href="../pages/categories.html#categorias">Categorías</a>
+        <a class="user-offers" href="../pages/offers.html#ofertas">Ofertas</a>
       </div>
 
       <section id="search" aria-label="Buscar productos">
@@ -100,7 +105,7 @@
               Customers
             </a>
 
-            <a href="/">
+            <a href="../index.html">
 
               <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
                 stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -112,6 +117,16 @@
           </li>
         </ul>
       </div>
+
+      <a class="btn-shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+          <path d="M17 17h-11v-14h-2" />
+          <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+        <span id="count">0</span>
+      </a>
 
       <div id="cart-modal" class="modal-overlay" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
@@ -134,7 +149,7 @@
       <section class="dashboard-sidebar">
         <span>OVERVIEW</span>
 
-        <button class="btn-dashboard" id="btn-dashboard">
+        <button class="btn-dashboard" id="btn-data">
           <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
               stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -501,7 +516,7 @@
     </section>
   </footer>
 
-  <script defer src="/js/pages/dashboard.js"></script>
+  <script defer src="../../js/pages/dashboard.js"></script>
 </body>
 
 </html>

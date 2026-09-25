@@ -11,21 +11,71 @@
   <link rel="stylesheet" href="../../css/components/cart.css">
   <link rel="stylesheet" href="../../css/pages/shopping.css">
   <script src="../../js/pages/cart.js" defer></script>
+  <script src="../../js/components/navegation.js"></script>
+  <script src="../../js/components/profile-menu.js"></script>
 </head>
 <body>
-  <header class="shopping-header">
+  <header id="hero" role="banner">
     <nav class="nav-bar" aria-label="Navegación principal">
-      <div class="nav-bar-logo"><img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50"></div>
-      <div class="nav-bar-tittle"><h2><a href="/" class="nav-brand">Minimarket</a></h2></div>
-      <div class="nav-bar-categories">
-        <a class="user-categories" href="/html/pages/categories.html">Categorías</a>
-        <a class="user-offers" href="/html/pages/offers.html">Ofertas</a>
+      <div class="nav-bar-logo">
+        <img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
       </div>
-      <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Actualizar carrito">
-        <span id="count">0</span>
-      </button>
+
+      <div class="nav-bar-tittle">
+        <h2><a href="index.html" class="nav-brand">Minimarket</a></h2>
+      </div>
+
+      <div class="nav-bar-categories">
+        <a class="user-categories" href="categories.html#categorias">Categorías</a>
+        <a class="user-offers" href="offers.html#ofertas">Ofertas</a>
+      </div>
+
+      <section id="search" aria-label="Buscar productos">
+        <form class="search-form" role="search">
+          <button class="search-button" type="submit" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="6"></circle>
+              <path d="M16 16L21 21"></path>
+            </svg>
+          </button>
+
+          <input class="search-input" id="Search-In-Inline" type="search" name="q" placeholder="Buscar productos"
+            aria-label="Buscar productos" autocorrect="off" autocomplete="off" autocapitalize="off"
+            spellcheck="false" />
+        </form>
+
+      </section>
+      <section>
+        <div class="profile-dropdown">
+          <a id="profile-dropdown-menu" href="#" role="button">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a id="btn-dashboard" class="dropdown-item" href="#">Dashboard</a>
+            <a id="btn-my-profile"class="dropdown-item" href="#">My Profile</a>
+            <a id="btn-Accont-settings"class="dropdown-item" href="#">Accont Setting</a>
+            <a id="btn-payments"class="dropdown-item" href="#">Billing & payments</a>
+            <a id="btn-sign-out" class="dropdown-item" href="#">sign out</a>
+          </div>
+        </div>
+      </section>
+
+      <a class="btn-shopping" href="shopping_cart.html" aria-label="Abrir carrito">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 17h-11v-14h-2" />
+          <path d="M6 5l14 1l-1 7h-13" />
+        </svg>
+      </a>
     </nav>
   </header>
+
 
   <main class="shopping-page">
     <section class="shopping-intro">
@@ -36,11 +86,17 @@
 
     <section id="cart-modal" class="shopping-cart-panel active" aria-hidden="false">
       <div class="shopping-cart-content" role="region" aria-labelledby="cart-title">
-        <h2 id="cart-title">Productos seleccionados</h2>
+        <div class="cart-heading">
+          <div>
+            <p class="cart-heading-kicker">Resumen de compra</p>
+            <h2 id="cart-title">Productos seleccionados</h2>
+          </div>
+          <span class="cart-heading-count"><span id="cart-page-count">0</span> artículos</span>
+        </div>
         <p id="cart-message" class="cart-message" role="status" aria-live="polite"></p>
         <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
         <div class="cart-footer">
-          <p>Total: <span id="cart-total">$0</span></p>
+          <p class="cart-total-label">Total de la compra <strong id="cart-total">$0</strong></p>
           <button id="checkout-btn" type="button">Finalizar compra</button>
         </div>
       </div>
