@@ -224,6 +224,7 @@
     gap: 0.75rem;
     width: 100%;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .btn-sign-out svg {
