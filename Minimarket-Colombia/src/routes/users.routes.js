@@ -4,12 +4,17 @@ import {
     getUserById,
     createUser,
     updateUser,
-    deleteUser
+    deleteUser,
+    getMyProfile,
+    updateMyProfile
 } from '../controllers/usersControllers.js';
 import verifyToken from '../middlewares/authMiddleware.js';
 import soloAdmin from '../middlewares/adminMiddleware.js';
 
 const usersRouter = Router();
+
+usersRouter.get('/me', verifyToken, getMyProfile);
+usersRouter.put('/me', verifyToken, updateMyProfile);
 
 usersRouter.get('/', verifyToken, soloAdmin, getUsers);
 usersRouter.get('/:id', verifyToken, soloAdmin, getUserById);

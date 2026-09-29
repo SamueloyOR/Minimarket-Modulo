@@ -13,6 +13,9 @@ import productsRouter from './routes/products.routes.js';
 import categoryRoutes from './routes/category.routes.js';
 import orderRoutes from './routes/order.routes.js';
 import usersRoutes from './routes/users.routes.js';
+import providersRoutes from './routes/providers.routes.js';
+import inventoryRoutes from './routes/inventory.routes.js';
+import promotionRoutes from './routes/promotion.routes.js';
 
 export const app = express();
 const PORT = process.env.PORT || 4000;
@@ -56,6 +59,50 @@ app.get('/dashboard/admin', (req, res) => {
 app.get('/dashboard/worker', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/dashboard/worker.html'));
 });
+
+app.get('/orders', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/orders.html'));
+});
+
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/profile.html'));
+});
+
+app.get('/inventory', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/manager/inventory.html'));
+});
+
+app.get('/promotions', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/manager/promotions.html'));
+});
+
+app.get('/aboutUS', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/aboutUs.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/contac.html'));
+});
+
+app.get('/terminos', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/termsconditions.html'));
+});
+
+app.get('/termino', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/termsconditions.html'));
+});
+
+app.get('/cookies', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/cookies.html'));
+});
+
+app.get('/privacidad', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/privacy.html'));
+});
+
+app.get('/payment-methods', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/payment-methods.html'));
+});
 app.get('/api', (req, res) => {
     res.json({
         ok: true,
@@ -85,6 +132,9 @@ app.use('/api/products', productsRouter);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/api/providers', providersRoutes);
+app.use('/api/inventory', inventoryRoutes);
+app.use('/api/promotions', promotionRoutes);
 
 app.use((req, res, next) => {
     if (req.originalUrl.startsWith('/api/')) {

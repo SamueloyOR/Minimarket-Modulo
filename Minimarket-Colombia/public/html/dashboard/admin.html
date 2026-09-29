@@ -65,83 +65,34 @@
 
       <!--Dropdown Manu-->
 
-      <div class="profile-dropdown">
-        <button type="button" id="dropdown-toggle" aria-haspopup="true" aria-expanded="false"
-          aria-controls="dropdown-menu" class="dropdown-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
-            stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-            <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
-            <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5l0 14" />
-            <path d="M18 13l-6 6" />
-            <path d="M6 13l6 6" />
-          </svg>
-        </button>
-        <ul id="dropdown-menu" aria-labelledby="dropdown-toggle">
-          <li>
-            <a href="../../html/dashboard/admin.html">
+      <section>
+        <div class="profile-dropdown">
+          <a id="profile-dropdown-menu" href="#" role="button">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a id="btn-dashboard" class="dropdown-item" href="#">Dashboard</a>
+            <a id="btn-my-profile" class="dropdown-item" href="#">My Profile</a>
+            <a id="btn-Accont-settings" class="dropdown-item" href="#">Accont Setting</a>
+            <a id="btn-payments" class="dropdown-item" href="#">Billing & payments</a>
+            <a id="btn-sign-out" class="dropdown-item" href="#">sign out</a>
+          </div>
+        </div>
 
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                <path d="M10 12h4v4h-4z" />
-              </svg>
-              Dashboard
-            </a>
-            <a href="../../html/manager/users.html">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-              </svg>
-              Customers
-            </a>
-
-            <a href="../index.html">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                <path d="M12 4v7l2 -2l2 2v-7" />
-              </svg>
-              Orders
-            </a>
-          </li>
-        </ul>
-      </div>
+      </section>
 
       <a class="btn-shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
           <path d="M17 17h-11v-14h-2" />
           <path d="M6 5l14 1l-1 7h-13" />
         </svg>
-        <span id="count">0</span>
       </a>
-
-      <div id="cart-modal" class="modal-overlay" aria-hidden="true">
-        <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
-          <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">
-            &times;
-          </button>
-          <h2 id="cart-title">Tu carrito</h2>
-          <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
-          <div class="cart-footer">
-            <p>Total: $<span id="cart-total">0</span></p>
-            <button id="checkout-btn" type="button">Finalizar Compra</button>
-          </div>
-        </div>
-      </div>
     </nav>
   </header>
 
@@ -180,7 +131,6 @@
         <span>MANAGEMENT</span>
 
         <a class="btn-dashboard" id="btn-Products" href="../manager/stores.html">
-          <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
               stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 19v-14a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z" />
@@ -188,7 +138,6 @@
               <path d="M9 12h6" />
               <path d="M10 7h4" />
             </svg>
-          </i>
           <span>Products</span>
         </a>
 
@@ -234,29 +183,66 @@
           <span>Stores</span>
         </a>
 
-        <!-- Barra de Acceso Rápido y Dinamismo -->
+        <!-- Acceso al directorio de proveedores -->
         <div class="dashboard-actions-bar">
-          <!-- Anclas y botones funcionales para navegación interna -->
-          <a href="#section-metrics" class="btn-anchor">Ver Métricas</a>
-          <a href="#section-inventory" class="btn-anchor">Inventario Rápido</a>
-
-          <!-- Botón interactivo para abrir el módulo de Proveedores -->
-          <button id="openProvidersModal" class="btn-dynamic-action" onclick="toggleProvidersModal()">
-            Gestionar Proveedores
+          <button id="openProvidersModal" class="btn-dynamic-action" type="button" aria-haspopup="dialog"
+            aria-controls="providers-module-container">
+            Directorio de proveedores
           </button>
         </div>
 
-        <!-- Sección del Módulo de Proveedores (Integrada de forma dinámica) -->
-        <div id="providers-module-container" class="modal-hidden">
-          <div class="modal-content-wrapper">
-            <h3>Directorio de Proveedores</h3>
-            <form id="providerForm">
-              <input type="text" id="provName" placeholder="Nombre de la empresa" required>
-              <input type="email" id="provEmail" placeholder="Correo electrónico" required>
-              <button type="submit" class="btn-submit">Guardar Proveedor</button>
-            </form>
-            <div id="providersList"></div>
-          </div>
+        <div id="providers-module-container" class="providers-overlay" hidden>
+          <section class="providers-dialog" role="dialog" aria-modal="true" aria-labelledby="providers-title"
+            aria-describedby="providers-description" tabindex="-1">
+            <header class="providers-dialog-header">
+              <div>
+                <span class="providers-eyebrow">ABASTECIMIENTO</span>
+                <h2 id="providers-title">Directorio de proveedores</h2>
+                <p id="providers-description">Registra y consulta los contactos de tus aliados comerciales.</p>
+              </div>
+              <button id="closeProvidersModal" class="providers-close" type="button" aria-label="Cerrar directorio">
+                &times;
+              </button>
+            </header>
+
+            <div class="providers-dialog-body">
+              <form id="providerForm" class="provider-form">
+                <h3>Crear proveedor</h3>
+                <label for="provName">Empresa <span>*</span></label>
+                <input type="text" id="provName" name="name" autocomplete="organization" required>
+
+                <label for="provContact">Nombre de contacto <span>*</span></label>
+                <input type="text" id="provContact" name="contactName" autocomplete="name" required>
+
+                <div class="provider-form-row">
+                  <div>
+                    <label for="provEmail">Correo electrónico</label>
+                    <input type="email" id="provEmail" name="email" autocomplete="email">
+                  </div>
+                  <div>
+                    <label for="provPhone">Teléfono <span>*</span></label>
+                    <input type="tel" id="provPhone" name="phone" autocomplete="tel" required>
+                  </div>
+                </div>
+
+                <label for="provAddress">Dirección</label>
+                <input type="text" id="provAddress" name="address" autocomplete="street-address">
+                <p class="provider-required-note">* Campos obligatorios</p>
+                <button type="submit" class="btn-submit">Guardar proveedor</button>
+                <p id="providerFormStatus" class="provider-status" role="status" aria-live="polite"></p>
+              </form>
+
+              <section class="providers-directory" aria-labelledby="providers-list-title">
+                <div class="providers-list-heading">
+                  <h3 id="providers-list-title">Proveedores registrados</h3>
+                  <button id="refreshProviders" class="providers-refresh" type="button">Actualizar</button>
+                </div>
+                <div id="providersList" class="providers-list" aria-live="polite" aria-busy="false">
+                  <p class="providers-empty">Cargando proveedores...</p>
+                </div>
+              </section>
+            </div>
+          </section>
         </div>
 
         <button class="btn-sign-out" id="btn-sign-out">
@@ -279,8 +265,8 @@
         <div class="admin-panel-shell">
           <div class="admin-header">
             <div class="tittle">
-              <h1>Dashboard Overview</h1>
-              <span>.</span>
+              <h1>Panel de administración</h1>
+              <span>Resumen general del minimarket</span>
             </div>
 
             <div class="toolbar">
@@ -361,164 +347,6 @@
               <div class="metric-value">23</div>
               <div class="metric-meta"><span class="warn">Low stock</span> requires action</div>
             </div>
-          </div>
-
-          <div class="content-grid">
-            <div class="panel-card chart-panel">
-              <div class="section-header">
-                <h3>Revenue Overview</h3>
-                <button type="button" class="mini-select">Oct 2023</button>
-              </div>
-
-              <div class="chart" aria-label="Gráfico de ingresos">
-                <div class="y-axis">
-                  <span>$25k</span>
-                  <span>$20k</span>
-                  <span>$15k</span>
-                  <span>$10k</span>
-                  <span>$5k</span>
-                  <span>$0k</span>
-                </div>
-
-                <div class="bars-wrap">
-                  <div class="chart-bars">
-                    <span class="bar" style="height: 54%"></span>
-                    <span class="bar" style="height: 68%"></span>
-                    <span class="bar" style="height: 48%"></span>
-                    <span class="bar" style="height: 74%"></span>
-                    <span class="bar" style="height: 62%"></span>
-                    <span class="bar" style="height: 80%"></span>
-                    <span class="bar" style="height: 56%"></span>
-                  </div>
-                  <div class="x-axis">
-                    <span>1 Oct</span>
-                    <span>5 Oct</span>
-                    <span>10 Oct</span>
-                    <span>15 Oct</span>
-                    <span>20 Oct</span>
-                    <span>25 Oct</span>
-                    <span>30 Oct</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="panel-card side-panel">
-              <div class="section-header">
-                <h3>Top Products</h3>
-                <a href="#" class="view-all">View All</a>
-              </div>
-
-              <div class="product-list">
-                <div class="product-row">
-                  <span class="badge org">ORG</span>
-                  <div>
-                    <strong>Organic Avocados</strong>
-                    <small>Produce • 420 sales</small>
-                  </div>
-                  <span class="price">$2,450</span>
-                </div>
-
-                <div class="product-row">
-                  <span class="badge frh">FRH</span>
-                  <div>
-                    <strong>Fresh Sourdough</strong>
-                    <small>Bakery • 315 sales</small>
-                  </div>
-                  <span class="price">$1,890</span>
-                </div>
-
-                <div class="product-row">
-                  <span class="badge alm">ALM</span>
-                  <div>
-                    <strong>Almond Milk 1L</strong>
-                    <small>Dairy • 280 sales</small>
-                  </div>
-                  <span class="price">$1,120</span>
-                </div>
-
-                <div class="product-row">
-                  <span class="badge cfb">CFB</span>
-                  <div>
-                    <strong>Artisan Coffee Beans</strong>
-                    <small>Pantry • 150 sales</small>
-                  </div>
-                  <span class="price">$2,100</span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="manager-panel panel-card">
-            <div class="section-header table-header">
-              <div>
-                <h3>Store Managers</h3>
-                <p>Manage your team’s access and roles.</p>
-              </div>
-              <button type="button" class="add-manager">+ Add Manager</button>
-            </div>
-
-            <table>
-              <thead>
-                <tr>
-                  <th>User</th>
-                  <th>Role / Store</th>
-                  <th>Status</th>
-                  <th>Last Active</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="user-cell">
-                    <span class="avatar avatar-one">M</span>
-                    <div>
-                      <strong>Maria Rodriguez</strong>
-                      <small>maria@minimarket.com</small>
-                    </div>
-                  </td>
-                  <td>Store Manager<br /><small>Downtown Branch</small></td>
-                  <td><span class="status active">Active</span></td>
-                  <td>Today, 08:30 AM</td>
-                  <td><button type="button" class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                  <td class="user-cell">
-                    <span class="avatar avatar-two">C</span>
-                    <div>
-                      <strong>Carlos Gomez</strong>
-                      <small>carlos@gminimarket.com</small>
-                    </div>
-                  </td>
-                  <td>Regional Director<br /><small>All Stores</small></td>
-                  <td><span class="status active">Active</span></td>
-                  <td>Yesterday, 14:15 PM</td>
-                  <td><button type="button" class="action-btn">Edit</button></td>
-                </tr>
-                <tr>
-                  <td class="user-cell">
-                    <span class="avatar avatar-three">A</span>
-                    <div>
-                      <strong>Ana Silva</strong>
-                      <small>ana@minimarket.com</small>
-                    </div>
-                  </td>
-                  <td>Inventory Analyst<br /><small>Westside Branch</small></td>
-                  <td><span class="status suspended">Suspended</span></td>
-                  <td>Oct 24, 09:00 AM</td>
-                  <td><button type="button" class="action-btn">Edit</button></td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="table-footer">
-              <span>Showing 1 to 3 of 12 managers</span>
-              <div class="pager">
-                <button type="button">Previous</button>
-                <span class="page active">1</span>
-                <span class="page">2</span>
-                <span class="page">Next</span>
-              </div>
             </div>
           </div>
         </div>
@@ -543,6 +371,7 @@
   </footer>
 
   <script defer src="../../js/pages/dashboard.js"></script>
+  <script defer src="../../js/pages/provider.js"></script>
 </body>
 
 </html>

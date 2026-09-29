@@ -14,11 +14,20 @@ const getCartByUser = (req) => {
     return carts.get(key);
 };
 
-const calcularResumen = (items) => ({
-    items,
-    total: items.reduce((sum, item) => sum + Number(item.price || 0) * Number(item.quantity || 0), 0),
-    count: items.reduce((sum, item) => sum + Number(item.quantity || 0), 0)
-});
+const calcularResumen = (items) => {
+    const itemsConSubtotal = items.map((item) => ({
+        ...item,
+        subtotal: Number(item.price || 0) * Number(item.quantity || 0)
+    }));
+    const subtotal = itemsConSubtotal.reduce((sum, item) => sum + item.subtotal, 0);
+
+    return {
+        items: itemsConSubtotal,
+        subtotal,
+        total: subtotal,
+        count: itemsConSubtotal.reduce((sum, item) => sum + Number(item.quantity || 0), 0)
+    };
+};
 
 const esIdMongoValido = (id) => /^[a-f\d]{24}$/i.test(String(id || ''));
 

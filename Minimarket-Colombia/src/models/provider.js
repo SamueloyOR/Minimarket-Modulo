@@ -1,12 +1,14 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const ProviderSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    contactName: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    phone: { type: String, required: true },
-    address: { type: String },
-    createdAt: { type: Date, default: Date.now }
+const providerSchema = new mongoose.Schema({
+    name: { type: String, required: true, trim: true },
+    contactName: { type: String, required: true, trim: true },
+    email: { type: String, trim: true, lowercase: true, sparse: true },
+    phone: { type: String, required: true, trim: true },
+    address: { type: String, default: '', trim: true },
+    productos: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }]
+}, {
+    timestamps: true
 });
 
-module.exports = mongoose.model('Provider', ProviderSchema);
+export default mongoose.model('Provider', providerSchema);

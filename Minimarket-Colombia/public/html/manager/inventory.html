@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inventario - Minimarket</title>
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/pages/dashboard.css">
+  <script defer src="../../js/pages/inventory.js"></script>
+</head>
+<body>
+  <main style="padding:2rem; max-width:1000px; margin:auto;">
+    <h1>Gestión de inventario</h1>
+    <p id="inventory-message" role="status" aria-live="polite"></p>
+
+    <section class="panel-card" style="padding:1rem; margin:1rem 0;">
+      <h2>Registrar entrada</h2>
+      <form id="entry-form">
+        <input name="producto" required placeholder="ID del producto">
+        <input name="cantidad" type="number" min="1" required placeholder="Cantidad">
+        <input name="proveedor" placeholder="ID del proveedor (opcional)">
+        <input name="costoUnitario" type="number" min="0" placeholder="Costo unitario">
+        <input name="motivo" placeholder="Motivo">
+        <button type="submit">Registrar entrada</button>
+      </form>
+    </section>
+
+    <section class="panel-card" style="padding:1rem; margin:1rem 0;">
+      <h2>Registrar salida</h2>
+      <form id="exit-form">
+        <input name="producto" required placeholder="ID del producto">
+        <input name="cantidad" type="number" min="1" required placeholder="Cantidad">
+        <input name="motivo" placeholder="Motivo">
+        <button type="submit">Registrar salida</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Alertas de stock</h2>
+      <div id="inventory-alerts"></div>
+    </section>
+
+    <section>
+      <h2>Movimientos</h2>
+      <div id="inventory-movements"></div>
+    </section>
+  </main>
+</body>
+</html>

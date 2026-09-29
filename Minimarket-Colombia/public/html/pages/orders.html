@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis pedidos - Minimarket</title>
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/components/navbar.css">
+  <link rel="stylesheet" href="../../css/pages/dashboard.css">
+  <script defer src="../../js/components/profile-menu.js"></script>
+  <script defer src="../../js/pages/orders.js"></script>
+</head>
+<body>
+  <header id="hero" role="banner">
+    <nav class="nav-bar" aria-label="Navegación principal">
+      <div class="nav-bar-logo"><img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50"></div>
+      <div class="nav-bar-tittle"><h2><a href="/" class="nav-brand">Minimarket</a></h2></div>
+      <div class="nav-bar-categories">
+        <a class="user-categories" href="/html/pages/categories.html#categorias">Categorías</a>
+        <a class="user-offers" href="/html/pages/offers.html#ofertas">Ofertas</a>
+      </div>
+      <div class="profile-dropdown">
+        <button class="profile-toggle" type="button" aria-expanded="false" aria-label="Abrir perfil">Perfil</button>
+        <div class="profile-menu">
+          <a class="dropdown-item" href="/profile">Mi perfil</a>
+          <a class="dropdown-item" href="/dashboard">Dashboard</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content" style="padding: 2rem;">
+    <h1>Historial de pedidos</h1>
+    <p id="orders-message" role="status" aria-live="polite"></p>
+    <section id="orders-list"></section>
+  </main>
+</body>
+</html>

@@ -30,3 +30,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#btn-my-profile').forEach((link) => {
+        link.setAttribute('href', '/profile');
+    });
+});

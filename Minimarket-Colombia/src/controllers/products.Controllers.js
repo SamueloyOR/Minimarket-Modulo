@@ -10,7 +10,9 @@ const CAMPOS_PRODUCTO = [
     "categoria",
     "imagen",
     "enOferta",
-    "precioOferta"
+    "precioOferta",
+    "proveedores",
+    "promocion"
 ];
 
 function obtenerCamposProducto(body) {
@@ -42,7 +44,7 @@ export const getProducts = async (req, res) => {
         if (oferta === "true" || oferta === "false") filtro.enOferta = oferta === "true";
         if (buscar?.trim()) filtro.nombre = { $regex: escaparRegex(buscar.trim()), $options: "i" };
 
-        const productos = await Product.find(filtro).sort({ nombre: 1 });
+        const productos = await Product.find(filtro).populate('proveedores', 'name contactName phone').sort({ nombre: 1 });
         res.json(productos);
     } catch (error) {
         console.error("Error al obtener productos:", error);
@@ -57,7 +59,7 @@ export const getProductById = async (req, res) => {
             return res.status(400).json({ message: "Id de producto inválido" });
         }
 
-        const producto = await Product.findById(req.params.id);
+        const producto = await Product.findById(req.params.id).populate('proveedores', 'name contactName phone');
         if (!producto) {
             return res.status(404).json({ message: "Producto no encontrado" });
         }
@@ -95,6 +97,7 @@ export const createProduct = async (req, res) => {
             ...producto,
             nombre: nombre.trim(),
             precio: precioNumero,
+            precioRegular: producto.precioRegular === undefined ? precioNumero : Number(producto.precioRegular),
             stock: stockNumero
         });
 

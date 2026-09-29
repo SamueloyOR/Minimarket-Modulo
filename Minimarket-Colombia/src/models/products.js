@@ -16,12 +16,14 @@ const productSchema = new Schema({
         trim: true
     },
     precio: { type: Number, required: true, min: 0 },
-    precioRegular: { type: Number, default: 0, min: 0 },
+    precioRegular: { type: Number, default: null, min: 0 },
     precioOferta: { type: Number, default: null, min: 0 },
     enOferta: { type: Boolean, default: false },
     stock: { type: Number, required: true, default: 0, min: 0 },
     imagen: { type: String, default: '' },
     imagenUrl: { type: String, default: '' },
+    proveedores: [{ type: Schema.Types.ObjectId, ref: 'Provider' }],
+    promocion: { type: Schema.Types.ObjectId, ref: 'Promotion', default: null },
     activo: { type: Boolean, default: true }
 }, {
     timestamps: true

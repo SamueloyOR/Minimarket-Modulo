@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Promociones - Minimarket</title>
+  <link rel="stylesheet" href="../../css/base/reset.css">
+  <link rel="stylesheet" href="../../css/base/variables.css">
+  <link rel="stylesheet" href="../../css/pages/dashboard.css">
+  <script defer src="../../js/pages/promotions.js"></script>
+</head>
+<body>
+  <main style="padding:2rem; max-width:1000px; margin:auto;">
+    <h1>Gestión de promociones</h1>
+    <p id="promotion-message" role="status" aria-live="polite"></p>
+
+    <form id="promotion-form" class="panel-card" style="padding:1rem; margin:1rem 0;">
+      <input type="hidden" name="id" id="promotion-id">
+      <label>Nombre <input name="nombre" required></label>
+      <label>Descripción <textarea name="descripcion"></textarea></label>
+      <label>Descuento (%) <input name="descuentoPorcentaje" type="number" min="0" max="100" step="0.01" required></label>
+      <label>Fecha inicio <input name="fechaInicio" type="datetime-local"></label>
+      <label>Fecha fin <input name="fechaFin" type="datetime-local"></label>
+      <label><input name="activa" type="checkbox" checked> Activa</label>
+      <label>Productos</label>
+      <select name="productos" id="promotion-products" multiple size="8" required></select>
+      <button type="submit">Guardar promoción</button>
+      <button type="button" id="promotion-cancel">Cancelar edición</button>
+    </form>
+
+    <section>
+      <h2>Promociones existentes</h2>
+      <div id="promotion-list"></div>
+    </section>
+  </main>
+</body>
+</html>

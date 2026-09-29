@@ -1,33 +1,23 @@
-const express = require('express');
-const router = express.Router();
-const Provider = require('../models/Provider');
+import { Router } from 'express';
+import {
+    getProviders,
+    getProviderById,
+    createProvider,
+    updateProvider,
+    deleteProvider,
+    getProviderPurchaseHistory
+} from '../controllers/providersControllers.js';
+import verifyToken from '../middlewares/authMiddleware.js';
+import puedeGestionarClientes from '../middlewares/workersMIddleware.js';
+import soloAdmin from '../middlewares/adminMiddleware.js';
 
-// Obtener todos los proveedores
-router.get('/', async (req, res) => {
-    try {
-        const providers = await Provider.find();
-        res.json(providers);
-    } catch (err) {
-        res.status(500).json({ message: err.message });
-    }
-});
+const router = Router();
 
-// Registrar un nuevo proveedor
-router.post('/', async (req, res) => {
-    const provider = new Provider({
-        name: req.body.name,
-        contactName: req.body.contactName,
-        email: req.body.email,
-        phone: req.body.phone,
-        address: req.body.address
-    });
+router.get('/', verifyToken, puedeGestionarClientes, getProviders);
+router.get('/:id', verifyToken, puedeGestionarClientes, getProviderById);
+router.get('/:id/historial-compras', verifyToken, puedeGestionarClientes, getProviderPurchaseHistory);
+router.post('/', verifyToken, puedeGestionarClientes, createProvider);
+router.put('/:id', verifyToken, puedeGestionarClientes, updateProvider);
+router.delete('/:id', verifyToken, soloAdmin, deleteProvider);
 
-    try {
-        const newProvider = await provider.save();
-        res.status(201).json(newProvider);
-    } catch (err) {
-        res.status(400).json({ message: err.message });
-    }
-});
-
-module.exports = router;
+export default router;
