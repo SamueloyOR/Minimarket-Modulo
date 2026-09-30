@@ -56,6 +56,15 @@ app.get('/dashboard/admin', (req, res) => {
 app.get('/dashboard/worker', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/dashboard/worker.html'));
 });
+
+app.get('/manager/users.html', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/manager/users.html'));
+});
+
+app.get('/pages/shopping_cart.html', (req, res) => {
+    res.sendFile(path.join(dirname, '../public/html/pages/shopping_cart.html'))
+})
+
 app.get('/api', (req, res) => {
     res.json({
         ok: true,

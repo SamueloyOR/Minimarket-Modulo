@@ -16,7 +16,8 @@
   <link rel="stylesheet" href="../../css/components/cart.css" />
   <link rel="stylesheet" href="../../css/pages/dashboard.css" />
 
-  <script src="../../js/components/profile-menu.js"></script>
+  <script src="../../js/components/profile-menu.js" defer></script>
+  <script src="../../js/pages/cart.js" defer></script>
 </head>
 
 <body>
@@ -64,69 +65,25 @@
       </form>
 
       <!--Dropdown Manu-->
+      <section>
+        <div class="profile-dropdown">
+          <a id="profile-dropdown-menu" href="#" role="button">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path
+                d="M3 20C5.33579 17.5226 8.50702 16 12 16C15.493 16 18.6642 17.5226 21 20M16.5 7.5C16.5 9.98528 14.4853 12 12 12C9.51472 12 7.5 9.98528 7.5 7.5C7.5 5.01472 9.51472 3 12 3C14.4853 3 16.5 5.01472 16.5 7.5Z"
+                stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a id="btn-dashboard" class="dropdown-item" href="#">Dashboard</a>
+            <a id="btn-my-profile" class="dropdown-item" href="#">My Profile</a>
+            <a id="btn-Accont-settings" class="dropdown-item" href="#">Accont Setting</a>
+            <a id="btn-payments" class="dropdown-item" href="#">Billing & payments</a>
+            <a id="btn-sign-out" class="dropdown-item" href="#">sign out</a>
+          </div>
+        </div>
+      </section>
 
-      <div class="profile-dropdown">
-        <button type="button" id="dropdown-toggle" aria-haspopup="true" aria-expanded="false"
-          aria-controls="dropdown-menu" class="dropdown-menu">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none"
-            stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-            <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
-            <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-            stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 5l0 14" />
-            <path d="M18 13l-6 6" />
-            <path d="M6 13l6 6" />
-          </svg>
-        </button>
-        <ul id="dropdown-menu" aria-labelledby="dropdown-toggle">
-          <li>
-            <a href="../../html/dashboard/admin.html">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M5 12l-2 0l9 -9l9 9l-2 0" />
-                <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
-                <path d="M10 12h4v4h-4z" />
-              </svg>
-              Dashboard
-            </a>
-            <a href="../../html/manager/users.html">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 7m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
-                <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-                <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-              </svg>
-              Customers
-            </a>
-
-            <a href="../index.html">
-
-              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
-                stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
-                <path d="M12 4v7l2 -2l2 2v-7" />
-              </svg>
-              Orders
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <a class="btn-shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
-        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-          <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-          <path d="M17 17h-11v-14h-2" />
-          <path d="M6 5l14 1l-1 7h-13" />
-        </svg>
-        <span id="count">0</span>
-      </a>
 
       <div id="cart-modal" class="modal-overlay" aria-hidden="true">
         <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
@@ -140,6 +97,18 @@
             <button id="checkout-btn" type="button">Finalizar Compra</button>
           </div>
         </div>
+      </div>
+
+      <div>
+        <a id="open-cart-btn" class="btn-shopping" href="../pages/shopping_cart.html" aria-label="Abrir carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>
+        </a>
       </div>
     </nav>
   </header>
@@ -178,7 +147,7 @@
 
         <span>MANAGEMENT</span>
 
-        <a class="btn-dashboard" id="btn-Products" href="../pages/categories.html#categorias">
+        <a class="btn-dashboard" id="btn-Products" href="">
           <i>
             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none"
               stroke="#607d8b" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
@@ -254,7 +223,7 @@
           <div class="admin-header">
             <div class="tittle">
               <h1>Dashboard Overview</h1>
-              <span>.</span>
+              <span>Aqui encontraras el panel del admin con sus gestiones</span>
             </div>
 
             <div class="toolbar">

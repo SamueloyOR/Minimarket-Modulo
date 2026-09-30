@@ -1,0 +1,39 @@
+main.form-section {
+    padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-section {
+    background-color: var(--background);
+    color: var(--text-primary);
+    padding: 40px 32px;
+    border-radius: 18px;
+    box-shadow: 0 20px 45px var(--shadow);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    border: 1px solid var(--boder);
+
+    h1 {
+        margin: 0 0 10px;
+        font-size: clamp(2rem, 3vw, 2.6rem);
+        letter-spacing: -0.04em;
+    }
+
+    p {
+        margin: 0 0 28px;
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+}
+
+.cliente-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+    margin-bottom: 8px;
+}
