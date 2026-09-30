@@ -60,7 +60,6 @@ app.get('/dashboard/worker', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/dashboard/worker.html'));
 });
 
-<<<<<<< HEAD
 app.get('/manager/users.html', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/manager/users.html'));
 });
@@ -68,8 +67,6 @@ app.get('/manager/users.html', (req, res) => {
 app.get('/pages/shopping_cart.html', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/pages/shopping_cart.html'))
 })
-
-=======
 app.get('/orders', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/pages/orders.html'));
 });
@@ -113,7 +110,7 @@ app.get('/privacidad', (req, res) => {
 app.get('/payment-methods', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/pages/payment-methods.html'));
 });
->>>>>>> 5b8aab392849b2186e77f8f3a07a47155ff75647
+
 app.get('/api', (req, res) => {
     res.json({
         ok: true,
