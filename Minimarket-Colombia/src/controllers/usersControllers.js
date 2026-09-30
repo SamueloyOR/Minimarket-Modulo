@@ -146,3 +146,43 @@ export const deleteUser = async (req, res) => {
         return res.status(400).json({ message: 'Id de usuario inválido' });
     }
 };
+
+export const getMyProfile = async (req, res) => {
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+        return res.json(sanitizeUser(user.toObject()));
+    } catch {
+        return res.status(400).json({ message: 'Id de usuario inválido' });
+    }
+};
+
+export const updateMyProfile = async (req, res) => {
+    try {
+        const { nombre, correo, documento, telefono } = req.body;
+        const updates = {};
+
+        if (nombre !== undefined) {
+            if (typeof nombre !== 'string' || !nombre.trim()) return res.status(400).json({ message: 'El nombre es obligatorio' });
+            updates.nombre = nombre.trim();
+        }
+        if (correo !== undefined) {
+            if (typeof correo !== 'string' || !EMAIL_PATTERN.test(correo.trim().toLowerCase())) return res.status(400).json({ message: 'El correo no tiene un formato válido' });
+            updates.correo = correo.trim().toLowerCase();
+        }
+        if (documento !== undefined) {
+            if (typeof documento !== 'string' || !/^\d{6,15}$/.test(documento.trim())) return res.status(400).json({ message: 'El documento debe contener entre 6 y 15 dígitos' });
+            updates.documento = documento.trim();
+        }
+        if (telefono !== undefined) updates.telefono = typeof telefono === 'string' ? telefono.trim() : '';
+
+        if (!Object.keys(updates).length) return res.status(400).json({ message: 'No hay campos válidos para actualizar' });
+
+        const user = await User.findByIdAndUpdate(req.user.id, updates, { new: true, runValidators: true }).select('-password');
+        if (!user) return res.status(404).json({ message: 'Usuario no encontrado' });
+        return res.json({ message: 'Perfil actualizado', user: sanitizeUser(user.toObject()) });
+    } catch (error) {
+        if (error?.code === 11000) return res.status(400).json({ message: 'El correo o documento ya está registrado' });
+        return res.status(400).json({ message: error.message || 'No se pudo actualizar el perfil' });
+    }
+};
