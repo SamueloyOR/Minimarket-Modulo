@@ -1,0 +1,197 @@
+
+main {
+    position: relative;
+    padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    background: transparent;
+}
+
+.form-section h1 {
+    color: var(--text-primary);
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    letter-spacing: -0.04rem;
+}
+
+.form-section > p {
+    margin: 0 0 28px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.form-section label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.input-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    text-align: left;
+}
+
+.input-form label {
+    display: block;
+    font-weight: 700;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.input-form input {
+    display: flex;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    font-size: 1rem;
+    color: var(--text-primary);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-form input::placeholder {
+    color: var(--text-muted);
+}
+
+.input-form input:focus {
+    outline: none;
+    border-color: var(--primary-hover);
+    box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
+
+}
+
+.password-toggle {
+    margin-bottom: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none;
+}
+
+.password-toggle input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+    accent-color: var(--primary-light);
+    cursor: pointer;
+}
+
+.password-toggle label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    user-select: none
+}
+
+#btn-submit {
+    width: 100%;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-hover));
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(9, 153, 255, 0.25);
+    filter: brightness(1.04);
+}
+
+#btn-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
+}
+
+.mensaje {
+    font-size: 13px;
+    margin-top: 5px;
+    font-weight: bold;
+    min-height: 1.2em;
+    }
+
+.mensaje[hidden] {
+    display: none;
+    }
+
+.mensaje.exito {
+    color: #86efac;
+    }
+
+.mensaje.error {
+    color: #fca5a5;
+    }
+
+.input-form input.valido {
+    border-color: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
+}
+
+.input-form input.invalido {
+    border-color: #f87171;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
+}
+
+.forgot-password {
+    margin-top: 18px;
+}
+
+.forgot-password a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.form-section .card-footer {
+    margin: 18px 0 0;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.form-section .card-footer a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 6px;
+}
+
+.form-section .card-footer a:hover {
+    text-decoration: underline;
+}
+
+.form-section {
+    background-color: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 420px;
+    text-align: center;
+}

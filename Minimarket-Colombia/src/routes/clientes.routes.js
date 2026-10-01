@@ -5,12 +5,16 @@ import {
     actualizarCliente, 
     eliminarCliente 
 } from "../controllers/clientes.controllers.js";
+import puedeGestionarClientes from '../middlewares/workersMIddleware.js';
 
-const router = Router();
+import verifyToken from "../middlewares/authMiddleware.js"
+import soloAdmin from '../middlewares/adminMiddleware.js';
 
-router.get('/', obtenerClientes);
-router.post('/', crearCliente);
-router.put('/:id', actualizarCliente);
-router.delete('/:id', eliminarCliente);
+const clientesRouter = Router();
 
-export default router;
+clientesRouter.get('/', verifyToken, puedeGestionarClientes, obtenerClientes);
+clientesRouter.post('/', verifyToken, puedeGestionarClientes, crearCliente);
+clientesRouter.put('/:id', verifyToken, puedeGestionarClientes, actualizarCliente);
+clientesRouter.delete('/:id', verifyToken, soloAdmin, eliminarCliente);
+
+export default clientesRouter;

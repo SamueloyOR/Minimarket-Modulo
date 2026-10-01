@@ -1,101 +1,66 @@
-import fs from "node:fs/promises";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
-import { randomUUID } from "node:crypto";
-
-const filename = fileURLToPath(import.meta.url);
-const dirname = path.dirname(filename);
-
-const router = path.join(dirname, "../data/clientes.js");
+import client from "./client.js";
 
 export async function LeerClientes() {
+  return client.find()
+    .select("-__v")
+    .sort({ apellidos: 1, nombres: 1 })
+    .lean();
+}
+
+export const obtenerClientes = async (req, res) => {
+    const clientes = await client.find()
+        .select("-__v")
+        .sort({ apellidos: 1, nombres: 1 });
+
+    res.json(clientes);
+};
+
+export async function ListarClientes() {
+  return LeerClientes();
+}
+
+export async function buscarClientesById(id) {
+  return client.findById(id).select("-__v").lean();
+}
+
+export async function crearCLiente(data) {
   try {
-    const data = await fs.readFile(router, "utf-8");
-    return JSON.parse(data);
+    return await client.create({
+      nombres: data.nombres,
+      apellidos: data.apellidos,
+      documento: data.documento,
+      telefono: data.telefono,
+      correo: data.correo
+    });
   } catch (error) {
-    if (error.code == "ENOENT") {
-      await guardarClientes([]);
-      return [];
+    if (error?.code === 11000 && error.keyPattern?.documento) {
+      throw new Error("DOCUMENTO_DUPLICADO");
     }
     throw error;
   }
 }
 
-export async function guardarClientes(cliente) {
-  const folder = path.dirname(router);
-
-  await fs.mkdir(folder, { recursive: true });
-
-  await fs.writeFile(router, JSON.stringify(cliente, null, 2), "utf-8");
-}
-
-export async function ListarClientes() {
-  return await LeerClientes();
-}
-
-export async function buscarClientesById(id) {
-  const clientes = await LeerClientes();
-
-  return clientes.find((clientes) => clientes.id == id);
-}
-
-export async function crearCLiente(data) {
-  const clientes = await LeerClientes();
-
-  const nuevoCliente = {
-    id: randomUUID(),
-    nombres: data.nombres ? data.nombres.trim() : "",
-    apellidos: data.apellidos ? data. apellidos.trim() : "",
-    documento: data.documento ? data.documento.trim() : "",
-    telefono: data.telefono ? data.telefono.trim() : "",
-    correo: data.correo ? data.correo.trim() : "",
-    password: data.password ? data.password.trim() : "",
-  };
-
-  clientes.push(nuevoCliente);
-
-  await guardarClientes(clientes);
-
-  return nuevoCliente;
-}
-
 export async function actualizarCliente(id, data) {
-  const clientes = await LeerClientes();
-
-  const indice = clientes.findIndex((clientes) => clientes.id === id);
-
-  if (indice === -1) {
-    return null;
+  try {
+    return await client.findByIdAndUpdate(
+      id,
+      {
+        $set: Object.fromEntries(
+          ["nombres", "apellidos", "documento", "telefono", "correo"]
+            .filter((field) => typeof data[field] === "string")
+            .map((field) => [field, data[field].trim()])
+        )
+      },
+      { new: true, runValidators: true }
+    ).select("-__v").lean();
+  } catch (error) {
+    if (error?.code === 11000 && error.keyPattern?.documento) {
+      throw new Error("DOCUMENTO_DUPLICADO");
+    }
+    throw error;
   }
-
-
-const clienteActual = clientes[indice];
-
-clientes[indice];
-
-clientes[indice] = {
-    ...clientes[indice],
-    nombre: data.nombre ? data.nombre.trim() : clientes[indice].nombre,
-    documento: data.documento ? data.documento.trim() : clientes[indice].documento,
-    telefono: data.telefono ? data.telefono.trim() : clientes[indice].telefono,
-    correo: data.correo ? data.correo.trim() : clientes[indice].correo,
-  };
-
-
-  await guardarClientes(clientes);
-
-  return clientes[indice];
 }
 
 export async function eliminarCliente(id) {
-  const clientes = await LeerClientes();
-  const nuevosClientes = clientes.filter((cliente) => cliente.id !== id);
-
-  if (clientes.length === nuevosClientes.length) {
-    return null; // No se encontró el cliente
-  }
-
-  await guardarClientes(nuevosClientes);
-  return { mensaje: "Cliente eliminado correctamente" };
-  //hola
+  return await client.findByIdAndDelete(id);
 }

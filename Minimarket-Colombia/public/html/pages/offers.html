@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ofertas y descuentos destacados de Minimarket Colombia."
+    />
+    <meta name="theme-color" content="#141d26" />
+    <title>Ofertas | Minimarket Colombia</title>
+    <link rel="icon" href="/img/minimarket.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/base/variables.css" />
+    <link rel="stylesheet" href="/css/base/reset.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/navbar.css" />
+    <link rel="stylesheet" href="/css/components/cart.css" />
+    <link rel="stylesheet" href="/css/components/search.css" />
+    <link rel="stylesheet" href="/css/pages/categories.css" />
+    <script src="/js/components/profile-menu.js" defer></script>
+    <script src="/js/pages/cart.js" defer></script>
+    <script src="/js/components/navegation.js" defer></script>
+    <script src="/js/pages/catalog.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#ofertas">Saltar al contenido principal</a>
+    <header id="hero" role="banner">
+      <nav class="nav-bar" aria-label="Navegación principal">
+        <div class="nav-bar-logo">
+          <img src="/img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+        </div>
+
+        <div class="nav-bar-tittle">
+          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
+        </div>
+
+        <div class="nav-bar-categories">
+          <a class="user-categories" href="/html/pages/categories.html#categorias">Categorías</a>
+          <a class="user-offers" href="/html/pages/offers.html#ofertas">Ofertas</a>
+        </div>
+
+        <section id="search" aria-label="Buscar productos">
+          <form class="search-form" role="search">
+            <button class="search-button" type="submit" aria-label="Buscar">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="M16 16L21 21"></path>
+              </svg>
+            </button>
+
+            <input class="search-input" id="Search-In-Inline" type="search" name="q" placeholder="Buscar productos" aria-label="Buscar productos" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+          </form>
+        </section>
+
+        <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Abrir carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>
+          <span id="count">0</span>
+        </button>
+
+        <div id="cart-modal" class="modal-overlay" aria-hidden="true">
+          <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+            <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">&times;</button>
+            <h2 id="cart-title">Tu carrito</h2>
+            <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+            <div class="cart-footer">
+              <p>Total: $<span id="cart-total">0</span></p>
+              <button id="checkout-btn" type="button">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="ofertas" role="main">
+      <div id="principal-content">
+        <aside class="categories-sidebar">
+          <h2>Ofertas</h2>
+          <span>Lo mejor del mercado con descuentos.</span>
+
+          <div class="categories-container">
+            <button class="category-card" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M6 12h12" />
+                <path d="M12 18V6" />
+              </svg>
+              <div>
+                <h3>Semana verde</h3>
+                <p>Descuentos en frutas y verduras.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M5 12h14" />
+                <path d="M12 5v14" />
+              </svg>
+              <div>
+                <h3>Productos del hogar</h3>
+                <p>Ahorra en limpieza y cocina.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="M7 4h10l3 7-8 9-8-9 3-7z" />
+              </svg>
+              <div>
+                <h3>Combo familiar</h3>
+                <p>Paquetes con descuento especial.</p>
+              </div>
+            </button>
+          </div>
+        </aside>
+
+        <section class="categories-main" aria-label="Productos en oferta">
+          <h1 class="categories-title">Ofertas del día</h1>
+          <span>Compra con ahorro y calidad.</span>
+
+          <div class="products-carts">
+            <article class="category-card">
+              <h3>Leche entera x 1L</h3>
+              <p>Descuento del 20% en productos lácteos de la marca favorita.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Agregar</button>
+            </article>
+            <article class="category-card">
+              <h3>Jabón de ropa</h3>
+              <p>Oferta exclusiva para limpieza del hogar.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Agregar</button>
+            </article>
+            <article class="category-card">
+              <h3>Frutas mixtas</h3>
+              <p>Canasta de temporada con precio promocional.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Agregar</button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer id="form-section">
+      <section class="footer-section">
+        <h3>Minimarket</h3>
+        <div class="footer-section-links">
+          <a href="/aboutUS">Sobre nosotros</a>
+          <a href="/contact">Contacto</a>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos y condiciones</a>
+          <a href="/cookies">Cookies</a>
+          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>

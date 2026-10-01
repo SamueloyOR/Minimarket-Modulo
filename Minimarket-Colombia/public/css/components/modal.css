@@ -1,0 +1,27 @@
+.modal-overlay[aria-hidden="true"] {
+    visibility: hidden;
+}
+
+.modal-overlay .modal-content {
+    max-height: calc(100vh - 40px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+}
+
+.modal-content :focus-visible,
+.close-btn:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
+.close-btn:hover {
+    color: var(--primary-light);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .modal-overlay,
+    .modal-content {
+        transition: none;
+        animation: none;
+    }
+}

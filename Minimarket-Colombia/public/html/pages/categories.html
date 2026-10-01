@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Explora las categorías de productos de Minimarket Colombia: frutas, lácteos, aseo y snacks."
+    />
+    <meta name="theme-color" content="#141d26" />
+    <title>Categorías | Minimarket Colombia</title>
+    <link rel="icon" href="/img/minimarket.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/base/variables.css" />
+    <link rel="stylesheet" href="/css/base/reset.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/navbar.css" />
+    <link rel="stylesheet" href="/css/components/cart.css" />
+    <link rel="stylesheet" href="/css/components/search.css" />
+    <link rel="stylesheet" href="/css/pages/categories.css" />
+    <script src="/js/components/profile-menu.js" defer></script>
+    <script src="/js/pages/cart.js" defer></script>
+    <script src="/js/components/navegation.js" defer></script>
+    <script src="/js/pages/catalog.js" defer></script>
+  </head>
+
+  <body>
+    <a class="skip-link" href="#categorias">Saltar al contenido principal</a>
+    <header id="hero" role="banner">
+      <nav class="nav-bar" aria-label="Navegación principal">
+        <div class="nav-bar-logo">
+          <img src="/img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+        </div>
+
+        <div class="nav-bar-tittle">
+          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
+        </div>
+
+        <div class="nav-bar-categories">
+          <a class="user-categories" href="/html/pages/categories.html#categorias">Categorías</a>
+          <a class="user-offers" href="/html/pages/offers.html#ofertas">Ofertas</a>
+        </div>
+
+        <section id="search" aria-label="Buscar productos">
+          <form class="search-form" role="search">
+            <button class="search-button" type="submit" aria-label="Buscar">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="11" cy="11" r="6"></circle>
+                <path d="M16 16L21 21"></path>
+              </svg>
+            </button>
+
+            <input class="search-input" id="Search-In-Inline" type="search" name="q" placeholder="Buscar productos" aria-label="Buscar productos" autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+          </form>
+        </section>
+
+        <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Abrir carrito">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+            <path d="M17 17h-11v-14h-2" />
+            <path d="M6 5l14 1l-1 7h-13" />
+          </svg>
+          <span id="count">0</span>
+        </button>
+
+        <div id="cart-modal" class="modal-overlay" aria-hidden="true">
+          <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="cart-title">
+            <button id="close-cart-btn" class="close-btn" type="button" aria-label="Cerrar carrito">&times;</button>
+            <h2 id="cart-title">Tu carrito</h2>
+            <ul id="cart-items" class="cart-items" aria-live="polite"></ul>
+            <div class="cart-footer">
+              <p>Total: $<span id="cart-total">0</span></p>
+              <button id="checkout-btn" type="button">Finalizar Compra</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="categorias" role="main">
+      <div id="principal-content">
+        <aside class="categories-sidebar">
+          <h2>Categorías</h2>
+          <span>Explora por necesidades del hogar.</span>
+
+          <div class="categories-container">
+            <button class="category-card" type="button" data-category="Frutas y verduras">
+              <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                >
+                <path d="M15 2a1 1 0 0 1 .117 1.993l-.117 .007c-.693 0 -1.33 .694 -1.691 1.552a5.1 5.1 0 0 1 1.982 -.544l.265 -.008c2.982 0 5.444 3.053 5.444 6.32c0 3.547 -.606 5.862 -2.423 8.578c-1.692 2.251 -4.092 2.753 -6.41 1.234a.31 .31 0 0 0 -.317 -.01c-2.335 1.528 -4.735 1.027 -6.46 -1.27c-1.783 -2.668 -2.39 -4.984 -2.39 -8.532l.004 -.222c.108 -3.181 2.526 -6.098 5.44 -6.098c.94 0 1.852 .291 2.688 .792c.419 -1.95 1.818 -3.792 3.868 -3.792m-7.034 6.154c-1.36 .858 -1.966 2.06 -1.966 3.846a1 1 0 0 0 2 0c0 -1.125 .28 -1.678 1.034 -2.154a1 1 0 1 0 -1.068 -1.692" />
+                </svg>
+              <div>
+                <h3>Frutas y verduras</h3>
+                <p>Productos frescos del día.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button" data-category="Lácteos">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path d="M17.799 7l.144 .23a7 7 0 0 1 1.057 3.7v8.07a3 3 0 0 1 -3 3h-8a3 3 0 0 1 -3 -3v-8.071a7 7 0 0 1 1.057 -3.698l.142 -.231zm-5.799 6a3 3 0 0 0 -2.995 2.824l-.005 .176a3 3 0 1 0 3 -3m0 2a1 1 0 1 1 0 2a1 1 0 0 1 0 -2m2 -6h-4a1 1 0 1 0 0 2h4a1 1 0 0 0 0 -2m1 -7a2 2 0 0 1 2 2v1h-10v-1a2 2 0 0 1 2 -2z" />
+                </svg>
+              <div>
+                <h3>Lácteos</h3>
+                <p>Leches, yogures y quesos.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button" data-category="Aseo y hogar">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#607d8b"
+                stroke-width="1"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M6 10m-3 0a3 7 0 1 0 6 0a3 7 0 1 0 -6 0" />
+                <path d="M21 10c0 -3.866 -1.343 -7 -3 -7" />
+                <path d="M6 3h12" />
+                <path d="M21 10v10l-3 -1l-3 2l-3 -3l-3 2v-10" />
+                <path d="M6 10h.01" />
+              </svg>
+
+              <div>
+                <h3>Aseo y hogar</h3>
+                <p>Todo para tu limpieza y orden.</p>
+              </div>
+            </button>
+            <button class="category-card" type="button" data-category="Snacks">
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path d="M13.53 2.552l2.667 1.104a1 1 0 0 1 .414 1.53a3 3 0 0 0 3.492 4.604a1 1 0 0 1 1.296 .557l.049 .122a4 4 0 0 1 0 3.062l-.079 .151c-.467 .74 -.785 1.314 -.945 1.7c-.166 .4 -.373 1.097 -.613 2.073l-.047 .144a4 4 0 0 1 -2.166 2.164l-.139 .046c-1.006 .253 -1.705 .461 -2.076 .615c-.412 .17 -.982 .486 -1.696 .942l-.156 .082a4 4 0 0 1 -3.062 0l-.148 -.077c-.759 -.475 -1.333 -.793 -1.704 -.947c-.413 -.171 -1.109 -.378 -2.07 -.612l-.146 -.048a4 4 0 0 1 -2.164 -2.166l-.046 -.138c-.254 -1.009 -.463 -1.709 -.615 -2.078q -.256 -.621 -.942 -1.695l-.082 -.156a4 4 0 0 1 0 -3.062l.084 -.16c.447 -.692 .761 -1.262 .94 -1.692c.147 -.355 .356 -1.057 .615 -2.078l.045 -.138a4 4 0 0 1 2.166 -2.164l.141 -.047c.988 -.245 1.686 -.453 2.074 -.614c.395 -.164 .967 -.48 1.7 -.944l.152 -.08a4 4 0 0 1 3.062 0m-1.531 13.448a1 1 0 0 0 -1 1v.01a1 1 0 0 0 2 0v-.01a1 1 0 0 0 -1 -1m4 -3a1 1 0 0 0 -1 1v.01a1 1 0 0 0 2 0v-.01a1 1 0 0 0 -1 -1m-8 -1a1 1 0 0 0 -1 1v.01a1 1 0 0 0 2 0v-.01a1 1 0 0 0 -1 -1m4 -1a1 1 0 0 0 -1 1v.01a1 1 0 0 0 2 0v-.01a1 1 0 0 0 -1 -1m-1 -4c-.552 0 -1 .448 -1 1.01a1 1 0 1 0 2 -.01a1 1 0 0 0 -1 -1" />
+              </svg>
+
+              <div>
+                <h3>Snacks</h3>
+                <p>Refrigerios y aperitivos.</p>
+              </div>
+            </button>
+          </div>
+        </aside>
+
+        <section class="categories-main" aria-label="Productos destacados">
+          <h1 class="categories-title">Encuentra lo que necesitas</h1>
+          <span>Selecciona una categoría y descubre lo mejor del mercado.</span>
+
+          <div class="products-carts">
+            <article class="category-card">
+              <h3>Canasta básica</h3>
+              <p>Arroz, panela, aceite y productos esenciales para tu hogar.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+            <article class="category-card">
+              <h3>Desayunos</h3>
+              <p>Pan, huevos, café y alimentos para empezar bien el día.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+            <article class="category-card">
+              <h3>Perfumería</h3>
+              <p>Productos de higiene y cuidado personal con buena calidad.</p>
+              <button class="btn-view-Weekly-Deals" type="button">Ver ofertas</button>
+            </article>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <section class="category-admin" id="category-admin" hidden aria-labelledby="category-admin-title">
+      <div class="category-admin-heading">
+        <p class="admin-kicker">Administración</p>
+        <h2 id="category-admin-title">Gestiona tu catálogo</h2>
+        <p>Crea categorías y productos que quedarán guardados en MongoDB.</p>
+      </div>
+
+      <div class="category-admin-grid">
+        <form class="admin-form" id="category-form">
+          <h3>Nueva categoría</h3>
+          <label for="category-name">Nombre</label>
+          <input id="category-name" name="nombre" type="text" required placeholder="Ej. Bebidas" />
+          <label for="category-description">Descripción</label>
+          <textarea id="category-description" name="descripcion" rows="3" placeholder="Qué encontrarás aquí"></textarea>
+          <button type="submit">Guardar categoría</button>
+        </form>
+
+        <form class="admin-form" id="product-form">
+          <h3>Nuevo producto</h3>
+          <label for="product-name">Nombre</label>
+          <input id="product-name" name="nombre" type="text" required placeholder="Ej. Jugo de mango" />
+          <label for="product-description">Descripción</label>
+          <textarea id="product-description" name="descripcion" rows="2" placeholder="Descripción breve"></textarea>
+          <div class="admin-form-row">
+            <div>
+              <label for="product-price">Precio</label>
+              <input id="product-price" name="precio" type="number" min="0" step="1" required />
+            </div>
+            <div>
+              <label for="product-stock">Stock</label>
+              <input id="product-stock" name="stock" type="number" min="0" step="1" value="0" required />
+            </div>
+          </div>
+          <label for="product-category">Categoría</label>
+          <select id="product-category" name="categoria" required>
+            <option value="">Selecciona una categoría</option>
+          </select>
+          <label for="product-image">URL de imagen</label>
+          <input id="product-image" name="imagen" type="url" placeholder="https://..." />
+          <button type="submit">Guardar producto</button>
+        </form>
+      </div>
+      <p id="admin-catalog-message" class="admin-catalog-message" role="status" aria-live="polite"></p>
+    </section>
+
+    <footer id="form-section">
+      <section class="footer-section">
+        <h3>Minimarket</h3>
+        <div class="footer-section-links">
+          <a href="/aboutUS">Sobre nosotros</a>
+          <a href="/contact">Contacto</a>
+          <a href="/privacidad">Privacidad</a>
+          <a href="/terminos">Términos y condiciones</a>
+          <a href="/cookies">Cookies</a>
+          <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+        </div>
+      </section>
+    </footer>
+  </body>
+</html>
