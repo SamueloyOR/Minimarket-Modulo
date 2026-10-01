@@ -14,8 +14,10 @@
     padding: 20px;
     text-align: center;
     margin-bottom: 50px;
+    max-width: 720px;
     background-color: var(--background);
-    box-shadow: 0 10px 25px var(--text-primary);
+    border: 1px solid var(--border);
+    box-shadow: 0 10px 25px var(--shadow);
 }
 
 .main__text h1{
@@ -42,24 +44,30 @@
 .users-card{
     background-color: var(--background);
     color: var(--text-primary);
+    border: 1px solid var(--border);
     border-radius: 12px;
     padding: 35px 25px;
     width: 320px;
     text-align: center;
-    box-shadow: 0 10px 25px var(--card-bg);
+    box-shadow: 0 10px 25px var(--shadow);
     display: flex;
     flex-direction: column;
     align-items: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
     svg{
         stroke: var(--text-primary);
     }
 }
 
-.users-card:hover{
+.users-card:hover,
+.users-card:focus-within{
     transform: translateY(-5px);
+    border-color: var(--primary-light);
+    box-shadow: 0 16px 32px var(--shadow);
 }
 
+.users-card h2,
 .users-card h3{
     font-size: 22px;
     margin-bottom: 12px;
@@ -130,22 +138,48 @@
     filter: brightness(1.04);
 }
 
-@media ((max-width: 992px)) {
+.btn-container-login:focus-visible,
+.btn-container-signup:focus-visible{
+    outline: 2px solid var(--primary-light);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .users-card,
+    .btn-container-login,
+    .btn-container-signup{
+        transition: none;
+    }
+
+    .users-card:hover,
+    .users-card:focus-within,
+    .btn-container-login:hover,
+    .btn-container-signup:hover{
+        transform: none;
+    }
+}
+
+@media (max-width: 992px) {
     .users-containers{
+        padding: 1rem;
+        gap: 20px;
+    }
+
+    .users-card{
+        width: min(320px, 100%);
+    }
+
+    .main__text h1{
+        font-size: clamp(1.75rem, 6vw, 2.6rem);
+    }
+}
+
+@media (max-width: 600px) {
+    #main{
+        padding-inline: 1rem;
+    }
+
+    .btn-container{
         flex-direction: column;
-        align-items: center;
-    }
-    
-    header {
-        padding: 15px 20px;
-    }
-    
-    nav {
-        display: none;
-    }
-    .footer__section{
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
     }
 }

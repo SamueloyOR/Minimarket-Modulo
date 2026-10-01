@@ -21,23 +21,80 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     };
 
+    const informar = (texto, esError = false) => {
+        if (!message) return;
+        message.textContent = texto;
+        message.hidden = !texto;
+        message.classList.toggle('error', esError);
+        message.classList.toggle('exito', !esError && Boolean(texto));
+    };
+
+    const parrafoVacio = (texto) => {
+        const vacio = document.createElement('p');
+        vacio.className = 'lista-vacia';
+        vacio.textContent = texto;
+        return vacio;
+    };
+
     const cargarProductos = async () => {
-        const products = await request('/api/products');
-        productSelect.innerHTML = products.map((p) => `<option value="${p._id}">${p.nombre}</option>`).join('');
+        const resultado = await request('/api/products');
+        const products = Array.isArray(resultado) ? resultado : resultado.productos || [];
+
+        productSelect.replaceChildren(...products.map((p) => new Option(p.nombre || 'Sin nombre', p._id)));
+    };
+
+    const crearTarjetaPromocion = (promotion) => {
+        const tarjeta = document.createElement('article');
+        tarjeta.className = 'panel-card promotion-card';
+
+        const titulo = document.createElement('h3');
+        titulo.textContent = promotion.nombre || 'Promoción sin nombre';
+
+        const descripcion = document.createElement('p');
+        descripcion.textContent = promotion.descripcion || '';
+
+        const descuento = document.createElement('p');
+        const estado = document.createElement('span');
+        estado.className = `estado ${promotion.activa ? 'activa' : 'inactiva'}`;
+        estado.textContent = promotion.activa ? 'Activa' : 'Inactiva';
+        descuento.append(`Descuento: ${Number(promotion.descuentoPorcentaje) || 0}% · `, estado);
+
+        const productos = document.createElement('p');
+        const nombres = (Array.isArray(promotion.productos) ? promotion.productos : [])
+            .map((p) => p.nombre || 'Producto')
+            .join(', ');
+        productos.textContent = `Productos: ${nombres || 'Ninguno'}`;
+
+        const acciones = document.createElement('div');
+        acciones.className = 'promotion-actions';
+
+        const editar = document.createElement('button');
+        editar.type = 'button';
+        editar.textContent = 'Editar';
+        editar.dataset.edit = promotion._id;
+
+        const eliminar = document.createElement('button');
+        eliminar.type = 'button';
+        eliminar.textContent = 'Eliminar';
+        eliminar.className = 'peligro';
+        eliminar.dataset.delete = promotion._id;
+
+        acciones.append(editar, eliminar);
+        tarjeta.append(titulo, descripcion, descuento, productos, acciones);
+
+        return tarjeta;
     };
 
     const cargarPromociones = async () => {
-        const promotions = await request('/api/promotions');
-        list.innerHTML = promotions.map((promotion) => `
-            <article class="panel-card" style="padding:1rem; margin:1rem 0;">
-                <h3>${promotion.nombre}</h3>
-                <p>${promotion.descripcion || ''}</p>
-                <p>Descuento: ${promotion.descuentoPorcentaje}% · ${promotion.activa ? 'Activa' : 'Inactiva'}</p>
-                <p>Productos: ${(promotion.productos || []).map((p) => p.nombre).join(', ') || 'Ninguno'}</p>
-                <button type="button" data-edit="${promotion._id}">Editar</button>
-                <button type="button" data-delete="${promotion._id}">Eliminar</button>
-            </article>
-        `).join('') || '<p>No hay promociones creadas.</p>';
+        const resultado = await request('/api/promotions');
+        const promotions = Array.isArray(resultado) ? resultado : resultado.promociones || [];
+
+        if (!promotions.length) {
+            list.replaceChildren(parrafoVacio('No hay promociones creadas.'));
+            return;
+        }
+
+        list.replaceChildren(...promotions.map(crearTarjetaPromocion));
     };
 
     const resetForm = () => {
@@ -56,56 +113,63 @@ document.addEventListener('DOMContentLoaded', () => {
         delete data.id;
 
         const id = idInput.value;
-        if (!id) {
-            data.fechaInicio = data.fechaInicio ? new Date(data.fechaInicio).toISOString() : undefined;
-            data.fechaFin = data.fechaFin ? new Date(data.fechaFin).toISOString() : undefined;
-        } else {
-            data.fechaInicio = data.fechaInicio ? new Date(data.fechaInicio).toISOString() : undefined;
-            data.fechaFin = data.fechaFin ? new Date(data.fechaFin).toISOString() : undefined;
-        }
+        data.fechaInicio = data.fechaInicio ? new Date(data.fechaInicio).toISOString() : undefined;
+        data.fechaFin = data.fechaFin ? new Date(data.fechaFin).toISOString() : undefined;
 
         try {
             await request(id ? `/api/promotions/${id}` : '/api/promotions', {
                 method: id ? 'PUT' : 'POST',
                 body: JSON.stringify(data)
             });
-            message.textContent = id ? 'Promoción actualizada.' : 'Promoción creada.';
+            informar(id ? 'Promoción actualizada.' : 'Promoción creada.');
             resetForm();
             await cargarPromociones();
         } catch (error) {
-            message.textContent = error.message;
+            informar(error.message, true);
         }
     });
 
     list.addEventListener('click', async (event) => {
-        const editId = event.target.dataset.edit;
-        const deleteId = event.target.dataset.delete;
+        const boton = event.target.closest('button[data-edit], button[data-delete]');
+        if (!boton) return;
+
+        const editId = boton.dataset.edit;
+        const deleteId = boton.dataset.delete;
+
         try {
             if (editId) {
                 const promotion = await request(`/api/promotions/${editId}`);
+                const productos = Array.isArray(promotion.productos) ? promotion.productos : [];
+
                 idInput.value = promotion._id;
                 form.querySelector('[name="nombre"]').value = promotion.nombre || '';
                 form.querySelector('[name="descripcion"]').value = promotion.descripcion || '';
-                form.querySelector('[name="descuentoPorcentaje"]').value = promotion.descuentoPorcentaje;
+                form.querySelector('[name="descuentoPorcentaje"]').value = promotion.descuentoPorcentaje ?? '';
                 form.querySelector('[name="fechaInicio"]').value = promotion.fechaInicio ? new Date(promotion.fechaInicio).toISOString().slice(0, 16) : '';
                 form.querySelector('[name="fechaFin"]').value = promotion.fechaFin ? new Date(promotion.fechaFin).toISOString().slice(0, 16) : '';
-                form.querySelector('[name="activa"]').checked = promotion.activa;
+                form.querySelector('[name="activa"]').checked = Boolean(promotion.activa);
                 [...productSelect.options].forEach((option) => {
-                    option.selected = promotion.productos.some((p) => String(p._id) === option.value);
+                    option.selected = productos.some((p) => String(p._id ?? p) === option.value);
                 });
+
+                informar('');
+                form.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 return;
             }
+
             if (deleteId) {
+                if (!window.confirm('¿Estás seguro de eliminar esta promoción?')) return;
+
                 await request(`/api/promotions/${deleteId}`, { method: 'DELETE' });
-                message.textContent = 'Promoción eliminada.';
+                informar('Promoción eliminada.');
                 await cargarPromociones();
             }
         } catch (error) {
-            message.textContent = error.message;
+            informar(error.message, true);
         }
     });
 
-    document.getElementById('promotion-cancel').addEventListener('click', resetForm);
+    document.getElementById('promotion-cancel')?.addEventListener('click', resetForm);
 
-    Promise.all([cargarProductos(), cargarPromociones()]).catch((error) => { message.textContent = error.message; });
+    Promise.all([cargarProductos(), cargarPromociones()]).catch((error) => { informar(error.message, true); });
 });

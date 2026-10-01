@@ -23,19 +23,58 @@ document.addEventListener('DOMContentLoaded', () => {
         return data;
     };
 
+    const informar = (texto, esError = false) => {
+        if (!message) return;
+        message.textContent = texto;
+        message.hidden = !texto;
+        message.classList.toggle('error', esError);
+        message.classList.toggle('exito', !esError && Boolean(texto));
+    };
+
+    const parrafoVacio = (texto) => {
+        const vacio = document.createElement('p');
+        vacio.className = 'lista-vacia';
+        vacio.textContent = texto;
+        return vacio;
+    };
+
     const cargarInventario = async () => {
         const [alertData, movementData] = await Promise.all([
             request('/api/inventory/alerts?limite=5'),
             request('/api/inventory')
         ]);
 
-        alerts.innerHTML = alertData.productos.map((product) =>
-            `<p><strong>${product.nombre}</strong>: ${product.stock} unidades</p>`
-        ).join('') || '<p>No hay productos con stock bajo.</p>';
+        const productos = Array.isArray(alertData?.productos) ? alertData.productos : [];
 
-        movements.innerHTML = movementData.map((movement) => `
-            <p>${movement.tipo.toUpperCase()} — ${movement.producto?.nombre || 'Producto'} — ${movement.cantidad} — ${movement.motivo || ''}</p>
-        `).join('') || '<p>No hay movimientos.</p>';
+        if (alerts) {
+            alerts.replaceChildren(...(productos.length
+                ? productos.map((product) => {
+                    const parrafo = document.createElement('p');
+                    const nombre = document.createElement('strong');
+                    nombre.textContent = product.nombre || 'Producto sin nombre';
+                    parrafo.append(nombre, `: ${Number(product.stock) || 0} unidades`);
+                    return parrafo;
+                })
+                : [parrafoVacio('No hay productos con stock bajo.')]));
+        }
+
+        const movimientos = Array.isArray(movementData) ? movementData : movementData?.movimientos;
+
+        if (movements) {
+            movements.replaceChildren(...(Array.isArray(movimientos) && movimientos.length
+                ? movimientos.map((movement) => {
+                    const parrafo = document.createElement('p');
+                    const partes = [
+                        String(movement.tipo || '').toUpperCase(),
+                        movement.producto?.nombre || 'Producto',
+                        String(Number(movement.cantidad) || 0),
+                        movement.motivo || ''
+                    ].filter(Boolean);
+                    parrafo.textContent = partes.join(' — ');
+                    return parrafo;
+                })
+                : [parrafoVacio('No hay movimientos.')]));
+        }
     };
 
     const submitMovement = async (form, endpoint) => {
@@ -46,10 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             await request(endpoint, { method: 'POST', body: JSON.stringify(body) });
             form.reset();
-            message.textContent = 'Movimiento registrado correctamente.';
+            informar('Movimiento registrado correctamente.');
             await cargarInventario();
         } catch (error) {
-            message.textContent = error.message;
+            informar(error.message, true);
         }
     };
 
@@ -63,5 +102,5 @@ document.addEventListener('DOMContentLoaded', () => {
         submitMovement(event.currentTarget, '/api/inventory/exit');
     });
 
-    cargarInventario().catch((error) => { message.textContent = error.message; });
+    cargarInventario().catch((error) => { informar(error.message, true); });
 });
