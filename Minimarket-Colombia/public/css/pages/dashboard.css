@@ -190,10 +190,6 @@
     content: "+";
     display: grid;
     place-items: center;
-    width: 1.6rem;
-    height: 1.6rem;
-    border-radius: 8px;
-    background: rgba(9, 153, 255, 0.18);
     font-size: 1.2rem;
 }
 
@@ -456,6 +452,7 @@
 .btn-dashboard {
     display: flex;
     align-items: center;
+    text-decoration: none;
     gap: 0.75rem;
     width: 100%;
     background: rgba(148, 163, 184, 0.04);
@@ -478,8 +475,7 @@
     transform: translateX(2px);
 }
 
-.btn-dashboard a {
-    text-decoration: none;
+.btn-dashboard a{
     display: inline-flex;
     align-items: center;
     justify-content: center;
