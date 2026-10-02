@@ -33,16 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const nombreEl = document.querySelector("[data-user-name]");
-  if (nombreEl) {
+  if (nombreEl && usuario) {
     nombreEl.textContent = usuario.nombre || "";
   }
 
-  const btnSignOut = document.getElementById("btn-sign-out");
-  if (btnSignOut) {
-    btnSignOut.addEventListener("click", () => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("usuario");
-      window.location.href = "/login";
-    });
-  }
+  const cerrarSesion = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("usuario");
+    window.location.href = "/login";
+  };
+
+  document.querySelectorAll("[data-sign-out]").forEach((boton) => {
+    boton.addEventListener("click", cerrarSesion);
+  });
 });

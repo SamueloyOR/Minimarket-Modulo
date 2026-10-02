@@ -5,33 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Ofertas destacadas de Minimarket Colombia"
+      content="Ofertas y descuentos destacados de Minimarket Colombia."
     />
+    <meta name="theme-color" content="#141d26" />
     <title>Ofertas | Minimarket Colombia</title>
-    <link rel="stylesheet" href="../../css/base/reset.css" />
-    <link rel="stylesheet" href="../../css/base/variables.css" />
-    <link rel="stylesheet" href="../../css/components/footer.css" />
-    <link rel="stylesheet" href="../../css/components/navbar.css" />
-    <link rel="stylesheet" href="../../css/components/cart.css" />
-    <link rel="stylesheet" href="../../css/pages/categories.css" />
-    <script src="../../js/pages/cart.js" defer></script>
-    <script src="../../js/pages/catalog.js" defer></script>
+    <link rel="icon" href="/img/minimarket.jpeg" type="image/jpeg" />
+    <link rel="stylesheet" href="/css/base/variables.css" />
+    <link rel="stylesheet" href="/css/base/reset.css" />
+    <link rel="stylesheet" href="/css/components/footer.css" />
+    <link rel="stylesheet" href="/css/components/navbar.css" />
+    <link rel="stylesheet" href="/css/components/cart.css" />
+    <link rel="stylesheet" href="/css/components/search.css" />
+    <link rel="stylesheet" href="/css/pages/categories.css" />
+    <script src="/js/components/profile-menu.js" defer></script>
+    <script src="/js/pages/cart.js" defer></script>
+    <script src="/js/components/navegation.js" defer></script>
+    <script src="/js/pages/catalog.js" defer></script>
   </head>
 
   <body>
+    <a class="skip-link" href="#ofertas">Saltar al contenido principal</a>
     <header id="hero" role="banner">
       <nav class="nav-bar" aria-label="Navegación principal">
         <div class="nav-bar-logo">
-          <img src="../../img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
+          <img src="/img/minimarket.jpeg" alt="Logo de Minimarket" width="50" height="50" />
         </div>
 
         <div class="nav-bar-tittle">
-          <h2><a href="../index.html" class="nav-brand">Minimarket</a></h2>
+          <h2><a href="/" class="nav-brand">Minimarket</a></h2>
         </div>
 
         <div class="nav-bar-categories">
-          <a class="user-categories" href="categories.html#categorias">Categorías</a>
-          <a class="user-offers" href="offers.html#ofertas">Ofertas</a>
+          <a class="user-categories" href="/html/pages/categories.html#categorias">Categorías</a>
+          <a class="user-offers" href="/html/pages/offers.html#ofertas">Ofertas</a>
         </div>
 
         <section id="search" aria-label="Buscar productos">
@@ -48,7 +54,7 @@
         </section>
 
         <button class="btn-shopping" id="open-cart-btn" type="button" aria-label="Abrir carrito">
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M6 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
             <path d="M17 19m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
             <path d="M17 17h-11v-14h-2" />
@@ -139,7 +145,7 @@
       <section class="footer-section">
         <h3>Minimarket</h3>
         <div class="footer-section-links">
-          <a href="/aboutUS">About us</a>
+          <a href="/aboutUS">Sobre nosotros</a>
           <a href="/contact">Contacto</a>
           <a href="/privacidad">Privacidad</a>
           <a href="/terminos">Términos y condiciones</a>

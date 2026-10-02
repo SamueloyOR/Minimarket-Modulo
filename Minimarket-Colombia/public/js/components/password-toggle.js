@@ -1,75 +1,94 @@
-                // Función para ver la contraseña
-function viewPassword() {
+(function () {
+  const PATRON_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function configurarAlternarPassword() {
     const passwordInput = document.getElementById("password");
-    if (!passwordInput) return;
+    const toggle = document.getElementById("showPassword");
 
-    passwordInput.type = passwordInput.type === "password" ? "text" : "password";
-}
+    if (!passwordInput || !toggle) return;
 
-window.ViewPassword = viewPassword;
-window.viewPassword = viewPassword;
+    const esCheckbox = toggle.tagName === "INPUT";
 
-document.addEventListener('DOMContentLoaded', () => {
-    const passwordInput = document.getElementById('password');
-    const toggle = document.getElementById('showPassword');
+    if (!esCheckbox) {
+      toggle.setAttribute("role", "button");
+      toggle.setAttribute("aria-pressed", "false");
+    }
 
-    if (passwordInput && toggle) {
-        const togglePassword = () => {
-            const isVisible = passwordInput.type === 'text';
-                passwordInput.type = isVisible ? 'password' : 'text';
-    
-            if (toggle.tagName === 'INPUT') {
-                toggle.checked = !isVisible;
-            }
+    const alternar = () => {
+      const visible = passwordInput.type === "text";
+      passwordInput.type = visible ? "password" : "text";
 
-            toggle.classList.toggle('is-applied', !isVisible);
-            toggle.setAttribute('aria-pressed', String(!isVisible));
-        };
+      if (esCheckbox) {
+        toggle.checked = !visible;
+      } else {
+        toggle.setAttribute("aria-pressed", String(!visible));
+      }
 
-        if (toggle.tagName === 'INPUT') {
-            toggle.addEventListener('change', togglePassword);
-        } else {
-            toggle.addEventListener('click', togglePassword);
-            toggle.addEventListener('keydown', (event) => {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    togglePassword();
-                }
-            });
+      toggle.classList.toggle("is-applied", !visible);
+      passwordInput.focus({ preventScroll: true });
+    };
+
+    if (esCheckbox) {
+      toggle.addEventListener("change", alternar);
+      return;
+    }
+
+    toggle.addEventListener("click", (evento) => {
+      evento.preventDefault();
+      alternar();
+    });
+
+    toggle.addEventListener("keydown", (evento) => {
+      if (evento.key !== "Enter" && evento.key !== " ") return;
+      evento.preventDefault();
+      alternar();
+    });
+  }
+
+  function configurarValidacionCorreo() {
+    const emailInput = document.getElementById("gmail");
+    const mensaje = document.getElementById("mensaje-de-estado");
+
+    if (!emailInput) return;
+
+    emailInput.addEventListener("input", () => {
+      const valor = emailInput.value.trim();
+
+      if (valor === "") {
+        if (mensaje && mensaje.dataset.origen === "correo") {
+          mensaje.textContent = "";
+          mensaje.hidden = true;
+          mensaje.className = "mensaje";
+          delete mensaje.dataset.origen;
         }
-    }
+        emailInput.classList.remove("valido", "invalido");
+        emailInput.removeAttribute("aria-invalid");
+        return;
+      }
 
-    const emailInput = document.getElementById('gmail');
-    const mensaje = document.getElementById('mensaje-de-estado');
+      const esValido = PATRON_CORREO.test(valor);
+      emailInput.classList.toggle("valido", esValido);
+      emailInput.classList.toggle("invalido", !esValido);
+      emailInput.setAttribute("aria-invalid", String(!esValido));
 
-    function checkGmail(email) {
-        const patron = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-        return patron.test(email);
-    }
+      if (!mensaje || mensaje.dataset.origen !== "correo") return;
 
-    if (emailInput && mensaje) {
-        emailInput.addEventListener('input', () => {
-            const value = emailInput.value.trim();
+      if (esValido) {
+        mensaje.textContent = "";
+        mensaje.className = "mensaje";
+        mensaje.hidden = true;
+        delete mensaje.dataset.origen;
+        return;
+      }
 
-            if (value === '') {
-                mensaje.textContent = '';
-                mensaje.className = 'mensaje';
-                emailInput.classList.remove('valido', 'invalido');
-                return;
-            }
+      mensaje.textContent = "Formato de correo no válido (ej: usuario@dominio.com)";
+      mensaje.className = "mensaje error";
+      mensaje.hidden = false;
+    });
+  }
 
-            if (checkGmail(value)) {
-                mensaje.textContent = '✓ Correo válido';
-                mensaje.className = 'mensaje exito';
-                emailInput.classList.remove('invalido');
-                emailInput.classList.add('valido');
-            } else {
-                mensaje.textContent = '✕ Formato de correo no válido (ej: usuario@dominio.com)';
-                mensaje.className = 'mensaje error';
-                emailInput.classList.remove('valido');
-                emailInput.classList.add('invalido');
-            }
-        });
-    }
-});
-
+  document.addEventListener("DOMContentLoaded", () => {
+    configurarAlternarPassword();
+    configurarValidacionCorreo();
+  });
+})();

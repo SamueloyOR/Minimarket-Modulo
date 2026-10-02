@@ -77,16 +77,33 @@ main.register-page {
     border-right: 1px solid var(--border);
 }
 
-.tab.active {
+.tab.active,
+.tab[aria-pressed="true"] {
     background-color: #ffffff;
     color: #0f172a;
     box-shadow: 0 10px 8px var(--background);
     filter: brightness(1.04);
 }
 
+.tab:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: -2px;
+}
+
+.tab[hidden] {
+    display: none;
+}
+
 
 .form-group {
     text-align: left;
+}
+
+.ayuda-campo {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
 }
 
 .form-group label {
@@ -126,24 +143,29 @@ main.register-page {
     font-size: 13px;
     margin-top: 5px;
     font-weight: bold;
+    min-height: 1.2em;
+    }
+
+.mensaje[hidden] {
+    display: none;
     }
 
 .mensaje.exito {
-    color: #2e7d32;
+    color: #86efac;
     }
 
 .mensaje.error {
-    color: #c62828;
+    color: #fca5a5;
     }
 
 .form-control.valido {
-    border-color: #2e7d32;
-    box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.12);
+    border-color: #4ade80;
+    box-shadow: 0 0 0 3px rgba(74, 222, 128, 0.16);
 }
 
 .form-control.invalido {
-    border-color: #c62828;
-    box-shadow: 0 0 0 3px rgba(198, 40, 40, 0.12);
+    border-color: #f87171;
+    box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.16);
 }
 
 .password {
@@ -151,10 +173,13 @@ main.register-page {
     width: 100%;
 }
 
-.password i {
+.password .btn-toggle-show {
     position: absolute;
-    right: 12px;
-    top: 50%;
+    right: 10px;
+    bottom: 8px;
+    padding: 4px;
+    border: 0;
+    background: transparent;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -162,6 +187,26 @@ main.register-page {
     color: var(--text-muted);
     z-index: 2;
     transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.password .btn-toggle-show svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+}
+
+.password .btn-toggle-show:hover {
+    color: var(--text-primary);
+}
+
+.password .btn-toggle-show:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.password .form-control {
+    padding-right: 44px;
 }
 
 .btn-toggle-show {
@@ -198,6 +243,13 @@ main.register-page {
     transform: translateY(-1px);
     box-shadow: 0 8px 20px rgba(9, 153, 255, 0.25);
     filter: brightness(1.04);
+}
+
+.btn-register:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
 }
 
 .card-footer {

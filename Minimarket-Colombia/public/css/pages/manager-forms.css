@@ -1,0 +1,116 @@
+.manager-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    margin: 1.5rem 0;
+}
+
+.content-card .panel-card {
+    margin: 0 0 1rem;
+    padding: 1.25rem;
+}
+
+.content-card .panel-card h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+.content-card .panel-card p {
+    margin: 0 0 0.35rem;
+}
+
+.manager-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.manager-form label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.manager-form input,
+.manager-form textarea,
+.manager-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.95rem;
+}
+
+.manager-form input:focus-visible,
+.manager-form textarea:focus-visible,
+.manager-form select:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 1px;
+}
+
+.manager-form textarea {
+    resize: vertical;
+    min-height: 70px;
+}
+
+.manager-form select[multiple] {
+    min-height: 160px;
+}
+
+.manager-form button {
+    margin-top: 0.5rem;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-hover));
+    color: #ffffff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.manager-form button[type="button"] {
+    background: var(--input-bg);
+    border: 1px solid var(--border);
+    color: var(--text-primary);
+}
+
+.manager-form button:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}
+
+.manager-check {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+.manager-check input {
+    width: auto;
+    accent-color: var(--primary-light);
+}
+
+.content-card .panel-card button {
+    margin: 0.25rem 0.5rem 0.25rem 0;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.content-card .panel-card button:hover {
+    border-color: var(--primary-light);
+}
+
+.content-card .panel-card button:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+}

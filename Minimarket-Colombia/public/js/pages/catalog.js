@@ -57,12 +57,20 @@ document.addEventListener("DOMContentLoaded", async () => {
                 button.type = "button";
                 button.className = "category-card";
                 button.dataset.category = category.nombre;
-                button.innerHTML = `
-                    <span class="category-icon" aria-hidden="true">+</span>
-                    <span>
-                        <strong>${category.nombre}</strong>
-                        <small>${category.descripcion || "Explora productos de esta categoría."}</small>
-                    </span>`;
+
+                const icon = document.createElement("span");
+                icon.className = "category-icon";
+                icon.setAttribute("aria-hidden", "true");
+                icon.textContent = "+";
+
+                const texto = document.createElement("span");
+                const nombre = document.createElement("strong");
+                nombre.textContent = category.nombre;
+                const detalle = document.createElement("small");
+                detalle.textContent = category.descripcion || "Explora productos de esta categoría.";
+                texto.append(nombre, detalle);
+
+                button.append(icon, texto);
                 categoriesContainer?.appendChild(button);
 
                 productCategory?.appendChild(new Option(category.nombre, category.nombre));
