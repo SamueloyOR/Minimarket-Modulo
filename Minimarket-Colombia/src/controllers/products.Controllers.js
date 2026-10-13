@@ -1,170 +1,168 @@
-import Product from "../models/products.js";
-import { CATEGORIAS_VALIDAS } from "../models/products.js";
-import Category from "../models/category.js";
+import mongoose from 'mongoose';
+import Product from '../models/products.js';
+import Category from '../models/category.js';
 
-const CAMPOS_PRODUCTO = [
-    "nombre",
-    "descripcion",
-    "precio",
-    "stock",
-    "categoria",
-    "imagen",
-    "enOferta",
-    "precioOferta",
-    "proveedores",
-    "promocion"
+// enOferta, precioOferta y promocion se gestionan solo desde el modulo de promociones
+const PRODUCT_FIELDS = [
+    'nombre', 'descripcion', 'sku', 'categoria', 'precio', 'precioRegular',
+    'stock', 'imagen', 'imagenUrl', 'proveedores', 'activo'
 ];
 
-function obtenerCamposProducto(body) {
-    return Object.fromEntries(
-        Object.entries(body ?? {}).filter(([campo]) => CAMPOS_PRODUCTO.includes(campo))
+const productFieldsFrom = (body = {}) => {
+    const data = Object.fromEntries(
+        Object.entries(body).filter(([field]) => PRODUCT_FIELDS.includes(field))
     );
-}
+    // Un SKU vacio chocaria con el indice unico: se descarta
+    if (typeof data.sku === 'string' && !data.sku.trim()) delete data.sku;
+    return data;
+};
 
-function esIdMongooseValido(id) {
-    return /^[a-f\d]{24}$/i.test(id);
-}
+const escapeRegex = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-function escaparRegex(valor) {
-    return valor.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+const categoryExists = (nombre) =>
+    Category.exists({ nombre: new RegExp(`^${escapeRegex(nombre)}$`, 'i') });
 
-async function categoriaDisponible(nombre) {
-    if (CATEGORIAS_VALIDAS.includes(nombre)) return true;
-    return Boolean(await Category.exists({ nombre }));
-}
+const validPrice = (value) => Number.isFinite(Number(value)) && Number(value) >= 0;
 
-// Get obtener productos
-export const getProducts = async (req, res) => {
+export const getProducts = async (req, res, next) => {
     try {
-        const { categoria, oferta, buscar } = req.query;
-        const filtro = {};
+        const { categoria, buscar, oferta, minPrecio, maxPrecio } = req.query;
+        const filter = { activo: true };
 
-        if (categoria) filtro.categoria = categoria;
-        if (oferta === "true" || oferta === "false") filtro.enOferta = oferta === "true";
-        if (buscar?.trim()) filtro.nombre = { $regex: escaparRegex(buscar.trim()), $options: "i" };
+        if (categoria) filter.categoria = categoria;
+        if (oferta === 'true' || oferta === 'false') filter.enOferta = oferta === 'true';
+        if (buscar?.trim()) filter.$text = { $search: buscar.trim() };
 
-        const productos = await Product.find(filtro).populate('proveedores', 'name contactName phone').sort({ nombre: 1 });
-        res.json(productos);
+        if (minPrecio !== undefined || maxPrecio !== undefined) {
+            filter.precio = {};
+            if (minPrecio !== undefined) {
+                if (!validPrice(minPrecio)) return res.status(400).json({ message: 'Precio mínimo inválido' });
+                filter.precio.$gte = Number(minPrecio);
+            }
+            if (maxPrecio !== undefined) {
+                if (!validPrice(maxPrecio)) return res.status(400).json({ message: 'Precio máximo inválido' });
+                filter.precio.$lte = Number(maxPrecio);
+            }
+            if (filter.precio.$gte !== undefined && filter.precio.$lte !== undefined && filter.precio.$gte > filter.precio.$lte) {
+                return res.status(400).json({ message: 'El precio mínimo no puede superar el máximo' });
+            }
+        }
+
+        const products = await Product.find(filter).sort({ nombre: 1 });
+        return res.json(products);
     } catch (error) {
-        console.error("Error al obtener productos:", error);
-        res.status(500).json({ message: "Error interno del servidor" });
+        return next(error);
     }
 };
 
-// GET por id
-export const getProductById = async (req, res) => {
+export const getProductById = async (req, res, next) => {
     try {
-        if (!esIdMongooseValido(req.params.id)) {
-            return res.status(400).json({ message: "Id de producto inválido" });
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: 'Id de producto inválido' });
         }
 
-        const producto = await Product.findById(req.params.id).populate('proveedores', 'name contactName phone');
-        if (!producto) {
-            return res.status(404).json({ message: "Producto no encontrado" });
-        }
-        res.json(producto);
+        const product = await Product.findOne({ _id: req.params.id, activo: true });
+        if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
+        return res.json(product);
     } catch (error) {
-        console.error("Error al obtener producto:", error);
-        res.status(500).json({ message: "Error interno del servidor" });
+        return next(error);
     }
 };
 
-// POST crear productos
-export const createProduct = async (req, res) => {
+export const createProduct = async (req, res, next) => {
     try {
-        const producto = obtenerCamposProducto(req.body);
-        const { nombre, precio, categoria } = producto;
+        const data = productFieldsFrom(req.body);
+        const { nombre, categoria, precio } = data;
+        const stock = data.stock === undefined ? 0 : Number(data.stock);
 
-        if (typeof nombre !== "string" || !nombre.trim() || precio === undefined || !categoria) {
-            return res.status(400).json({ message: "nombre, precio y categoria son obligatorios" });
+        if (typeof nombre !== 'string' || !nombre.trim() || typeof categoria !== 'string' || !categoria.trim() || precio === undefined || precio === '') {
+            return res.status(400).json({ message: 'Nombre, categoría y precio son obligatorios' });
+        }
+        if (!validPrice(precio) || !Number.isInteger(stock) || stock < 0) {
+            return res.status(400).json({ message: 'Precio o stock inválidos' });
+        }
+        if (!(await categoryExists(categoria.trim()))) {
+            return res.status(400).json({ message: 'La categoría no existe' });
         }
 
-        const precioNumero = Number(precio);
-        const stockNumero = producto.stock === undefined ? 0 : Number(producto.stock);
-
-        if (
-            !Number.isFinite(precioNumero) ||
-            precioNumero < 0 ||
-            !Number.isInteger(stockNumero) ||
-            stockNumero < 0 ||
-            !(await categoriaDisponible(categoria))
-        ) {
-            return res.status(400).json({ message: "Datos de producto inválidos" });
-        }
-
-        const nuevo = await Product.create({
-            ...producto,
+        const price = Number(precio);
+        const product = await Product.create({
+            ...data,
             nombre: nombre.trim(),
-            precio: precioNumero,
-            precioRegular: producto.precioRegular === undefined ? precioNumero : Number(producto.precioRegular),
-            stock: stockNumero
+            categoria: categoria.trim(),
+            precio: price,
+            precioRegular: data.precioRegular === undefined ? price : Number(data.precioRegular),
+            stock
         });
-
-        res.status(201).json(nuevo);
+        return res.status(201).json(product);
     } catch (error) {
-        console.error("Error al crear producto:", error);
-        res.status(400).json({ message: error.message || "No se pudo crear el producto" });
+        return next(error);
     }
 };
 
-// PUT actualizar productos
-export const updateProduct = async (req, res) => {
+export const updateProduct = async (req, res, next) => {
     try {
-        if (!esIdMongooseValido(req.params.id)) {
-            return res.status(400).json({ message: "Id de producto inválido" });
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: 'Id de producto inválido' });
         }
 
-        const cambios = obtenerCamposProducto(req.body);
-        if (Object.keys(cambios).length === 0) {
-            return res.status(400).json({ message: "No hay campos válidos para actualizar" });
+        const changes = productFieldsFrom(req.body);
+        if (!Object.keys(changes).length) {
+            return res.status(400).json({ message: 'No hay campos válidos para actualizar' });
+        }
+        if (changes.nombre !== undefined) {
+            if (typeof changes.nombre !== 'string' || !changes.nombre.trim()) {
+                return res.status(400).json({ message: 'El nombre del producto es obligatorio' });
+            }
+            changes.nombre = changes.nombre.trim();
+        }
+        if (changes.categoria !== undefined) {
+            if (typeof changes.categoria !== 'string' || !changes.categoria.trim()) {
+                return res.status(400).json({ message: 'La categoría es obligatoria' });
+            }
+            changes.categoria = changes.categoria.trim();
+            if (!(await categoryExists(changes.categoria))) {
+                return res.status(400).json({ message: 'La categoría no existe' });
+            }
         }
 
-        if (cambios.nombre !== undefined && (typeof cambios.nombre !== "string" || !cambios.nombre.trim())) {
-            return res.status(400).json({ message: "El nombre del producto es obligatorio" });
+        for (const field of ['precio', 'precioRegular']) {
+            if (changes[field] !== undefined && changes[field] !== null) {
+                if (!validPrice(changes[field])) return res.status(400).json({ message: 'Precio inválido' });
+                changes[field] = Number(changes[field]);
+            }
+        }
+        if (changes.stock !== undefined) {
+            changes.stock = Number(changes.stock);
+            if (!Number.isInteger(changes.stock) || changes.stock < 0) {
+                return res.status(400).json({ message: 'Stock inválido' });
+            }
         }
 
-        if (cambios.precio !== undefined) cambios.precio = Number(cambios.precio);
-        if (cambios.stock !== undefined) cambios.stock = Number(cambios.stock);
-
-        if (
-            (cambios.precio !== undefined && (!Number.isFinite(cambios.precio) || cambios.precio < 0)) ||
-            (cambios.stock !== undefined && (!Number.isInteger(cambios.stock) || cambios.stock < 0)) ||
-            (cambios.categoria !== undefined && !(await categoriaDisponible(cambios.categoria)))
-        ) {
-            return res.status(400).json({ message: "Datos de producto inválidos" });
-        }
-
-        const producto = await Product.findByIdAndUpdate(req.params.id, cambios, {
-            new: true,
+        const product = await Product.findByIdAndUpdate(req.params.id, changes, {
+            returnDocument: 'after',
             runValidators: true
         });
-
-        if (!producto) {
-            return res.status(404).json({ message: "Producto no encontrado" });
-        }
-
-        res.json(producto);
+        if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
+        return res.json(product);
     } catch (error) {
-        console.error("Error al actualizar producto:", error);
-        res.status(400).json({ message: error.message || "No se pudo actualizar el producto" });
+        return next(error);
     }
 };
 
-// DELETE eliminar productos
-export const deleteProduct = async (req, res) => {
+export const deleteProduct = async (req, res, next) => {
     try {
-        if (!esIdMongooseValido(req.params.id)) {
-            return res.status(400).json({ message: "Id de producto inválido" });
+        if (!mongoose.isValidObjectId(req.params.id)) {
+            return res.status(400).json({ message: 'Id de producto inválido' });
         }
 
-        const producto = await Product.findByIdAndDelete(req.params.id);
-        if (!producto) {
-            return res.status(404).json({ message: "Producto no encontrado" });
-        }
-        res.json({ message: "Producto eliminado" });
+        const product = await Product.findByIdAndUpdate(req.params.id, { activo: false }, {
+            returnDocument: 'after',
+            runValidators: true
+        });
+        if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
+        return res.json({ message: 'Producto removido' });
     } catch (error) {
-        console.error("Error al eliminar producto:", error);
-        res.status(500).json({ message: "Error interno del servidor" });
+        return next(error);
     }
 };

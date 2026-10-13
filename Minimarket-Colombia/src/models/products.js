@@ -1,20 +1,10 @@
-import mongoose, { Schema, model } from 'mongoose';
+import mongoose from 'mongoose';
 
-export const CATEGORIAS_VALIDAS = [
-    'Frutas y verduras',
-    'Lácteos',
-    'Aseo y hogar',
-    'Snacks'
-];
-
-const productSchema = new Schema({
-    nombre: { type: String, required: true, trim: true },
-    descripcion: { type: String, default: '' },
-    categoria: {
-        type: String,
-        required: true,
-        trim: true
-    },
+const productSchema = new mongoose.Schema({
+    nombre: { type: String, required: true, trim: true, maxlength: 120 },
+    descripcion: { type: String, trim: true, default: '' },
+    sku: { type: String, trim: true, uppercase: true, sparse: true, unique: true },
+    categoria: { type: String, required: true, trim: true },
     precio: { type: Number, required: true, min: 0 },
     precioRegular: { type: Number, default: null, min: 0 },
     precioOferta: { type: Number, default: null, min: 0 },
@@ -22,15 +12,14 @@ const productSchema = new Schema({
     stock: { type: Number, required: true, default: 0, min: 0 },
     imagen: { type: String, default: '' },
     imagenUrl: { type: String, default: '' },
-    proveedores: [{ type: Schema.Types.ObjectId, ref: 'Provider' }],
-    promocion: { type: Schema.Types.ObjectId, ref: 'Promotion', default: null },
+    proveedores: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Provider' }],
+    promocion: { type: mongoose.Schema.Types.ObjectId, ref: 'Promotion', default: null },
     activo: { type: Boolean, default: true }
-}, {
-    timestamps: true
-});
+}, { timestamps: true });
 
-const Product = model('Product', productSchema);
+productSchema.index({ nombre: 'text', descripcion: 'text' });
+
+const Product = mongoose.models.Product || mongoose.model('Product', productSchema);
 
 export { Product };
 export default Product;
-

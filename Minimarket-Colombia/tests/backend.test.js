@@ -10,6 +10,11 @@ describe('API base modules', () => {
     expect(res.body.ok).toBe(true);
   });
 
+  it('rejects an invalid product id', async () => {
+    const res = await request(app).get('/api/products/not-an-object-id');
+    expect(res.status).toBe(400);
+  });
+
   it('exposes the orders API route with auth protection', async () => {
     const res = await request(app).get('/api/orders');
     expect(res.status).toBe(401);
