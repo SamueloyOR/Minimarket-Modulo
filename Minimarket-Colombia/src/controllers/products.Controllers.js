@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import Product from '../models/products.js';
 import Category from '../models/category.js';
 
-// enOferta, precioOferta y promocion se gestionan solo desde el modulo de promociones
+
 const PRODUCT_FIELDS = [
     'nombre', 'descripcion', 'sku', 'categoria', 'precio', 'precioRegular',
     'stock', 'imagen', 'imagenUrl', 'proveedores', 'activo'
@@ -12,7 +12,7 @@ const productFieldsFrom = (body = {}) => {
     const data = Object.fromEntries(
         Object.entries(body).filter(([field]) => PRODUCT_FIELDS.includes(field))
     );
-    // Un SKU vacio chocaria con el indice unico: se descarta
+    
     if (typeof data.sku === 'string' && !data.sku.trim()) delete data.sku;
     return data;
 };
