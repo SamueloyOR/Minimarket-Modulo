@@ -45,7 +45,7 @@ export const addItem = async (req, res) => {
             return res.status(400).json({ message: 'Datos del producto inválidos.' });
         }
 
-        const producto = await Product.findById(productId);
+        const producto = await Product.findOne({ _id: productId, activo: true });
         if (!producto) {
             return res.status(404).json({ message: 'El producto no existe' });
         }
@@ -98,7 +98,7 @@ export const updateItem = async (req, res) => {
         return res.status(404).json({ message: "Producto no encontrado en el carrito." });
     }
 
-    const producto = await Product.findById(id);
+    const producto = await Product.findOne({ _id: id, activo: true });
     if (!producto) {
         return res.status(404).json({ message: "El producto ya no existe." });
     }
@@ -154,7 +154,7 @@ export const checkoutCart = async (req, res) => {
             let total = 0;
 
             for (const item of cart) {
-                const producto = await Product.findById(item.id).session(session);
+                const producto = await Product.findOne({ _id: item.id, activo: true }).session(session);
                 if (!producto) {
                     throw new Error(`El producto ${item.name} no está disponible.`);
                 }
