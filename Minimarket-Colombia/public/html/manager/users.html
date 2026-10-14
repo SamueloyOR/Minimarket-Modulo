@@ -21,7 +21,6 @@
     <link rel="stylesheet" href="../../css/components/navbar.css">
     <link rel="stylesheet" href="../../css/components/search.css">
     <link rel="stylesheet" href="../../css/pages/dashboard.css">
-    <link rel="stylesheet" href="../../css/pages/login.css">
     <link rel="stylesheet" href="../../css/pages/users.css">
 
     <script src="../../js/components/profile-menu.js" defer></script>
@@ -59,8 +58,8 @@
                     </button>
 
                     <input class="search-input" id="Search-In-Inline" type="search" name="q"
-                        placeholder="Buscar productos o clientes" aria-label="Buscar productos"
-                        autocorrect="off" autocomplete="off" autocapitalize="off" spellcheck="false" />
+                        placeholder="Buscar productos o clientes" aria-label="Buscar productos" autocorrect="off"
+                        autocomplete="off" autocapitalize="off" spellcheck="false" />
                 </form>
             </section>
 
@@ -128,10 +127,10 @@
 
                 <div class="form-group">
                     <label for="documento">Documento:</label>
-                    <input type="text" id="documento" name="documento" required inputmode="numeric"
-                        pattern="\d{6,15}" autocomplete="off" placeholder="Ejem: 11230223"
-                        aria-describedby="ayuda-documento">
-                    <small id="ayuda-documento" class="ayuda-campo">Entre 6 y 15 dígitos, sin letras ni espacios.</small>
+                    <input type="text" id="documento" name="documento" required inputmode="numeric" pattern="\d{6,15}"
+                        autocomplete="off" placeholder="Ejem: 11230223" aria-describedby="ayuda-documento">
+                    <small id="ayuda-documento" class="ayuda-campo">Entre 6 y 15 dígitos, sin letras ni
+                        espacios.</small>
                 </div>
 
                 <div class="form-group">
@@ -148,8 +147,7 @@
                     <div class="password-field">
                         <input type="password" id="password" name="password" required minlength="8"
                             autocomplete="new-password" placeholder="••••••••" aria-describedby="ayuda-password">
-                        <button type="button" id="showPassword" class="btn-toggle-show"
-                            aria-label="Mostrar contraseña">
+                        <button type="button" id="showPassword" class="btn-toggle-show" aria-label="Mostrar contraseña">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round"
                                 stroke-linejoin="round" aria-hidden="true">
@@ -181,7 +179,8 @@
         <section class="table-section">
             <h2>Lista de Clientes</h2>
             <table>
-                <caption>Clientes registrados en la plataforma. Usa las acciones de cada fila para editar o eliminar.</caption>
+                <caption>Clientes registrados en la plataforma. Usa las acciones de cada fila para editar o eliminar.
+                </caption>
                 <thead>
                     <tr>
                         <th scope="col">ID</th>
@@ -201,19 +200,23 @@
         </section>
     </main>
 
-    <footer id="footer">
-        <div class="footer-container">
-            <p class="footer-brand">Mini Market Colombia</p>
-            <p class="footer-copy">Todos los derechos reservados</p>
-            <ul class="footer-legal">
-                <li><a href="/privacidad">Privacidad</a></li>
-                <li><a href="/terminos">Términos y condiciones</a></li>
-                <li><a href="/cookies">Cookies</a></li>
-            </ul>
-        </div>
+    <footer>
+        <section class="footer-section">
+            <h2>Minimarket</h2>
+
+            <div class="footer-section-links">
+                <a href="/aboutUS">Sobre nosotros</a>
+                <a href="/contact">Contacto</a>
+                <a href="/privacidad">Privacidad</a>
+                <a href="/terminos">Términos y condiciones</a>
+                <a href="/cookies">Cookies</a>
+
+                <p>© 2026 Minimarket Colombia. Todos los derechos reservados</p>
+            </div>
+        </section>
     </footer>
 
-    <!-- Script de conexión con la API -->
+
     <script src="../../js/app.js" defer></script>
 
 

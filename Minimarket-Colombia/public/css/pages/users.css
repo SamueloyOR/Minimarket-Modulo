@@ -1,40 +1,238 @@
-main.form-section {
-    padding: calc(var(--nav-height) + 20px) 20px 100px 20px;
-    flex: 1;
+#principal-content {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
+    gap: 32px;
+    padding: calc(var(--nav-height) + 20px) 20px 100px;
+    flex: 1;
+}
+
+.form-section,
+.table-section {
+    background-color: var(--background);
+    color: var(--text-primary);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 20px 45px var(--shadow);
+    width: min(100%, 980px);
 }
 
 .form-section {
-    background-color: var(--background);
-    color: var(--text-primary);
     padding: 40px 32px;
-    border-radius: 18px;
-    box-shadow: 0 20px 45px var(--shadow);
-    width: 100%;
-    max-width: 500px;
+    max-width: 560px;
     text-align: center;
-    border: 1px solid var(--boder);
-
-    h1 {
-        margin: 0 0 10px;
-        font-size: clamp(2rem, 3vw, 2.6rem);
-        letter-spacing: -0.04em;
-    }
-
-    p {
-        margin: 0 0 28px;
-        color: var(--text-secondary);
-        font-size: 1rem;
-    }
 }
 
-.cliente-form {
+.form-section .form-title {
+    margin: 0 0 10px;
+    font-size: clamp(2rem, 3vw, 2.6rem);
+    letter-spacing: -0.04em;
+}
+
+.form-section p {
+    margin: 0 0 28px;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+#cliente-form {
     display: flex;
     flex-direction: column;
     gap: 16px;
     text-align: left;
+}
+
+.form-group {
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
     margin-bottom: 8px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    border-radius: 10px;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+    font-size: 0.96rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-muted);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(9, 153, 255, 0.18);
+}
+
+.ayuda-campo {
+    display: block;
+    margin-top: 6px;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+}
+
+.password-field {
+    position: relative;
+}
+
+.password-field input {
+    padding-right: 44px;
+}
+
+.btn-toggle-show {
+    position: absolute;
+    right: 10px;
+    bottom: 8px;
+    padding: 4px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    z-index: 2;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-toggle-show:hover {
+    color: var(--text-primary);
+}
+
+.btn-toggle-show:focus-visible {
+    outline: 2px solid var(--primary-light);
+    outline-offset: 2px;
+    border-radius: 6px;
+}
+
+.btn-toggle-show svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+}
+
+#btn-submit {
+    width: 100%;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-hover));
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+#btn-submit:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(9, 153, 255, 0.25);
+    filter: brightness(1.04);
+}
+
+#btn-submit:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+    box-shadow: none;
+}
+
+.table-section {
+    overflow: hidden;
+    max-width: 980px;
+    padding: 24px 18px 18px;
+}
+
+.table-section h2 {
+    margin: 0 0 18px;
+    font-size: clamp(1.6rem, 2vw, 2rem);
+    letter-spacing: -0.04em;
+}
+
+.table-section table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: rgba(15, 23, 42, 0.38);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table-section th,
+.table-section td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.14);
+    vertical-align: middle;
+}
+
+.table-section thead th {
+    background-color: rgba(148, 163, 184, 0.08);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.table-section tbody tr:hover {
+    background-color: rgba(9, 153, 255, 0.04);
+}
+
+.table-section tbody td {
+    color: var(--text-secondary);
+    font-size: 0.94rem;
+}
+
+.table-section caption {
+    margin-bottom: 14px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.table-section button,
+.table-section .btn-action {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin-right: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.table-section button:hover,
+.table-section .btn-action:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.04);
+}
+
+.table-section .btn-edit {
+    background: rgba(9, 153, 255, 0.14);
+    color: #9cd5ff;
+}
+
+.table-section .btn-delete {
+    background: rgba(248, 113, 113, 0.12);
+    color: #fca5a5;
 }
 
