@@ -17,16 +17,14 @@ import usersRoutes from './routes/users.routes.js';
 import providersRoutes from './routes/providers.routes.js';
 import inventoryRoutes from './routes/inventory.routes.js';
 import promotionRoutes from './routes/promotion.routes.js';
+import { seedProducts } from './products.js';
 
 export const app = express();
 const PORT = process.env.PORT || 4000;
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
-const MONGO_URI = process.env.MONGO_URL;
-
-import Product from './models/products.js';
-import initialProducts from './data/products.json' with { type: 'json' };
+const MONGO_URL = process.env.MONGO_URL;
 
 app.use(cors());
 app.use(express.json());
@@ -112,27 +110,33 @@ app.get('/payment-methods', (req, res) => {
     res.sendFile(path.join(dirname, '../public/html/pages/payment-methods.html'));
 });
 
+//Agregar los endspoints del proyecto
+//Metodo get para obtener la api del proyecto
 app.get('/api', (req, res) => {
     res.json({
         ok: true,
-        mensaje: 'Api de gestor de clientes funciona correctamente'
+        mensaje: 'La api funciona correctamente'
     });
 });
 
+//metodo get para obtener, si la base de datos funciona
+//Se crea la variable de estados para establecer si hay un error y marcar en la consola posibles errores
 app.get('/api/health', (req, res) => {
-    const states = {
-        0: 'disconnected',
-        1: 'connected',
-        2: 'connecting',
-        3: 'disconnecting'
+    const estados = {
+        0: 'desconectado',
+        1: 'conectado',
+        2: 'conectando',
+        3: 'desconectando'
     };
-
+//envia un en formato json el estado actual del mongo
     res.json({
         ok: true,
         mongoState: mongoose.connection.readyState,
-        mongoStateName: states[mongoose.connection.readyState]
+        mongoStateName: estados[mongoose.connection.readyState]
     });
 });
+
+//Establecer las rutas de cada modulo del proyecto
 
 app.use('/api/clientes', clientesRoutes);
 app.use('/api/auth', authRoutes);
@@ -145,6 +149,7 @@ app.use('/api/providers', providersRoutes);
 app.use('/api/inventory', inventoryRoutes);
 app.use('/api/promotions', promotionRoutes);
 
+//Si al consultar una ruta esta no existe hay un condicional para validar si no existe o no
 app.use((req, res, next) => {
     if (req.originalUrl.startsWith('/api/')) {
         return res.status(404).json({
@@ -155,30 +160,49 @@ app.use((req, res, next) => {
     next();
 });
 
+// Manejador global de errores: siempre responde JSON
+app.use((err, req, res, next) => {
+    if (err.name === 'ValidationError') {
+        const mensajes = Object.values(err.errors).map((e) => e.message);
+        return res.status(400).json({ message: mensajes.join(', ') });
+    }
+    if (err.code === 11000) {
+        const campo = Object.keys(err.keyValue || {})[0] || 'valor';
+        return res.status(409).json({ message: `Ya existe un registro con ese ${campo}` });
+    }
+    console.error(err);
+    return res.status(500).json({ message: 'Error interno del servidor' });
+});
+
+//Variable para validar si el server de mongo funciona correctamente
 export async function startServer() {
-    if (!MONGO_URI) {
-        throw new Error('MONGO_URI no está configurado');
+
+    //Si la variable de la url es diferente tire un error
+    if (!MONGO_URL) {
+        throw new Error('Hubo un error en la url del mongo, no está configurado');
     }
 
+    //intentar si la base de datos funciona sin un error
     try {
-        console.log('Conectando a MongoDB...');
+        console.log('Conectando con la base de datos MONGODB');
 
-        await mongoose.connect(MONGO_URI, {
+        await mongoose.connect(MONGO_URL, {
             serverSelectionTimeoutMS: 10000
         });
 
-        console.log('MongoDB conectado');
-        await seedProductsDatabaseonStart();
+        console.log('Mongo conectado');
+        await seedProducts();
 
         return app.listen(PORT, () => {
             console.log(`Servidor corriendo en el puerto ${PORT}`);
         });
+    //capturar el error y mostrar en consola y salir del proceso
     } catch (error) {
         console.error('No se pudo iniciar el servidor:', error.message);
         process.exit(1);
     }
 }
-
+//apartir de este condicional llamo a startServer() al ejecutar el node src/app.js para q el servidor arranque
 if (process.argv[1]) {
     const isDirectRun = import.meta.url === pathToFileURL(process.argv[1]).href;
     if (isDirectRun) {
@@ -186,13 +210,3 @@ if (process.argv[1]) {
     }
 }
 
-async function seedProductsDatabaseonStart() {
-    const count = await Product.countDocuments();
-
-    if (count === 0 && Array.isArray(initialProducts) && initialProducts.length > 0) {
-        await Product.insertMany(initialProducts);
-        console.log('Productos iniciales cargados en el arranque');
-    } else {
-        console.log('La base de datos ya tiene productos');
-    }
-}
