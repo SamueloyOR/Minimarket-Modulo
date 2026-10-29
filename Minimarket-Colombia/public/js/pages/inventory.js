@@ -38,10 +38,53 @@ document.addEventListener('DOMContentLoaded', () => {
         return vacio;
     };
 
+    const llenarSelector = (selector, opciones, textoInicial, esObligatorio, textoOpcion) => {
+        if (!selector) return;
+        const elementos = [new Option(textoInicial, '')];
+        elementos[0].disabled = esObligatorio;
+        elementos[0].selected = true;
+        opciones.forEach((opcion) => {
+            elementos.push(new Option(textoOpcion(opcion), opcion._id));
+        });
+        selector.replaceChildren(...elementos);
+        selector.disabled = opciones.length === 0;
+    };
+
+    const cargarCatalogos = async () => {
+        const [products, providers] = await Promise.all([
+            request('/api/products'),
+            request('/api/providers')
+        ]);
+        const productos = Array.isArray(products) ? products : [];
+        const proveedores = Array.isArray(providers) ? providers : [];
+
+        llenarSelector(
+            document.getElementById('entry-producto'),
+            productos,
+            productos.length ? 'Selecciona un producto' : 'No hay productos activos',
+            true,
+            (product) => `${product.nombre || 'Producto'}${product.sku ? ` · ${product.sku}` : ''} · ${Number(product.stock) || 0} unidades`
+        );
+        llenarSelector(
+            document.getElementById('exit-producto'),
+            productos,
+            productos.length ? 'Selecciona un producto' : 'No hay productos activos',
+            true,
+            (product) => `${product.nombre || 'Producto'}${product.sku ? ` · ${product.sku}` : ''} · ${Number(product.stock) || 0} unidades`
+        );
+        llenarSelector(
+            document.getElementById('entry-proveedor'),
+            proveedores,
+            'Sin proveedor',
+            false,
+            (provider) => provider.name || 'Proveedor sin nombre'
+        );
+    };
+
     const cargarInventario = async () => {
         const [alertData, movementData] = await Promise.all([
             request('/api/inventory/alerts?limite=5'),
-            request('/api/inventory')
+            request('/api/inventory?limite=20')
         ]);
 
         const productos = Array.isArray(alertData?.productos) ? alertData.productos : [];
@@ -82,13 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
         body.cantidad = Number(body.cantidad);
         if (body.costoUnitario === '') delete body.costoUnitario;
         if (!body.proveedor) delete body.proveedor;
+        const submitButton = form.querySelector('button[type="submit"]');
+        if (submitButton) submitButton.disabled = true;
         try {
             await request(endpoint, { method: 'POST', body: JSON.stringify(body) });
             form.reset();
             informar('Movimiento registrado correctamente.');
-            await cargarInventario();
+            await Promise.all([cargarInventario(), cargarCatalogos()]);
         } catch (error) {
             informar(error.message, true);
+        } finally {
+            if (submitButton) submitButton.disabled = false;
         }
     };
 
@@ -102,5 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
         submitMovement(event.currentTarget, '/api/inventory/exit');
     });
 
-    cargarInventario().catch((error) => { informar(error.message, true); });
+    Promise.all([cargarCatalogos(), cargarInventario()])
+        .catch((error) => { informar(error.message, true); });
 });

@@ -4,6 +4,8 @@ import InventoryMovement from '../models/inventoryMovement.js';
 import mongoose from 'mongoose';
 
 const validarCantidad = (cantidad) => Number.isInteger(Number(cantidad)) && Number(cantidad) > 0;
+const validarCosto = (costo) => costo === undefined || costo === null || costo === '' ||
+    (Number.isFinite(Number(costo)) && Number(costo) >= 0);
 
 export const getInventoryMovements = async (req, res) => {
     try {
@@ -11,12 +13,15 @@ export const getInventoryMovements = async (req, res) => {
         if (req.query.producto) filtro.producto = req.query.producto;
         if (req.query.tipo) filtro.tipo = req.query.tipo;
         if (req.query.proveedor) filtro.proveedor = req.query.proveedor;
+        const rawLimit = Number(req.query.limite ?? 20);
+        const limit = Number.isInteger(rawLimit) && rawLimit > 0 ? Math.min(rawLimit, 100) : 20;
 
         const movements = await InventoryMovement.find(filtro)
             .populate('producto', 'nombre categoria stock')
             .populate('proveedor', 'name contactName phone')
             .populate('usuario', 'nombre correo')
-            .sort({ createdAt: -1 });
+            .sort({ createdAt: -1 })
+            .limit(limit);
 
         return res.json(movements);
     } catch (error) {
@@ -41,6 +46,9 @@ export const registrarEntrada = async (req, res) => {
 
     if (!mongoose.isValidObjectId(producto) || !validarCantidad(cantidad)) {
         return res.status(400).json({ message: 'Producto y cantidad válida son obligatorios' });
+    }
+    if (!validarCosto(costoUnitario)) {
+        return res.status(400).json({ message: 'El costo unitario debe ser un número mayor o igual a cero' });
     }
 
     try {
@@ -69,7 +77,9 @@ export const registrarEntrada = async (req, res) => {
             proveedor: proveedor || null,
             usuario: req.user.id,
             motivo: motivo || 'Entrada de mercancía',
-            costoUnitario: costoUnitario === undefined || costoUnitario === '' ? null : Number(costoUnitario)
+            costoUnitario: costoUnitario === undefined || costoUnitario === null || costoUnitario === ''
+                ? null
+                : Number(costoUnitario)
         });
 
         return res.status(201).json({ message: 'Entrada de inventario registrada', producto: product, movimiento: movement });

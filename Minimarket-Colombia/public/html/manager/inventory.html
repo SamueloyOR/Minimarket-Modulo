@@ -103,17 +103,21 @@
         <section class="panel-card">
           <h2>Registrar entrada</h2>
           <form id="entry-form" class="manager-form">
-            <label for="entry-producto">ID del producto</label>
-            <input id="entry-producto" name="producto" required>
+            <label for="entry-producto">Producto</label>
+            <select id="entry-producto" name="producto" required>
+              <option value="" selected disabled>Cargando productos...</option>
+            </select>
 
             <label for="entry-cantidad">Cantidad</label>
             <input id="entry-cantidad" name="cantidad" type="number" min="1" required>
 
-            <label for="entry-proveedor">ID del proveedor (opcional)</label>
-            <input id="entry-proveedor" name="proveedor">
+            <label for="entry-proveedor">Proveedor (opcional)</label>
+            <select id="entry-proveedor" name="proveedor">
+              <option value="">Sin proveedor</option>
+            </select>
 
             <label for="entry-costo">Costo unitario</label>
-            <input id="entry-costo" name="costoUnitario" type="number" min="0" step="1">
+            <input id="entry-costo" name="costoUnitario" type="number" min="0" step="0.01">
 
             <label for="entry-motivo">Motivo</label>
             <input id="entry-motivo" name="motivo">
@@ -125,8 +129,10 @@
         <section class="panel-card">
           <h2>Registrar salida</h2>
           <form id="exit-form" class="manager-form">
-            <label for="exit-producto">ID del producto</label>
-            <input id="exit-producto" name="producto" required>
+            <label for="exit-producto">Producto</label>
+            <select id="exit-producto" name="producto" required>
+              <option value="" selected disabled>Cargando productos...</option>
+            </select>
 
             <label for="exit-cantidad">Cantidad</label>
             <input id="exit-cantidad" name="cantidad" type="number" min="1" required>
